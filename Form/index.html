@@ -1,0 +1,27 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Veteran Program Interest Form</title>
+</head>
+<body>
+  <h2>Veteran Program Application</h2>
+  <form action="http://localhost:3000/submit" method="POST">
+    <input type="text" name="firstName" placeholder="First Name" required><br>
+    <input type="text" name="lastName" placeholder="Last Name" required><br>
+    <input type="email" name="email" placeholder="Email" required><br>
+    <input type="number" name="phone" placeholder="Phone Number" required><br>
+    <label>Are you a veteran?</label>
+    <select name="veteran" required>
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select><br>
+    <input type="text" name="programInterest" placeholder="Program Interest" required><br>
+    <input type="text" name="serviceBranch" placeholder="Service Branch"><br>
+    <input type="text" name="state" placeholder="State"><br>
+    <textarea name="comment" placeholder="Comments" maxlength="300"></textarea><br>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
