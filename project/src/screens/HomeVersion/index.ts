@@ -1,1 +1,0 @@
-export { HomeVersion } from "./HomeVersion";

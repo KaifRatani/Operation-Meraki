@@ -1,0 +1,3230 @@
+From cd145198a9c0dbee4bfdd67faffa4899c7b71cc6 Mon Sep 17 00:00:00 2001
+From: Ken70-afk <Abhinavranjith47@gmail.com>
+Date: Wed, 9 Apr 2025 17:17:47 -0400
+Subject: Volunteer Registration Initial Commit
+
+
+diff --git a/Form/VolunteerReg.html b/Form/VolunteerReg.html
+new file mode 100644
+index 0000000..f86cef2
+--- /dev/null
++++ b/Form/VolunteerReg.html
+@@ -0,0 +1,210 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="UTF-8">
++  <title>Volunteer Registration – Operation Meraki</title>
++  <style>
++    body {
++      font-family: Arial, sans-serif;
++      background: #f9f9f9;
++      padding: 20px;
++    }
++    .header-image {
++  display: block;
++  margin: 0 auto 20px auto; /* auto left/right for centering */
++  width: 60%; /* adjust this percentage to control size */
++  max-width: 400px; /* optional: cap the maximum size */
++  height: auto;
++  border-radius: 8px; /* optional: adds slightly rounded corners */
++}
++
++    h1 {
++      text-align: center;
++      color: #004a75;
++      font-size: 32px;
++    }
++    form {
++      max-width: 600px;
++      margin: 20px auto;
++      background: white;
++      padding: 20px;
++      border-radius: 8px;
++      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
++    }
++    label {
++      display: block;
++      margin: 12px 0 5px;
++    }
++    input, select, textarea {
++      width: 100%;
++      padding: 8px;
++      border: 1px solid #ccc;
++      border-radius: 4px;
++    }
++    .section-title {
++      font-weight: bold;
++      margin-top: 20px;
++      color: #004a75;
++    }
++    .checkbox-label {
++      display: flex;
++      align-items: center;
++      margin-top: 15px;
++    }
++    .checkbox-label input {
++      margin-right: 10px;
++    }
++    button {
++      margin-top: 20px;
++      background-color: #004a75;
++      color: white;
++      padding: 10px;
++      border: none;
++      border-radius: 4px;
++      cursor: pointer;
++    }
++    button:hover {
++      background-color: #0063a0;
++    }
++  </style>
++</head>
++<body>
++
++  <!-- Banner Image -->
++  <img src="thumbnail_image001.avif" alt="Operation Meraki Banner" class="header-image">
++
++  <!-- Page Title -->
++  <h1>Interested in Volunteering with Operation Meraki</h1>
++
++  <!-- Registration Form -->
++  <form action="http://localhost:3000/volunteer-submit" method="post">
++    
++    <label for="fullName">Full Name *</label>
++    <input type="text" id="fullName" name="fullName" required>
++
++    <label for="email">Email Address *</label>
++    <input type="email" id="email" name="email" required>
++
++    <label for="phone">Phone Number *</label>
++    <input type="tel" id="phone" name="phone" required>
++
++    <p class="section-title">Address</p>
++    <label for="street">Street Address *</label>
++    <input type="text" id="street" name="street" required>
++
++    <label for="city">City *</label>
++    <input type="text" id="city" name="city" required>
++
++    <label for="state">State *</label>
++    <select id="state" name="state" required>
++      <option value="">-- Select State --</option>
++      <option value="AL">Alabama</option>
++      <option value="AK">Alaska</option>
++      <option value="AZ">Arizona</option>
++      <option value="AR">Arkansas</option>
++      <option value="CA">California</option>
++      <option value="CO">Colorado</option>
++      <option value="CT">Connecticut</option>
++      <option value="DE">Delaware</option>
++      <option value="FL">Florida</option>
++      <option value="GA">Georgia</option>
++      <option value="HI">Hawaii</option>
++      <option value="ID">Idaho</option>
++      <option value="IL">Illinois</option>
++      <option value="IN">Indiana</option>
++      <option value="IA">Iowa</option>
++      <option value="KS">Kansas</option>
++      <option value="KY">Kentucky</option>
++      <option value="LA">Louisiana</option>
++      <option value="ME">Maine</option>
++      <option value="MD">Maryland</option>
++      <option value="MA">Massachusetts</option>
++      <option value="MI">Michigan</option>
++      <option value="MN">Minnesota</option>
++      <option value="MS">Mississippi</option>
++      <option value="MO">Missouri</option>
++      <option value="MT">Montana</option>
++      <option value="NE">Nebraska</option>
++      <option value="NV">Nevada</option>
++      <option value="NH">New Hampshire</option>
++      <option value="NJ">New Jersey</option>
++      <option value="NM">New Mexico</option>
++      <option value="NY">New York</option>
++      <option value="NC">North Carolina</option>
++      <option value="ND">North Dakota</option>
++      <option value="OH">Ohio</option>
++      <option value="OK">Oklahoma</option>
++      <option value="OR">Oregon</option>
++      <option value="PA">Pennsylvania</option>
++      <option value="RI">Rhode Island</option>
++      <option value="SC">South Carolina</option>
++      <option value="SD">South Dakota</option>
++      <option value="TN">Tennessee</option>
++      <option value="TX">Texas</option>
++      <option value="UT">Utah</option>
++      <option value="VT">Vermont</option>
++      <option value="VA">Virginia</option>
++      <option value="WA">Washington</option>
++      <option value="WV">West Virginia</option>
++      <option value="WI">Wisconsin</option>
++      <option value="WY">Wyoming</option>
++    </select>
++
++    <label for="zip">ZIP Code *</label>
++    <input type="text" id="zip" name="zip" required maxlength="10">
++
++    <p class="section-title">Availability</p>
++    <label for="availability">When are you available? *</label>
++    <textarea id="availability" name="availability" rows="3" required></textarea>
++
++    <label for="interests">Areas of Interest *</label>
++    <textarea id="interests" name="interests" rows="3" required></textarea>
++
++    <div class="checkbox-label">
++      <input type="checkbox" id="consent" name="consent" required>
++      <label for="consent">I consent to the collection of my information for volunteer purposes.</label>
++    </div>
++
++    <button type="submit">Submit Registration</button>
++  </form>
++
++  <!-- FORM SUBMIT SCRIPT -->
++  <script>
++    document.getElementById("volunteerForm").addEventListener("submit", async function(e) {
++      e.preventDefault();
++
++      const data = {
++        fullName: document.getElementById("fullName").value,
++        email: document.getElementById("email").value,
++        phone: document.getElementById("phone").value,
++        streetAddress: document.getElementById("street").value,
++        city: document.getElementById("city").value,
++        state: document.getElementById("state").value,
++        zipCode: document.getElementById("zip").value,
++        availability: document.getElementById("availability").value,
++        areaOfInterest: document.getElementById("interests").value
++      };
++
++      try {
++        const res = await fetch("http://localhost:3000/register", {
++          method: "POST",
++          headers: {
++            "Content-Type": "application/json"
++          },
++          body: JSON.stringify(data)
++        });
++
++        if (res.ok) {
++          alert("✅ Registration successful!");
++          this.reset();
++        } else {
++          alert("❌ Failed to register. Please try again.");
++        }
++      } catch (err) {
++        console.error(err);
++        alert("🚨 Error submitting form. Check your server.");
++      }
++    });
++  </script>
++</body>
++</html>
+diff --git a/Form/form.html b/Form/form.html
+index 7f95617..3a4393d 100644
+--- a/Form/form.html
++++ b/Form/form.html
+@@ -20,6 +20,16 @@
+       border-radius: 10px;
+       box-shadow: 0 0 20px rgba(0,0,0,0.05);
+     }
++    .header-image {
++  display: block;
++  margin: 0 auto 20px auto; /* auto left/right for centering */
++  width: 60%; /* adjust this percentage to control size */
++  max-width: 400px; /* optional: cap the maximum size */
++  height: auto;
++  border-radius: 8px; /* optional: adds slightly rounded corners */
++}
++
++
+     h1 {
+       text-align: center;
+       margin-bottom: 1rem;
+@@ -56,6 +66,10 @@
+ </head>
+ <body>
+   <div class="form-container">
++<!-- Banner Image -->
++<img src="thumbnail_image001.avif" alt="Operation Meraki Banner" class="header-image">
++
++
+     <h1>Veteran Registration</h1>
+     <form id="veteranForm">
+       <label for="firstName">First Name</label>
+diff --git a/Form/thumbnail_image001.avif b/Form/thumbnail_image001.avif
+new file mode 100644
+index 0000000..939aaee
+Binary files /dev/null and b/Form/thumbnail_image001.avif differ
+diff --git a/Form/volunteerServer.js b/Form/volunteerServer.js
+new file mode 100644
+index 0000000..9682ed7
+--- /dev/null
++++ b/Form/volunteerServer.js
+@@ -0,0 +1,64 @@
++// vo;unteerServer.js
++const express = require('express');
++const bodyParser = require('body-parser');
++const cors = require('cors');
++const { Pool } = require('pg');
++
++const app = express();
++const port = 3000;
++
++// Middleware
++app.use(cors());
++app.use(bodyParser.urlencoded({ extended: true }));
++app.use(bodyParser.json());
++
++// Neon PostgreSQL connection
++const pool = new Pool({
++  connectionString: 'postgresql://operationmeraki_owner:npg_BlfxeIi1vOE2@ep-crimson-glade-a5ydc3xk-pooler.us-east-2.aws.neon.tech/operationmeraki?sslmode=require',
++  ssl: {
++    rejectUnauthorized: false
++  }
++});
++
++// Handle form submission
++app.post('/volunteer-submit', async (req, res) => {
++  const {
++    fullName,
++    email,
++    phone,
++    street,
++    city,
++    state,
++    zip,
++    availability,
++    interests
++  } = req.body;
++
++  try {
++    // Insert into the database, excluding ID (auto-generated)
++    const result = await pool.query(
++      `INSERT INTO volunteer 
++      ("fullName", "email", "phone", "streetAddress", "City", "state", "zipCode", "availability", "areaOfInterest")
++      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
++      RETURNING id`,
++      [fullName, email, phone, street, city, state, zip, availability, interests]
++    );
++
++    const insertedId = result.rows[0].id;
++    res.status(200).send(`Form submitted successfully!`);
++  } catch (error) {
++    console.error('Error inserting data:', error);
++
++    // If it's a duplicate key error
++    if (error.code === '23505') {
++      res.status(400).send('A record with this ID or unique field already exists.');
++    } else {
++      res.status(500).send('Error saving form data.');
++    }
++  }
++});
++
++// Start the server
++app.listen(port, () => {
++  console.log(` Server running at http://localhost:${port}`);
++});
+diff --git a/Homepage v3/c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg b/Homepage v3/c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg
+deleted file mode 100644
+index bdf46cf..0000000
+Binary files a/Homepage v3/c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg and /dev/null differ
+diff --git a/Homepage v3/ea9a389e101699d8b6f124dccad8a953.jpeg b/Homepage v3/ea9a389e101699d8b6f124dccad8a953.jpeg
+deleted file mode 100644
+index 4e15003..0000000
+Binary files a/Homepage v3/ea9a389e101699d8b6f124dccad8a953.jpeg and /dev/null differ
+diff --git a/Homepage v3/home-version3.css b/Homepage v3/home-version3.css
+deleted file mode 100644
+index 0dd25c5..0000000
+--- a/Homepage v3/home-version3.css	
++++ /dev/null
+@@ -1,478 +0,0 @@
+-// A mission to help <br/>veterans and their families
+-color: #2D2E3D;
+- font-size: 40px;
+- font-family: Raleway;
+- font-weight: 700;
+- line-height: 55px;
+- letter-spacing: 2px;
+- word-wrap: break-word
+----
+-// The transition home can be hard, but it doesn’t have to be done alone. 
+-color: #2F2F31;
+- font-size: 20px;
+- font-family: Raleway;
+- font-weight: 500;
+- line-height: 40px;
+- letter-spacing: 0.60px;
+- word-wrap: break-word
+----
+-// I’m looking for help
+-color: #222540;
+- font-size: 32px;
+- font-family: Raleway;
+- font-weight: 500;
+- line-height: 40px;
+- letter-spacing: 0.96px;
+- word-wrap: break-word
+----
+-// We are here to assist you by providing support groups, career help, photography classes, gardening groups, and health and wellness groups. Explore all our programs and find the right one for you. 
+-color: #222540;
+- font-size: 20px;
+- font-family: Raleway;
+- font-weight: 500;
+- line-height: 40px;
+- letter-spacing: 0.60px;
+- word-wrap: break-word
+----
+-// Get Assistance
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 600;
+- letter-spacing: 0.80px;
+- word-wrap: break-word
+----
+-// I want to help
+-color: #222540;
+- font-size: 32px;
+- font-family: Raleway;
+- font-weight: 500;
+- line-height: 40px;
+- letter-spacing: 0.96px;
+- word-wrap: break-word
+----
+-// We have many ways you can help: financially supporting us, becoming a director of the board, donating camera equipment, and volunteering for events and groups.
+-color: #222540;
+- font-size: 20px;
+- font-family: Raleway;
+- font-weight: 500;
+- line-height: 40px;
+- letter-spacing: 0.60px;
+- word-wrap: break-word
+----
+-// Get involved
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 600;
+- letter-spacing: 0.80px;
+- word-wrap: break-word
+----
+-// Our Mission
+-color: #222540;
+- font-size: 32px;
+- font-family: Raleway;
+- font-weight: 500;
+- line-height: 40px;
+- letter-spacing: 0.96px;
+- word-wrap: break-word
+----
+-// Our Vision
+-color: rgba(34, 37, 64, 0.75);
+- font-size: 32px;
+- font-family: Raleway;
+- font-weight: 500;
+- line-height: 40px;
+- letter-spacing: 0.96px;
+- word-wrap: break-word
+----
+-// We help our service members and their families transition from the uniform to new professional and personal lives by changing the veteran transition landscape.
+-color: #222540;
+- font-size: 20px;
+- font-family: Raleway;
+- font-weight: 600;
+- line-height: 35px;
+- letter-spacing: 0.60px;
+- word-wrap: break-word
+----
+-// Learn More
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 600;
+- letter-spacing: 0.80px;
+- word-wrap: break-word
+----
+-// Recent News
+-color: #222540;
+- font-size: 32px;
+- font-family: Raleway;
+- font-weight: 500;
+- line-height: 40px;
+- letter-spacing: 0.96px;
+- word-wrap: break-word
+----
+-// Lorem Ipsum
+-color: #074264;
+- font-size: 24px;
+- font-family: Raleway;
+- font-weight: 700;
+- word-wrap: break-word
+----
+-// June 13th, 2022
+-color: #65101C;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 400;
+- line-height: 25px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-// James Berg
+-color: #65101C;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 400;
+- line-height: 25px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-// Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. eiusmod tempor incididunt ut labore et dolore magna aliqua. <br/>
+-color: #1E1F29;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- line-height: 30px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-// Read More
+-color: #074264;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- text-decoration: underline;
+- line-height: 30px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-//  
+-color: #1E1F29;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- line-height: 30px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-// Lorem Ipsum
+-color: #074264;
+- font-size: 24px;
+- font-family: Raleway;
+- font-weight: 700;
+- word-wrap: break-word
+----
+-// June 13th, 2022
+-color: #65101C;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 400;
+- line-height: 25px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-// James Berg
+-color: #65101C;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 400;
+- line-height: 25px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-// Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ut labore et dolore magna aliqua. eiusmod tempor incididunt ut labore et dolore   <br/>
+-color: #1E1F29;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- line-height: 30px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-// Read More
+-color: #074264;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- text-decoration: underline;
+- line-height: 30px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-//  
+-color: #1E1F29;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- line-height: 30px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-// Lorem Ipusm
+-color: #074264;
+- font-size: 24px;
+- font-family: Raleway;
+- font-weight: 700;
+- word-wrap: break-word
+----
+-// June 13th, 2022
+-color: #65101C;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 400;
+- line-height: 25px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-// James Berg
+-color: #65101C;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 400;
+- line-height: 25px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-// Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ut labore et dolore magna aliqua. eiusmod tempor incididunt ut labore et dolore<br/>
+-color: #1E1F29;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- line-height: 30px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-// Read More
+-color: #074264;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- text-decoration: underline;
+- line-height: 30px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-//  
+-color: #1E1F29;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- line-height: 30px;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-// Programs
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 600;
+- word-wrap: break-word
+----
+-// Bridge-Reset
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// Bridge-Rebuild
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// Build-Refocus
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// Build-ReEngage 
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// Bridge-RePlant
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// Get Involved
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 600;
+- word-wrap: break-word
+----
+-// Board of Directors
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// Become a Volunteer
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// Financial Support
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// Camera and field equipment donation
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// 2024 Operation Meraki
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// Privacy Policy
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// Terms of Use
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// Contact Us
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// About Us
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// Subscribe Now
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 600;
+- word-wrap: break-word
+----
+-// Stay informed on what we’re doing and opportunities. 
+-color: rgba(254, 254, 254, 1);
+- font-size: 18px;
+- font-family: Raleway;
+- font-weight: 400;
+- word-wrap: break-word
+----
+-// (Enter Email)
+-color: #726E66;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 500;
+- word-wrap: break-word
+----
+-// Submit
+-color: rgba(254, 254, 254, 1);
+- font-size: 16px;
+- font-family: Inter;
+- font-weight: 500;
+- letter-spacing: 0.48px;
+- word-wrap: break-word
+----
+-// Home
+-color: #074264;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 600;
+- letter-spacing: 0.80px;
+- word-wrap: break-word
+----
+-// Programs
+-color: #074264;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 600;
+- letter-spacing: 0.80px;
+- word-wrap: break-word
+----
+-// Get Involved
+-color: #074264;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 600;
+- letter-spacing: 0.80px;
+- word-wrap: break-word
+----
+-// Events
+-color: #074264;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 600;
+- letter-spacing: 0.80px;
+- word-wrap: break-word
+----
+-// News
+-color: #074264;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 600;
+- letter-spacing: 0.80px;
+- word-wrap: break-word
+----
+-// Contact
+-color: #074264;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 600;
+- letter-spacing: 0.80px;
+- word-wrap: break-word
+----
+-// About Us
+-color: #074264;
+- font-size: 16px;
+- font-family: Raleway;
+- font-weight: 600;
+- letter-spacing: 0.80px;
+- word-wrap: break-word
+----
+-// Donate
+-color: rgba(254, 254, 254, 1);
+- font-size: 18px;
+- font-family: Raleway;
+- font-weight: 700;
+- line-height: 40px;
+- letter-spacing: 0.72px;
+- word-wrap: break-word
+\ No newline at end of file
+diff --git a/Homepage v3/home-version3.html b/Homepage v3/home-version3.html
+deleted file mode 100644
+index a5e2d78..0000000
+--- a/Homepage v3/home-version3.html	
++++ /dev/null
+@@ -1,207 +0,0 @@
+-<div style="width: 1440px; height: 3623px; position: relative; background: white; overflow: hidden">
+-  <div style="width: 1439px; height: 629px; left: 0px; top: 83px; position: absolute; background: #A4EFF3"></div>
+-  <div style="width: 492px; height: 457px; left: 948px; top: 83px; position: absolute"></div>
+-  <div style="width: 307px; height: 281px; left: 154px; top: 729px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: center; gap: 32px; display: inline-flex">
+-    <div style="width: 203.21px; height: 197.49px; background: #D9D9D9; border-radius: 9999px"></div>
+-    <img style="width: 199.14px; height: 193.54px" src="c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg" />
+-    <div style="width: 209.93px; height: 204.01px; border-radius: 9999px; border: 8px #D02D4B solid"></div>
+-    <div style="width: 203.63px; height: 198.91px; border-radius: 9999px; border: 2px white solid"></div>
+-    <div style="width: 563px; flex-direction: column; justify-content: flex-start; align-items: center; gap: 32px; display: flex">
+-      <div data-property-1="Default" style="width: 174px; height: 45px; position: relative; box-shadow: 2px 4px 4px rgba(2, 35, 53, 0.12)">
+-        <div style="width: 174px; height: 45px; left: 0px; top: 0px; position: absolute; background: #1C5A79; border-radius: 8px"></div>
+-        <div style="width: 174px; height: 45px; left: 0px; top: 0px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 600; letter-spacing: 0.80px; word-wrap: break-word">You Are Veterans</div>
+-      </div>
+-    </div>
+-  </div>
+-  <div style="width: 307px; height: 281px; left: 983px; top: 1027px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: center; gap: 32px; display: inline-flex">
+-    <div style="justify-content: flex-start; align-items: flex-start; gap: 42px; display: inline-flex">
+-      <div style="width: 193.60px; height: 193.60px; background: #D9D9D9; border-radius: 9999px"></div>
+-      <img style="width: 234.26px; height: 193.60px" src="c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg" />
+-      <div style="width: 200px; height: 200px; border-radius: 9999px; border: 8px #D02D4B solid"></div>
+-      <div style="width: 194px; height: 194px; border-radius: 9999px; border: 2px white solid"></div>
+-    </div>
+-    <div style="width: 419px; flex-direction: column; justify-content: flex-start; align-items: center; gap: 32px; display: flex">
+-      <div data-property-1="Default" style="width: 174px; height: 45px; position: relative; box-shadow: 2px 4px 4px rgba(2, 35, 53, 0.12)">
+-        <div style="width: 174px; height: 45px; left: 0px; top: 0px; position: absolute; background: #1C5A79; border-radius: 8px"></div>
+-        <div style="width: 174px; height: 45px; left: 0px; top: 0px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 600; letter-spacing: 0.80px; word-wrap: break-word">You Are Volunteers</div>
+-      </div>
+-    </div>
+-  </div>
+-  <div style="width: 1440px; padding-left: 146px; padding-right: 146px; left: 0px; top: 1630px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+-    <img style="width: 1142px; height: 583px" src="c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg" />
+-    <div style="width: 145px; height: 84px; left: 644px; top: 250px; position: absolute; background: rgba(217, 217, 217, 0.30); border-radius: 8px"></div>
+-  </div>
+-  <div style="width: 307px; height: 295px; left: 154px; top: 1335px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: center; gap: 32px; display: inline-flex">
+-    <img style="width: 203.21px; height: 197.49px; border-radius: 9999px" src="c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg" />
+-    <img style="width: 209.93px; height: 204.01px; border-radius: 9999px; border: 8px #D02D4B solid" src="c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg" />
+-    <img style="width: 203.63px; height: 198.91px; border-radius: 9999px; border: 2px white solid" src="c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg" />
+-    <div data-property-1="Default" style="width: 174px; height: 45px; position: relative; box-shadow: 2px 4px 4px rgba(2, 35, 53, 0.12)">
+-      <div style="width: 174px; height: 45px; left: 0px; top: 0px; position: absolute; background: #1C5A79; border-radius: 8px"></div>
+-      <div style="width: 174px; height: 45px; left: 0px; top: 0px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 600; letter-spacing: 0.80px; word-wrap: break-word">You Are Donors</div>
+-    </div>
+-  </div>
+-  <div style="width: 1140px; height: 442px; left: 150px; top: 2237px; position: absolute; background: #EAEEF2; border-radius: 5px">
+-    <div style="left: 96px; top: 91px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 32px; display: inline-flex">
+-      <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 32px; display: flex">
+-        <div style="justify-content: flex-start; align-items: center; gap: 56px; display: inline-flex">
+-          <div style="text-align: center; color: #222540; font-size: 32px; font-family: Raleway; font-weight: 500; line-height: 40px; letter-spacing: 0.96px; word-wrap: break-word">Our Mission</div>
+-          <div style="width: 213.02px; height: 0px; background: #222540; outline: 2px #222540 solid; outline-offset: -1px"></div>
+-          <div style="text-align: center; color: rgba(34, 37, 64, 0.75); font-size: 32px; font-family: Raleway; font-weight: 500; line-height: 40px; letter-spacing: 0.96px; word-wrap: break-word">Our Vision</div>
+-        </div>
+-        <div style="width: 730px; color: #222540; font-size: 20px; font-family: Raleway; font-weight: 600; line-height: 35px; letter-spacing: 0.60px; word-wrap: break-word">We help our service members and their families transition from the uniform to new professional and personal lives by changing the veteran transition landscape.</div>
+-      </div>
+-      <div data-property-1="Default" style="width: 174px; height: 45px; position: relative; box-shadow: 2px 4px 4px rgba(2, 35, 53, 0.12)">
+-        <div style="width: 174px; height: 45px; left: 0px; top: 0px; position: absolute; background: #1C5A79; border-radius: 8px"></div>
+-        <div style="width: 174px; height: 45px; left: 0px; top: 0px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 600; letter-spacing: 0.80px; word-wrap: break-word">Learn More</div>
+-      </div>
+-    </div>
+-  </div>
+-  <div style="width: 1440px; padding-left: 30px; padding-right: 30px; left: 0px; top: 2679px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: center; gap: 32px; display: inline-flex">
+-    <div style="width: 244px; height: 42px; color: #222540; font-size: 32px; font-family: Raleway; font-weight: 500; line-height: 40px; letter-spacing: 0.96px; word-wrap: break-word">Recent News</div>
+-    <div style="padding-left: 64px; padding-right: 64px; justify-content: flex-start; align-items: flex-start; gap: 32px; display: inline-flex">
+-      <div style="width: 396px; height: 484px; background: #EAEEF2; border-radius: 5px"></div>
+-      <div style="width: 362px; height: 257px; border-radius: 5px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
+-        <div style="color: #074264; font-size: 24px; font-family: Raleway; font-weight: 700; word-wrap: break-word">Lorem Ipsum</div>
+-        <div style="width: 351px; justify-content: flex-start; align-items: flex-start; gap: 72px; display: inline-flex">
+-          <div style="width: 122px; color: #65101C; font-size: 16px; font-family: Raleway; font-weight: 400; line-height: 25px; letter-spacing: 0.48px; word-wrap: break-word">June 13th, 2022</div>
+-          <div style="width: 157px; text-align: right; color: #65101C; font-size: 16px; font-family: Raleway; font-weight: 400; line-height: 25px; letter-spacing: 0.48px; word-wrap: break-word">James Berg</div>
+-        </div>
+-        <div style="width: 351px"><span style="color: #1E1F29; font-size: 16px; font-family: Raleway; font-weight: 500; line-height: 30px; letter-spacing: 0.48px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. eiusmod tempor incididunt ut labore et dolore magna aliqua. <br/></span><span style="color: #074264; font-size: 16px; font-family: Raleway; font-weight: 500; text-decoration: underline; line-height: 30px; letter-spacing: 0.48px; word-wrap: break-word">Read More</span><span style="color: #1E1F29; font-size: 16px; font-family: Raleway; font-weight: 500; line-height: 30px; letter-spacing: 0.48px; word-wrap: break-word"> </span></div>
+-      </div>
+-      <img style="width: 361.03px; height: 195.90px" src="c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg" />
+-      <div style="width: 396px; height: 484px; background: #EAEEF2; border-radius: 5px"></div>
+-      <div style="width: 350px; height: 257px; border-radius: 5px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
+-        <div style="color: #074264; font-size: 24px; font-family: Raleway; font-weight: 700; word-wrap: break-word">Lorem Ipsum</div>
+-        <div style="width: 351px; justify-content: flex-start; align-items: flex-start; gap: 72px; display: inline-flex">
+-          <div style="width: 122px; color: #65101C; font-size: 16px; font-family: Raleway; font-weight: 400; line-height: 25px; letter-spacing: 0.48px; word-wrap: break-word">June 13th, 2022</div>
+-          <div style="width: 157px; text-align: right; color: #65101C; font-size: 16px; font-family: Raleway; font-weight: 400; line-height: 25px; letter-spacing: 0.48px; word-wrap: break-word">James Berg</div>
+-        </div>
+-        <div style="width: 351px"><span style="color: #1E1F29; font-size: 16px; font-family: Raleway; font-weight: 500; line-height: 30px; letter-spacing: 0.48px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ut labore et dolore magna aliqua. eiusmod tempor incididunt ut labore et dolore   <br/></span><span style="color: #074264; font-size: 16px; font-family: Raleway; font-weight: 500; text-decoration: underline; line-height: 30px; letter-spacing: 0.48px; word-wrap: break-word">Read More</span><span style="color: #1E1F29; font-size: 16px; font-family: Raleway; font-weight: 500; line-height: 30px; letter-spacing: 0.48px; word-wrap: break-word"> </span></div>
+-      </div>
+-      <img style="width: 350.09px; height: 196px" src="c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg" />
+-      <div style="width: 396px; height: 484px; background: #EAEEF2; border-radius: 5px"></div>
+-      <div style="width: 362px; height: 257px; border-radius: 5px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
+-        <div style="color: #074264; font-size: 24px; font-family: Raleway; font-weight: 700; word-wrap: break-word">Lorem Ipusm</div>
+-        <div style="width: 351px; justify-content: flex-start; align-items: flex-start; gap: 72px; display: inline-flex">
+-          <div style="width: 122px; color: #65101C; font-size: 16px; font-family: Raleway; font-weight: 400; line-height: 25px; letter-spacing: 0.48px; word-wrap: break-word">June 13th, 2022</div>
+-          <div style="width: 157px; text-align: right; color: #65101C; font-size: 16px; font-family: Raleway; font-weight: 400; line-height: 25px; letter-spacing: 0.48px; word-wrap: break-word">James Berg</div>
+-        </div>
+-        <div style="width: 362px"><span style="color: #1E1F29; font-size: 16px; font-family: Raleway; font-weight: 500; line-height: 30px; letter-spacing: 0.48px; word-wrap: break-word">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ut labore et dolore magna aliqua. eiusmod tempor incididunt ut labore et dolore<br/></span><span style="color: #074264; font-size: 16px; font-family: Raleway; font-weight: 500; text-decoration: underline; line-height: 30px; letter-spacing: 0.48px; word-wrap: break-word">Read More</span><span style="color: #1E1F29; font-size: 16px; font-family: Raleway; font-weight: 500; line-height: 30px; letter-spacing: 0.48px; word-wrap: break-word"> </span></div>
+-      </div>
+-      <img style="width: 361.03px; height: 195.90px" src="c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg" />
+-    </div>
+-  </div>
+-  <div style="width: 1440px; height: 372px; left: 0px; top: 3251px; position: absolute">
+-    <div style="width: 1440px; height: 372px; left: 0px; top: 0px; position: absolute; background: #074264"></div>
+-    <img style="width: 176px; height: 48.98px; left: 65px; top: 135px; position: absolute" src="c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg" />
+-    <div style="left: 358px; top: 58px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 36px; display: inline-flex">
+-      <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 600; word-wrap: break-word">Programs</div>
+-      <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: flex">
+-        <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">Bridge-Reset</div>
+-        <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">Bridge-Rebuild</div>
+-        <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">Build-Refocus</div>
+-        <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">Build-ReEngage </div>
+-        <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">Bridge-RePlant</div>
+-      </div>
+-    </div>
+-    <div style="left: 585px; top: 59px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 36px; display: inline-flex">
+-      <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 600; word-wrap: break-word">Get Involved</div>
+-      <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: flex">
+-        <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">Board of Directors</div>
+-        <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">Become a Volunteer</div>
+-        <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">Financial Support</div>
+-        <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">Camera and field equipment donation</div>
+-      </div>
+-    </div>
+-    <div style="left: 65px; top: 335px; position: absolute; justify-content: flex-start; align-items: flex-start; gap: 124px; display: inline-flex">
+-      <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">2024 Operation Meraki</div>
+-      <div style="justify-content: flex-start; align-items: flex-start; gap: 124px; display: flex">
+-        <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">Privacy Policy</div>
+-        <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">Terms of Use</div>
+-        <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">Contact Us</div>
+-        <div style="color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">About Us</div>
+-      </div>
+-    </div>
+-    <div style="left: 963px; top: 58px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 32px; display: inline-flex">
+-      <div style="width: 139px; color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Raleway; font-weight: 600; word-wrap: break-word">Subscribe Now</div>
+-      <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 24px; display: flex">
+-        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: flex">
+-          <div style="color: rgba(254, 254, 254, 1); font-size: 18px; font-family: Raleway; font-weight: 400; word-wrap: break-word">Stay informed on what we’re doing and opportunities. </div>
+-          <div style="width: 436px; height: 42px; background: rgba(254, 254, 254, 1); border-radius: 12px"></div>
+-          <div style="width: 94px; height: 17px; color: #726E66; font-size: 16px; font-family: Raleway; font-weight: 500; word-wrap: break-word">(Enter Email)</div>
+-        </div>
+-        <div style="position: relative; justify-content: flex-start; align-items: flex-start; gap: 24px; display: inline-flex">
+-          <div style="width: 40px; height: 40px; border-radius: 9999px; border: 1px rgba(254, 254, 254, 1) solid"></div>
+-          <div style="width: 40px; height: 40px; border-radius: 9999px; border: 1px rgba(254, 254, 254, 1) solid"></div>
+-          <div style="width: 40px; height: 40px; border-radius: 9999px; border: 1px rgba(254, 254, 254, 1) solid"></div>
+-          <div style="width: 40px; height: 40px; border-radius: 9999px; border: 1px rgba(254, 254, 254, 1) solid"></div>
+-          <div style="width: 23px; height: 24px; left: 9px; top: 8px; position: absolute; overflow: hidden">
+-            <div style="width: 23px; height: 24px; left: 0px; top: 0px; position: absolute; background: black"></div>
+-            <div style="width: 23px; height: 23.99px; left: 0px; top: 0px; position: absolute; background: rgba(254, 254, 254, 1)"></div>
+-          </div>
+-          <div style="width: 23px; height: 23px; left: 73px; top: 8px; position: absolute; overflow: hidden">
+-            <div style="width: 22.67px; height: 22.67px; left: 0.16px; top: 0.16px; position: absolute; background: rgba(254, 254, 254, 1)"></div>
+-            <div style="width: 11.83px; height: 11.83px; left: 5.59px; top: 5.61px; position: absolute; background: rgba(254, 254, 254, 1)"></div>
+-            <div style="width: 1.97px; height: 1.97px; left: 16.44px; top: 4.49px; position: absolute; background: rgba(254, 254, 254, 1)"></div>
+-          </div>
+-          <div style="width: 24px; height: 33.88px; left: 136px; top: 3px; position: absolute; overflow: hidden">
+-            <div style="width: 15.98px; height: 28.41px; left: 3.30px; top: 2.73px; position: absolute; outline: 1px rgba(254, 254, 254, 1) solid; outline-offset: -0.50px"></div>
+-          </div>
+-          <div style="width: 20px; height: 28.57px; left: 202px; top: 6px; position: absolute; overflow: hidden">
+-            <div style="width: 4.67px; height: 5.42px; left: 0px; top: 0px; position: absolute; background: rgba(254, 254, 254, 1)"></div>
+-            <div style="width: 2.93px; height: 3.31px; left: 0.87px; top: 1.06px; position: absolute; background: #074264"></div>
+-            <div style="width: 3.91px; height: 17.50px; left: 0.42px; top: 6.32px; position: absolute; background: rgba(254, 254, 254, 1)"></div>
+-            <div style="width: 2.17px; height: 15.38px; left: 1.29px; top: 7.38px; position: absolute; background: #074264"></div>
+-            <div style="width: 13.47px; height: 17.50px; left: 6.53px; top: 6.32px; position: absolute; background: rgba(254, 254, 254, 1)"></div>
+-            <div style="width: 11.73px; height: 15.38px; left: 7.40px; top: 7.38px; position: absolute; background: #074264"></div>
+-          </div>
+-        </div>
+-      </div>
+-    </div>
+-    <div data-property-1="Default" style="width: 87px; height: 42px; left: 1312px; top: 142px; position: absolute">
+-      <div style="width: 87px; height: 42px; left: 0px; top: 0px; position: absolute; background: #B22035; border-top-right-radius: 12px; border-bottom-right-radius: 12px"></div>
+-      <div style="width: 76px; height: 30.62px; left: 5px; top: 6.12px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: rgba(254, 254, 254, 1); font-size: 16px; font-family: Inter; font-weight: 500; letter-spacing: 0.48px; word-wrap: break-word">Submit</div>
+-      <div style="width: 77px; height: 31.50px; left: 5px; top: 5.25px; position: absolute; border-radius: 6px; border: 1px rgba(254, 254, 254, 1) solid"></div>
+-    </div>
+-    <div style="width: 53px; height: 48.98px; left: 171px; top: 198px; position: absolute"></div>
+-  </div>
+-  <div style="width: 778px; height: 281px; left: 154px; top: 1027px; position: absolute; background: #D9D9D9"></div>
+-  <div style="width: 778px; height: 281px; left: 512px; top: 1325px; position: absolute; background: #D9D9D9"></div>
+-  <div style="width: 778px; height: 281px; left: 512px; top: 729px; position: absolute; background: #D9D9D9"></div>
+-  <div data-property-1="Default" style="width: 1251px; height: 58px; left: 154px; top: 25px; position: absolute">
+-    <div style="width: 1251px; height: 58.87px; left: 0px; top: 0px; position: absolute; background: rgba(254, 254, 254, 1); border-bottom: 0.50px #D9D9D9 solid"></div>
+-    <div style="width: 1096px; left: 120px; top: 5px; position: absolute; justify-content: flex-start; align-items: center; gap: 86px; display: inline-flex">
+-      <div style="justify-content: flex-start; align-items: center; gap: 64px; display: flex">
+-        <div data-property-1="Default" style="width: 49px; height: 19px; position: relative">
+-          <div style="width: 49px; left: 0px; top: 0px; position: absolute; color: #074264; font-size: 16px; font-family: Raleway; font-weight: 600; letter-spacing: 0.80px; word-wrap: break-word">Home</div>
+-        </div>
+-        <div data-property-1="Default" style="width: 82px; height: 19px; position: relative">
+-          <div style="width: 82px; left: 0px; top: 0px; position: absolute; color: #074264; font-size: 16px; font-family: Raleway; font-weight: 600; letter-spacing: 0.80px; word-wrap: break-word">Programs</div>
+-        </div>
+-        <div data-property-1="Default" style="width: 110px; height: 19px; position: relative">
+-          <div style="width: 110px; left: 0px; top: 0px; position: absolute; color: #074264; font-size: 16px; font-family: Raleway; font-weight: 600; letter-spacing: 0.80px; word-wrap: break-word">Get Involved</div>
+-        </div>
+-        <div data-property-1="Default" style="width: 57px; height: 19px; position: relative">
+-          <div style="width: 57px; left: 0px; top: 0px; position: absolute; color: #074264; font-size: 16px; font-family: Raleway; font-weight: 600; letter-spacing: 0.80px; word-wrap: break-word">Events</div>
+-        </div>
+-        <div data-property-1="Default" style="width: 47px; height: 19px; position: relative">
+-          <div style="width: 47px; left: 0px; top: 0px; position: absolute; color: #074264; font-size: 16px; font-family: Raleway; font-weight: 600; letter-spacing: 0.80px; word-wrap: break-word">News</div>
+-        </div>
+-        <div data-property-1="Default" style="width: 68px; height: 19px; position: relative">
+-          <div style="width: 68px; left: 0px; top: 0px; position: absolute; color: #074264; font-size: 16px; font-family: Raleway; font-weight: 600; letter-spacing: 0.80px; word-wrap: break-word">Contact</div>
+-        </div>
+-        <div data-property-1="Default" style="width: 78px; height: 19px; position: relative">
+-          <div style="width: 78px; left: 0px; top: 0px; position: absolute; color: #074264; font-size: 16px; font-family: Raleway; font-weight: 600; letter-spacing: 0.80px; word-wrap: break-word">About Us</div>
+-        </div>
+-      </div>
+-      <div data-property-1="Default" style="width: 142px; height: 45px; position: relative; box-shadow: 2px 4px 4px 1px rgba(44.75, 12.49, 18.27, 0.03)">
+-        <div style="width: 144px; height: 45px; left: 0px; top: 0px; position: absolute; background: #B8162F; border-radius: 5px"></div>
+-        <div style="width: 142px; height: 45px; left: 0px; top: 0px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: rgba(254, 254, 254, 1); font-size: 18px; font-family: Raleway; font-weight: 700; line-height: 40px; letter-spacing: 0.72px; word-wrap: break-word">Donate</div>
+-      </div>
+-    </div>
+-  </div>
+-  <img style="width: 290px; height: 157px; left: 0px; top: 5px; position: absolute" src="c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg" />
+-  <div data-property-1="pexels-rdne-7467943 2" style="width: 1439px; height: 550px; left: -1px; top: 162px; position: absolute">
+-    <img style="width: 1439px; height: 550px; left: 0px; top: 0px; position: absolute" src="c44de10e6d380d0fab7b7ec4b73cc3f2.jpeg" />
+-  </div>
+-</div>
+\ No newline at end of file
+diff --git a/Homepage v3/home-version3.jsx b/Homepage v3/home-version3.jsx
+deleted file mode 100644
+index a576d83..0000000
+--- a/Homepage v3/home-version3.jsx	
++++ /dev/null
+@@ -1,207 +0,0 @@
+-<div style={{width: 1440, height: 3623, position: 'relative', background: 'white', overflow: 'hidden'}}>
+-  <div style={{width: 1439, height: 629, left: 0, top: 83, position: 'absolute', background: '#A4EFF3'}} />
+-  <div style={{width: 492, height: 457, left: 948, top: 83, position: 'absolute'}} />
+-  <div style={{width: 307, height: 281, left: 154, top: 729, position: 'absolute', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 32, display: 'inline-flex'}}>
+-    <div style={{width: 203.21, height: 197.49, background: '#D9D9D9', borderRadius: 9999}} />
+-    <img style={{width: 199.14, height: 193.54}} src="https://placehold.co/199x194" />
+-    <div style={{width: 209.93, height: 204.01, borderRadius: 9999, border: '8px #D02D4B solid'}} />
+-    <div style={{width: 203.63, height: 198.91, borderRadius: 9999, border: '2px white solid'}} />
+-    <div style={{width: 563, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 32, display: 'flex'}}>
+-      <div data-property-1="Default" style={{width: 174, height: 45, position: 'relative', boxShadow: '2px 4px 4px rgba(2, 35, 53, 0.12)'}}>
+-        <div style={{width: 174, height: 45, left: 0, top: 0, position: 'absolute', background: '#1C5A79', borderRadius: 8}} />
+-        <div style={{width: 174, height: 45, left: 0, top: 0, position: 'absolute', textAlign: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column', color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '600', letterSpacing: 0.80, wordWrap: 'break-word'}}>You Are Veterans</div>
+-      </div>
+-    </div>
+-  </div>
+-  <div style={{width: 307, height: 281, left: 983, top: 1027, position: 'absolute', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 32, display: 'inline-flex'}}>
+-    <div style={{justifyContent: 'flex-start', alignItems: 'flex-start', gap: 42, display: 'inline-flex'}}>
+-      <div style={{width: 193.60, height: 193.60, background: '#D9D9D9', borderRadius: 9999}} />
+-      <img style={{width: 234.26, height: 193.60}} src="https://placehold.co/234x194" />
+-      <div style={{width: 200, height: 200, borderRadius: 9999, border: '8px #D02D4B solid'}} />
+-      <div style={{width: 194, height: 194, borderRadius: 9999, border: '2px white solid'}} />
+-    </div>
+-    <div style={{width: 419, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 32, display: 'flex'}}>
+-      <div data-property-1="Default" style={{width: 174, height: 45, position: 'relative', boxShadow: '2px 4px 4px rgba(2, 35, 53, 0.12)'}}>
+-        <div style={{width: 174, height: 45, left: 0, top: 0, position: 'absolute', background: '#1C5A79', borderRadius: 8}} />
+-        <div style={{width: 174, height: 45, left: 0, top: 0, position: 'absolute', textAlign: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column', color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '600', letterSpacing: 0.80, wordWrap: 'break-word'}}>You Are Volunteers</div>
+-      </div>
+-    </div>
+-  </div>
+-  <div style={{width: 1440, paddingLeft: 146, paddingRight: 146, left: 0, top: 1630, position: 'absolute', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 10, display: 'inline-flex'}}>
+-    <img style={{width: 1142, height: 583}} src="https://placehold.co/1142x583" />
+-    <div style={{width: 145, height: 84, left: 644, top: 250, position: 'absolute', background: 'rgba(217, 217, 217, 0.30)', borderRadius: 8}} />
+-  </div>
+-  <div style={{width: 307, height: 295, left: 154, top: 1335, position: 'absolute', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 32, display: 'inline-flex'}}>
+-    <img style={{width: 203.21, height: 197.49, borderRadius: 9999}} src="https://placehold.co/203x197" />
+-    <img style={{width: 209.93, height: 204.01, borderRadius: 9999, border: '8px #D02D4B solid'}} src="https://placehold.co/210x204" />
+-    <img style={{width: 203.63, height: 198.91, borderRadius: 9999, border: '2px white solid'}} src="https://placehold.co/204x199" />
+-    <div data-property-1="Default" style={{width: 174, height: 45, position: 'relative', boxShadow: '2px 4px 4px rgba(2, 35, 53, 0.12)'}}>
+-      <div style={{width: 174, height: 45, left: 0, top: 0, position: 'absolute', background: '#1C5A79', borderRadius: 8}} />
+-      <div style={{width: 174, height: 45, left: 0, top: 0, position: 'absolute', textAlign: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column', color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '600', letterSpacing: 0.80, wordWrap: 'break-word'}}>You Are Donors</div>
+-    </div>
+-  </div>
+-  <div style={{width: 1140, height: 442, left: 150, top: 2237, position: 'absolute', background: '#EAEEF2', borderRadius: 5}}>
+-    <div style={{left: 96, top: 91, position: 'absolute', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 32, display: 'inline-flex'}}>
+-      <div style={{flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 32, display: 'flex'}}>
+-        <div style={{justifyContent: 'flex-start', alignItems: 'center', gap: 56, display: 'inline-flex'}}>
+-          <div style={{textAlign: 'center', color: '#222540', fontSize: 32, fontFamily: 'Raleway', fontWeight: '500', lineHeight: 40, letterSpacing: 0.96, wordWrap: 'break-word'}}>Our Mission</div>
+-          <div style={{width: 213.02, height: 0, background: '#222540', outline: '2px #222540 solid', outlineOffset: '-1px'}}></div>
+-          <div style={{textAlign: 'center', color: 'rgba(34, 37, 64, 0.75)', fontSize: 32, fontFamily: 'Raleway', fontWeight: '500', lineHeight: 40, letterSpacing: 0.96, wordWrap: 'break-word'}}>Our Vision</div>
+-        </div>
+-        <div style={{width: 730, color: '#222540', fontSize: 20, fontFamily: 'Raleway', fontWeight: '600', lineHeight: 35, letterSpacing: 0.60, wordWrap: 'break-word'}}>We help our service members and their families transition from the uniform to new professional and personal lives by changing the veteran transition landscape.</div>
+-      </div>
+-      <div data-property-1="Default" style={{width: 174, height: 45, position: 'relative', boxShadow: '2px 4px 4px rgba(2, 35, 53, 0.12)'}}>
+-        <div style={{width: 174, height: 45, left: 0, top: 0, position: 'absolute', background: '#1C5A79', borderRadius: 8}} />
+-        <div style={{width: 174, height: 45, left: 0, top: 0, position: 'absolute', textAlign: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column', color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '600', letterSpacing: 0.80, wordWrap: 'break-word'}}>Learn More</div>
+-      </div>
+-    </div>
+-  </div>
+-  <div style={{width: 1440, paddingLeft: 30, paddingRight: 30, left: 0, top: 2679, position: 'absolute', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 32, display: 'inline-flex'}}>
+-    <div style={{width: 244, height: 42, color: '#222540', fontSize: 32, fontFamily: 'Raleway', fontWeight: '500', lineHeight: 40, letterSpacing: 0.96, wordWrap: 'break-word'}}>Recent News</div>
+-    <div style={{paddingLeft: 64, paddingRight: 64, justifyContent: 'flex-start', alignItems: 'flex-start', gap: 32, display: 'inline-flex'}}>
+-      <div style={{width: 396, height: 484, background: '#EAEEF2', borderRadius: 5}} />
+-      <div style={{width: 362, height: 257, borderRadius: 5, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 12, display: 'inline-flex'}}>
+-        <div style={{color: '#074264', fontSize: 24, fontFamily: 'Raleway', fontWeight: '700', wordWrap: 'break-word'}}>Lorem Ipsum</div>
+-        <div style={{width: 351, justifyContent: 'flex-start', alignItems: 'flex-start', gap: 72, display: 'inline-flex'}}>
+-          <div style={{width: 122, color: '#65101C', fontSize: 16, fontFamily: 'Raleway', fontWeight: '400', lineHeight: 25, letterSpacing: 0.48, wordWrap: 'break-word'}}>June 13th, 2022</div>
+-          <div style={{width: 157, textAlign: 'right', color: '#65101C', fontSize: 16, fontFamily: 'Raleway', fontWeight: '400', lineHeight: 25, letterSpacing: 0.48, wordWrap: 'break-word'}}>James Berg</div>
+-        </div>
+-        <div style={{width: 351}}><span style="color: '#1E1F29', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', lineHeight: 30, letterSpacing: 0.48, wordWrap: 'break-word'">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. eiusmod tempor incididunt ut labore et dolore magna aliqua. <br/></span><span style="color: '#074264', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', textDecoration: 'underline', lineHeight: 30, letterSpacing: 0.48, wordWrap: 'break-word'">Read More</span><span style="color: '#1E1F29', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', lineHeight: 30, letterSpacing: 0.48, wordWrap: 'break-word'"> </span></div>
+-      </div>
+-      <img style={{width: 361.03, height: 195.90}} src="https://placehold.co/361x196" />
+-      <div style={{width: 396, height: 484, background: '#EAEEF2', borderRadius: 5}} />
+-      <div style={{width: 350, height: 257, borderRadius: 5, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 12, display: 'inline-flex'}}>
+-        <div style={{color: '#074264', fontSize: 24, fontFamily: 'Raleway', fontWeight: '700', wordWrap: 'break-word'}}>Lorem Ipsum</div>
+-        <div style={{width: 351, justifyContent: 'flex-start', alignItems: 'flex-start', gap: 72, display: 'inline-flex'}}>
+-          <div style={{width: 122, color: '#65101C', fontSize: 16, fontFamily: 'Raleway', fontWeight: '400', lineHeight: 25, letterSpacing: 0.48, wordWrap: 'break-word'}}>June 13th, 2022</div>
+-          <div style={{width: 157, textAlign: 'right', color: '#65101C', fontSize: 16, fontFamily: 'Raleway', fontWeight: '400', lineHeight: 25, letterSpacing: 0.48, wordWrap: 'break-word'}}>James Berg</div>
+-        </div>
+-        <div style={{width: 351}}><span style="color: '#1E1F29', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', lineHeight: 30, letterSpacing: 0.48, wordWrap: 'break-word'">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ut labore et dolore magna aliqua. eiusmod tempor incididunt ut labore et dolore   <br/></span><span style="color: '#074264', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', textDecoration: 'underline', lineHeight: 30, letterSpacing: 0.48, wordWrap: 'break-word'">Read More</span><span style="color: '#1E1F29', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', lineHeight: 30, letterSpacing: 0.48, wordWrap: 'break-word'"> </span></div>
+-      </div>
+-      <img style={{width: 350.09, height: 196}} src="https://placehold.co/350x196" />
+-      <div style={{width: 396, height: 484, background: '#EAEEF2', borderRadius: 5}} />
+-      <div style={{width: 362, height: 257, borderRadius: 5, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 12, display: 'inline-flex'}}>
+-        <div style={{color: '#074264', fontSize: 24, fontFamily: 'Raleway', fontWeight: '700', wordWrap: 'break-word'}}>Lorem Ipusm</div>
+-        <div style={{width: 351, justifyContent: 'flex-start', alignItems: 'flex-start', gap: 72, display: 'inline-flex'}}>
+-          <div style={{width: 122, color: '#65101C', fontSize: 16, fontFamily: 'Raleway', fontWeight: '400', lineHeight: 25, letterSpacing: 0.48, wordWrap: 'break-word'}}>June 13th, 2022</div>
+-          <div style={{width: 157, textAlign: 'right', color: '#65101C', fontSize: 16, fontFamily: 'Raleway', fontWeight: '400', lineHeight: 25, letterSpacing: 0.48, wordWrap: 'break-word'}}>James Berg</div>
+-        </div>
+-        <div style={{width: 362}}><span style="color: '#1E1F29', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', lineHeight: 30, letterSpacing: 0.48, wordWrap: 'break-word'">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ut labore et dolore magna aliqua. eiusmod tempor incididunt ut labore et dolore<br/></span><span style="color: '#074264', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', textDecoration: 'underline', lineHeight: 30, letterSpacing: 0.48, wordWrap: 'break-word'">Read More</span><span style="color: '#1E1F29', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', lineHeight: 30, letterSpacing: 0.48, wordWrap: 'break-word'"> </span></div>
+-      </div>
+-      <img style={{width: 361.03, height: 195.90}} src="https://placehold.co/361x196" />
+-    </div>
+-  </div>
+-  <div style={{width: 1440, height: 372, left: 0, top: 3251, position: 'absolute'}}>
+-    <div style={{width: 1440, height: 372, left: 0, top: 0, position: 'absolute', background: '#074264'}} />
+-    <img style={{width: 176, height: 48.98, left: 65, top: 135, position: 'absolute'}} src="https://placehold.co/176x49" />
+-    <div style={{left: 358, top: 58, position: 'absolute', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 36, display: 'inline-flex'}}>
+-      <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '600', wordWrap: 'break-word'}}>Programs</div>
+-      <div style={{flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 12, display: 'flex'}}>
+-        <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>Bridge-Reset</div>
+-        <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>Bridge-Rebuild</div>
+-        <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>Build-Refocus</div>
+-        <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>Build-ReEngage </div>
+-        <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>Bridge-RePlant</div>
+-      </div>
+-    </div>
+-    <div style={{left: 585, top: 59, position: 'absolute', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 36, display: 'inline-flex'}}>
+-      <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '600', wordWrap: 'break-word'}}>Get Involved</div>
+-      <div style={{flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 12, display: 'flex'}}>
+-        <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>Board of Directors</div>
+-        <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>Become a Volunteer</div>
+-        <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>Financial Support</div>
+-        <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>Camera and field equipment donation</div>
+-      </div>
+-    </div>
+-    <div style={{left: 65, top: 335, position: 'absolute', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 124, display: 'inline-flex'}}>
+-      <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>2024 Operation Meraki</div>
+-      <div style={{justifyContent: 'flex-start', alignItems: 'flex-start', gap: 124, display: 'flex'}}>
+-        <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>Privacy Policy</div>
+-        <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>Terms of Use</div>
+-        <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>Contact Us</div>
+-        <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>About Us</div>
+-      </div>
+-    </div>
+-    <div style={{left: 963, top: 58, position: 'absolute', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 32, display: 'inline-flex'}}>
+-      <div style={{width: 139, color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Raleway', fontWeight: '600', wordWrap: 'break-word'}}>Subscribe Now</div>
+-      <div style={{flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 24, display: 'flex'}}>
+-        <div style={{flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 12, display: 'flex'}}>
+-          <div style={{color: 'rgba(254, 254, 254, 1)', fontSize: 18, fontFamily: 'Raleway', fontWeight: '400', wordWrap: 'break-word'}}>Stay informed on what we’re doing and opportunities. </div>
+-          <div style={{width: 436, height: 42, background: 'rgba(254, 254, 254, 1)', borderRadius: 12}} />
+-          <div style={{width: 94, height: 17, color: '#726E66', fontSize: 16, fontFamily: 'Raleway', fontWeight: '500', wordWrap: 'break-word'}}>(Enter Email)</div>
+-        </div>
+-        <div style={{position: 'relative', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 24, display: 'inline-flex'}}>
+-          <div style={{width: 40, height: 40, borderRadius: 9999, border: '1px rgba(254, 254, 254, 1) solid'}} />
+-          <div style={{width: 40, height: 40, borderRadius: 9999, border: '1px rgba(254, 254, 254, 1) solid'}} />
+-          <div style={{width: 40, height: 40, borderRadius: 9999, border: '1px rgba(254, 254, 254, 1) solid'}} />
+-          <div style={{width: 40, height: 40, borderRadius: 9999, border: '1px rgba(254, 254, 254, 1) solid'}} />
+-          <div style={{width: 23, height: 24, left: 9, top: 8, position: 'absolute', overflow: 'hidden'}}>
+-            <div style={{width: 23, height: 24, left: 0, top: 0, position: 'absolute', background: 'black'}} />
+-            <div style={{width: 23, height: 23.99, left: 0, top: 0, position: 'absolute', background: 'rgba(254, 254, 254, 1)'}} />
+-          </div>
+-          <div style={{width: 23, height: 23, left: 73, top: 8, position: 'absolute', overflow: 'hidden'}}>
+-            <div style={{width: 22.67, height: 22.67, left: 0.16, top: 0.16, position: 'absolute', background: 'rgba(254, 254, 254, 1)'}} />
+-            <div style={{width: 11.83, height: 11.83, left: 5.59, top: 5.61, position: 'absolute', background: 'rgba(254, 254, 254, 1)'}} />
+-            <div style={{width: 1.97, height: 1.97, left: 16.44, top: 4.49, position: 'absolute', background: 'rgba(254, 254, 254, 1)'}} />
+-          </div>
+-          <div style={{width: 24, height: 33.88, left: 136, top: 3, position: 'absolute', overflow: 'hidden'}}>
+-            <div style={{width: 15.98, height: 28.41, left: 3.30, top: 2.73, position: 'absolute', outline: '1px rgba(254, 254, 254, 1) solid', outlineOffset: '-0.50px'}} />
+-          </div>
+-          <div style={{width: 20, height: 28.57, left: 202, top: 6, position: 'absolute', overflow: 'hidden'}}>
+-            <div style={{width: 4.67, height: 5.42, left: 0, top: 0, position: 'absolute', background: 'rgba(254, 254, 254, 1)'}} />
+-            <div style={{width: 2.93, height: 3.31, left: 0.87, top: 1.06, position: 'absolute', background: '#074264'}} />
+-            <div style={{width: 3.91, height: 17.50, left: 0.42, top: 6.32, position: 'absolute', background: 'rgba(254, 254, 254, 1)'}} />
+-            <div style={{width: 2.17, height: 15.38, left: 1.29, top: 7.38, position: 'absolute', background: '#074264'}} />
+-            <div style={{width: 13.47, height: 17.50, left: 6.53, top: 6.32, position: 'absolute', background: 'rgba(254, 254, 254, 1)'}} />
+-            <div style={{width: 11.73, height: 15.38, left: 7.40, top: 7.38, position: 'absolute', background: '#074264'}} />
+-          </div>
+-        </div>
+-      </div>
+-    </div>
+-    <div data-property-1="Default" style={{width: 87, height: 42, left: 1312, top: 142, position: 'absolute'}}>
+-      <div style={{width: 87, height: 42, left: 0, top: 0, position: 'absolute', background: '#B22035', borderTopRightRadius: 12, borderBottomRightRadius: 12}} />
+-      <div style={{width: 76, height: 30.62, left: 5, top: 6.12, position: 'absolute', textAlign: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column', color: 'rgba(254, 254, 254, 1)', fontSize: 16, fontFamily: 'Inter', fontWeight: '500', letterSpacing: 0.48, wordWrap: 'break-word'}}>Submit</div>
+-      <div style={{width: 77, height: 31.50, left: 5, top: 5.25, position: 'absolute', borderRadius: 6, border: '1px rgba(254, 254, 254, 1) solid'}} />
+-    </div>
+-    <div style={{width: 53, height: 48.98, left: 171, top: 198, position: 'absolute'}} />
+-  </div>
+-  <div style={{width: 778, height: 281, left: 154, top: 1027, position: 'absolute', background: '#D9D9D9'}} />
+-  <div style={{width: 778, height: 281, left: 512, top: 1325, position: 'absolute', background: '#D9D9D9'}} />
+-  <div style={{width: 778, height: 281, left: 512, top: 729, position: 'absolute', background: '#D9D9D9'}} />
+-  <div data-property-1="Default" style={{width: 1251, height: 58, left: 154, top: 25, position: 'absolute'}}>
+-    <div style={{width: 1251, height: 58.87, left: 0, top: 0, position: 'absolute', background: 'rgba(254, 254, 254, 1)', borderBottom: '0.50px #D9D9D9 solid'}} />
+-    <div style={{width: 1096, left: 120, top: 5, position: 'absolute', justifyContent: 'flex-start', alignItems: 'center', gap: 86, display: 'inline-flex'}}>
+-      <div style={{justifyContent: 'flex-start', alignItems: 'center', gap: 64, display: 'flex'}}>
+-        <div data-property-1="Default" style={{width: 49, height: 19, position: 'relative'}}>
+-          <div style={{width: 49, left: 0, top: 0, position: 'absolute', color: '#074264', fontSize: 16, fontFamily: 'Raleway', fontWeight: '600', letterSpacing: 0.80, wordWrap: 'break-word'}}>Home</div>
+-        </div>
+-        <div data-property-1="Default" style={{width: 82, height: 19, position: 'relative'}}>
+-          <div style={{width: 82, left: 0, top: 0, position: 'absolute', color: '#074264', fontSize: 16, fontFamily: 'Raleway', fontWeight: '600', letterSpacing: 0.80, wordWrap: 'break-word'}}>Programs</div>
+-        </div>
+-        <div data-property-1="Default" style={{width: 110, height: 19, position: 'relative'}}>
+-          <div style={{width: 110, left: 0, top: 0, position: 'absolute', color: '#074264', fontSize: 16, fontFamily: 'Raleway', fontWeight: '600', letterSpacing: 0.80, wordWrap: 'break-word'}}>Get Involved</div>
+-        </div>
+-        <div data-property-1="Default" style={{width: 57, height: 19, position: 'relative'}}>
+-          <div style={{width: 57, left: 0, top: 0, position: 'absolute', color: '#074264', fontSize: 16, fontFamily: 'Raleway', fontWeight: '600', letterSpacing: 0.80, wordWrap: 'break-word'}}>Events</div>
+-        </div>
+-        <div data-property-1="Default" style={{width: 47, height: 19, position: 'relative'}}>
+-          <div style={{width: 47, left: 0, top: 0, position: 'absolute', color: '#074264', fontSize: 16, fontFamily: 'Raleway', fontWeight: '600', letterSpacing: 0.80, wordWrap: 'break-word'}}>News</div>
+-        </div>
+-        <div data-property-1="Default" style={{width: 68, height: 19, position: 'relative'}}>
+-          <div style={{width: 68, left: 0, top: 0, position: 'absolute', color: '#074264', fontSize: 16, fontFamily: 'Raleway', fontWeight: '600', letterSpacing: 0.80, wordWrap: 'break-word'}}>Contact</div>
+-        </div>
+-        <div data-property-1="Default" style={{width: 78, height: 19, position: 'relative'}}>
+-          <div style={{width: 78, left: 0, top: 0, position: 'absolute', color: '#074264', fontSize: 16, fontFamily: 'Raleway', fontWeight: '600', letterSpacing: 0.80, wordWrap: 'break-word'}}>About Us</div>
+-        </div>
+-      </div>
+-      <div data-property-1="Default" style={{width: 142, height: 45, position: 'relative', boxShadow: '2px 4px 4px 1px rgba(44.75, 12.49, 18.27, 0.03)'}}>
+-        <div style={{width: 144, height: 45, left: 0, top: 0, position: 'absolute', background: '#B8162F', borderRadius: 5}} />
+-        <div style={{width: 142, height: 45, left: 0, top: 0, position: 'absolute', textAlign: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column', color: 'rgba(254, 254, 254, 1)', fontSize: 18, fontFamily: 'Raleway', fontWeight: '700', lineHeight: 40, letterSpacing: 0.72, wordWrap: 'break-word'}}>Donate</div>
+-      </div>
+-    </div>
+-  </div>
+-  <img style={{width: 290, height: 157, left: 0, top: 5, position: 'absolute'}} src="https://placehold.co/290x157" />
+-  <div data-property-1="pexels-rdne-7467943 2" style={{width: 1439, height: 550, left: -1, top: 162, position: 'absolute'}}>
+-    <img style={{width: 1439, height: 550, left: 0, top: 0, position: 'absolute'}} src="https://placehold.co/1439x550" />
+-  </div>
+-</div>
+\ No newline at end of file
+diff --git a/Homepage v3/home-version3.svelte b/Homepage v3/home-version3.svelte
+deleted file mode 100644
+index 2378e84..0000000
+--- a/Homepage v3/home-version3.svelte	
++++ /dev/null
+@@ -1,1771 +0,0 @@
+-<div class="home-version-3">
+-  <div class="rectangle-23903"></div>
+-  <div class="rectangle-5"></div>
+-  <div class="frame-1321314669">
+-    <div class="ellipse-7"></div>
+-    <img class="pexels-lance-reis-15775946-2" src="https://placehold.co/199x194" />
+-    <div class="ellipse-6"></div>
+-    <div class="ellipse-7_01"></div>
+-    <div class="frame-1321314650">
+-      <div data-property-1="Default" class="blue-cta-button">
+-        <div class="rectangle-3"></div>
+-        <div class="submit"><span class="submit_span">You Are Veterans</span></div>
+-      </div>
+-    </div>
+-  </div>
+-  <div class="frame-1321314669_01">
+-    <div class="frame-1321314587">
+-      <div class="ellipse-7_02"></div>
+-      <img class="pexels-allan-mas-5368943-2" src="https://placehold.co/234x194" />
+-      <div class="ellipse-6_01"></div>
+-      <div class="ellipse-7_03"></div>
+-    </div>
+-    <div class="frame-1321314650_01">
+-      <div data-property-1="Default" class="blue-cta-button_01">
+-        <div class="rectangle-3_01"></div>
+-        <div class="submit_01"><span class="submit_01_span">You Are Volunteers</span></div>
+-      </div>
+-    </div>
+-  </div>
+-  <div class="frame-35704">
+-    <img class="rectangle-23893" src="https://placehold.co/1142x583" />
+-    <div class="rectangle-23894"></div>
+-  </div>
+-  <div class="frame-1321314669_02">
+-    <img class="ellipse-7_04" src="https://placehold.co/203x197" />
+-    <img class="ellipse-6_02" src="https://placehold.co/210x204" />
+-    <img class="ellipse-7_05" src="https://placehold.co/204x199" />
+-    <div data-property-1="Default" class="blue-cta-button_02">
+-      <div class="rectangle-3_02"></div>
+-      <div class="submit_02"><span class="submit_02_span">You Are Donors</span></div>
+-    </div>
+-  </div>
+-  <div class="missionvision-section-homepage---concept-1">
+-    <div class="frame-1321314672">
+-      <div class="frame-1321314671">
+-        <div class="frame-1321314670">
+-          <div class="our-mission"><span class="ourmission_span">Our Mission</span></div>
+-          <div class="line-1"></div>
+-          <div class="our-vision"><span class="ourvision_span">Our Vision</span></div>
+-        </div>
+-        <div class="we-help-our-service-members-and-their-families-transition-from-the-uniform-to-new-professional-and-personal-lives-by-changing-the-veteran-transition-landscape"><span class="wehelpourservicemembersandtheirfamiliestransitionfromtheuniformtonewprofessionalandpersonallivesbychangingtheveterantransitionlandscape_span">We help our service members and their families transition from the uniform to new professional and personal lives by changing the veteran transition landscape.</span></div>
+-      </div>
+-      <div data-property-1="Default" class="blue-cta-button_03">
+-        <div class="rectangle-3_03"></div>
+-        <div class="submit_03"><span class="submit_03_span">Learn More</span></div>
+-      </div>
+-    </div>
+-  </div>
+-  <div class="frame-1321314649">
+-    <div class="recent-news"><span class="recentnews_span">Recent News</span></div>
+-    <div class="frame-1321314604">
+-      <div class="rectangle-23885"></div>
+-      <div class="frame-1321314565">
+-        <div><span class="loremipsum_span">Lorem Ipsum</span></div>
+-        <div class="frame-1321314602">
+-          <div class="june-13th-2022"><span class="june13th2022_span">June 13th, 2022</span></div>
+-          <div class="james-berg"><span class="jamesberg_span">James Berg</span></div>
+-        </div>
+-        <div class="lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua-read-more"><span class="loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdoloremagnaaliquareadmore_span_01">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. eiusmod tempor incididunt ut labore et dolore magna aliqua. <br/></span><span class="loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdoloremagnaaliquareadmore_span_02">Read More</span><span class="loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdoloremagnaaliquareadmore_span_03"> </span></div>
+-      </div>
+-      <img class="pexels-tima-miroshnichenko-5711177-1" src="https://placehold.co/361x196" />
+-      <div class="rectangle-23885_01"></div>
+-      <div class="frame-1321314565_01">
+-        <div><span class="loremipsum_01_span">Lorem Ipsum</span></div>
+-        <div class="frame-1321314602_01">
+-          <div class="june-13th-2022_01"><span class="june13th2022_01_span">June 13th, 2022</span></div>
+-          <div class="james-berg_01"><span class="jamesberg_01_span">James Berg</span></div>
+-        </div>
+-        <div class="lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua-ut-labore-et-dolore-magna-aliqua-eiusmod-tempor-incididunt-ut-labore-et-dolore-read-more"><span class="loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquautlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdolorereadmore_span_01">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ut labore et dolore magna aliqua. eiusmod tempor incididunt ut labore et dolore   <br/></span><span class="loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquautlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdolorereadmore_span_02">Read More</span><span class="loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquautlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdolorereadmore_span_03"> </span></div>
+-      </div>
+-      <img class="pexels-rdne-stock-project-7468215-1" src="https://placehold.co/350x196" />
+-      <div class="rectangle-23885_02"></div>
+-      <div class="frame-1321314565_02">
+-        <div><span class="loremipusm_span">Lorem Ipusm</span></div>
+-        <div class="frame-1321314602_02">
+-          <div class="june-13th-2022_02"><span class="june13th2022_02_span">June 13th, 2022</span></div>
+-          <div class="james-berg_02"><span class="jamesberg_02_span">James Berg</span></div>
+-        </div>
+-        <div class="lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-ut-labore-et-dolore-magna-aliqua-eiusmod-tempor-incididunt-ut-labore-et-dolore-read-more"><span class="loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnautlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdolorereadmore_span_01">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ut labore et dolore magna aliqua. eiusmod tempor incididunt ut labore et dolore<br/></span><span class="loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnautlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdolorereadmore_span_02">Read More</span><span class="loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnautlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdolorereadmore_span_03"> </span></div>
+-      </div>
+-      <img class="pexels-tima-miroshnichenko-5711177-1_01" src="https://placehold.co/361x196" />
+-    </div>
+-  </div>
+-  <div class="footer">
+-    <div class="rectangle-8"></div>
+-    <img class="white-stacked-logo-high-res-1" src="https://placehold.co/176x49" />
+-    <div class="frame-45">
+-      <div><span class="programs_span">Programs</span></div>
+-      <div class="frame-43">
+-        <div><span class="bridge-reset_span">Bridge-Reset</span></div>
+-        <div><span class="bridge-rebuild_span">Bridge-Rebuild</span></div>
+-        <div><span class="build-refocus_span">Build-Refocus</span></div>
+-        <div><span class="build-reengage_span">Build-ReEngage </span></div>
+-        <div><span class="bridge-replant_span">Bridge-RePlant</span></div>
+-      </div>
+-    </div>
+-    <div class="frame-44">
+-      <div><span class="getinvolved_span">Get Involved</span></div>
+-      <div class="frame-43_01">
+-        <div><span class="boardofdirectors_span">Board of Directors</span></div>
+-        <div><span class="becomeavolunteer_span">Become a Volunteer</span></div>
+-        <div><span class="financialsupport_span">Financial Support</span></div>
+-        <div><span class="cameraandfieldequipmentdonation_span">Camera and field equipment donation</span></div>
+-      </div>
+-    </div>
+-    <div class="frame-47">
+-      <div><span class="f024operationmeraki_span">2024 Operation Meraki</span></div>
+-      <div class="frame-46">
+-        <div><span class="privacypolicy_span">Privacy Policy</span></div>
+-        <div><span class="termsofuse_span">Terms of Use</span></div>
+-        <div><span class="contactus_span">Contact Us</span></div>
+-        <div><span class="aboutus_span">About Us</span></div>
+-      </div>
+-    </div>
+-    <div class="frame-1321314923">
+-      <div class="subscribe-now"><span class="subscribenow_span">Subscribe Now</span></div>
+-      <div class="frame-1321314922">
+-        <div class="frame-1321314921">
+-          <div><span class="stayinformedonwhatweredoingandopportunities_span">Stay informed on what we’re doing and opportunities. </span></div>
+-          <div class="rectangle-4"></div>
+-          <div class="enter-email"><span class="enteremail_span">(Enter Email)</span></div>
+-        </div>
+-        <div class="frame-48">
+-          <div class="ellipse-2"></div>
+-          <div class="ellipse-3"></div>
+-          <div class="ellipse-4"></div>
+-          <div class="ellipse-5"></div>
+-          <div class="frame-11244080_x_twitter_elon-musk_twitter-new-logo_icon-1">
+-            <div class="vector"></div>
+-            <div class="vector_01"></div>
+-          </div>
+-          <div class="frame-7156617_instagram_social_media_icon-1">
+-            <div class="vector_02"></div>
+-            <div class="vector_03"></div>
+-            <div class="vector_04"></div>
+-          </div>
+-          <div class="frame-7405573_plumpicons_facebook_simple_icon-1">
+-            <div class="vector_05"></div>
+-          </div>
+-          <div class="frame-1829792_brand_linkedin_logo_network_social_icon-1">
+-            <div class="vector_06"></div>
+-            <div class="vector_07"></div>
+-            <div class="vector_08"></div>
+-            <div class="vector_09"></div>
+-            <div class="vector_10"></div>
+-            <div class="vector_11"></div>
+-          </div>
+-        </div>
+-      </div>
+-    </div>
+-    <div data-property-1="Default" class="email-button">
+-      <div class="rectangle-10"></div>
+-      <div class="submit_04"><span class="submit_04_span">Submit</span></div>
+-      <div class="rectangle-11"></div>
+-    </div>
+-    <div class="full-color-stacked-logo-high-res-2"></div>
+-  </div>
+-  <div class="rectangle-23899"></div>
+-  <div class="rectangle-23900"></div>
+-  <div class="rectangle-23901"></div>
+-  <div data-property-1="Default" class="navigation-bar">
+-    <div class="rectangle-1"></div>
+-    <div class="frame-41">
+-      <div class="frame-1321314601">
+-        <div data-property-1="Default" class="home">
+-          <div class="home_01"><span class="home_01_span">Home</span></div>
+-        </div>
+-        <div data-property-1="Default" class="programs_01">
+-          <div class="programs_01"><span class="programs_01_span">Programs</span></div>
+-        </div>
+-        <div data-property-1="Default" class="home_02">
+-          <div class="home_03"><span class="home_03_span">Get Involved</span></div>
+-        </div>
+-        <div data-property-1="Default" class="home_04">
+-          <div class="home_05"><span class="home_05_span">Events</span></div>
+-        </div>
+-        <div data-property-1="Default" class="home_06">
+-          <div class="home_07"><span class="home_07_span">News</span></div>
+-        </div>
+-        <div data-property-1="Default" class="home_08">
+-          <div class="home_09"><span class="home_09_span">Contact</span></div>
+-        </div>
+-        <div data-property-1="Default" class="home_10">
+-          <div class="home_11"><span class="home_11_span">About Us</span></div>
+-        </div>
+-      </div>
+-      <div data-property-1="Default" class="red-donate-button">
+-        <div class="rectangle-3_04"></div>
+-        <div class="donate"><span class="donate_span">Donate</span></div>
+-      </div>
+-    </div>
+-  </div>
+-  <img class="full-color-stacked-logo-high-res-1" src="https://placehold.co/290x157" />
+-  <div data-property-1="pexels-rdne-7467943 2" class="home-scroll">
+-    <img class="pexels-rdne-7467943-2" src="https://placehold.co/1439x550" />
+-  </div>
+-</div>
+-
+-<style>
+-.rectangle-23903 {
+-  width: 1439px;
+-  height: 629px;
+-  left: 0px;
+-  top: 83px;
+-  position: absolute;
+-  background: #A4EFF3;
+-}
+-
+-.rectangle-5 {
+-  width: 492px;
+-  height: 457px;
+-  left: 948px;
+-  top: 83px;
+-  position: absolute;
+-}
+-
+-.ellipse-7 {
+-  width: 203.21px;
+-  height: 197.49px;
+-  background: #D9D9D9;
+-  border-radius: 9999px;
+-}
+-
+-.pexels-lance-reis-15775946-2 {
+-  width: 199.14px;
+-  height: 193.54px;
+-}
+-
+-.ellipse-6 {
+-  width: 209.93px;
+-  height: 204.01px;
+-  border-radius: 9999px;
+-  border: 8px #D02D4B solid;
+-}
+-
+-.ellipse-7_01 {
+-  width: 203.63px;
+-  height: 198.91px;
+-  border-radius: 9999px;
+-  border: 2px white solid;
+-}
+-
+-.rectangle-3 {
+-  width: 174px;
+-  height: 45px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  background: #1C5A79;
+-  border-radius: 8px;
+-}
+-
+-.submit_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  letter-spacing: 0.80px;
+-  word-wrap: break-word;
+-}
+-
+-.submit {
+-  width: 174px;
+-  height: 45px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  text-align: center;
+-  justify-content: center;
+-  display: flex;
+-  flex-direction: column;
+-}
+-
+-.ellipse-7_02 {
+-  width: 193.60px;
+-  height: 193.60px;
+-  background: #D9D9D9;
+-  border-radius: 9999px;
+-}
+-
+-.pexels-allan-mas-5368943-2 {
+-  width: 234.26px;
+-  height: 193.60px;
+-}
+-
+-.ellipse-6_01 {
+-  width: 200px;
+-  height: 200px;
+-  border-radius: 9999px;
+-  border: 8px #D02D4B solid;
+-}
+-
+-.ellipse-7_03 {
+-  width: 194px;
+-  height: 194px;
+-  border-radius: 9999px;
+-  border: 2px white solid;
+-}
+-
+-.rectangle-3_01 {
+-  width: 174px;
+-  height: 45px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  background: #1C5A79;
+-  border-radius: 8px;
+-}
+-
+-.submit_01_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  letter-spacing: 0.80px;
+-  word-wrap: break-word;
+-}
+-
+-.submit_01 {
+-  width: 174px;
+-  height: 45px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  text-align: center;
+-  justify-content: center;
+-  display: flex;
+-  flex-direction: column;
+-}
+-
+-.rectangle-23893 {
+-  width: 1142px;
+-  height: 583px;
+-}
+-
+-.rectangle-23894 {
+-  width: 145px;
+-  height: 84px;
+-  left: 644px;
+-  top: 250px;
+-  position: absolute;
+-  background: rgba(217, 217, 217, 0.30);
+-  border-radius: 8px;
+-}
+-
+-.ellipse-7_04 {
+-  width: 203.21px;
+-  height: 197.49px;
+-  border-radius: 9999px;
+-}
+-
+-.ellipse-6_02 {
+-  width: 209.93px;
+-  height: 204.01px;
+-  border-radius: 9999px;
+-  border: 8px #D02D4B solid;
+-}
+-
+-.ellipse-7_05 {
+-  width: 203.63px;
+-  height: 198.91px;
+-  border-radius: 9999px;
+-  border: 2px white solid;
+-}
+-
+-.rectangle-3_02 {
+-  width: 174px;
+-  height: 45px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  background: #1C5A79;
+-  border-radius: 8px;
+-}
+-
+-.submit_02_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  letter-spacing: 0.80px;
+-  word-wrap: break-word;
+-}
+-
+-.submit_02 {
+-  width: 174px;
+-  height: 45px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  text-align: center;
+-  justify-content: center;
+-  display: flex;
+-  flex-direction: column;
+-}
+-
+-.ourmission_span {
+-  color: #222540;
+-  font-size: 32px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  line-height: 40px;
+-  letter-spacing: 0.96px;
+-  word-wrap: break-word;
+-}
+-
+-.our-mission {
+-  text-align: center;
+-}
+-
+-.line-1 {
+-  width: 213.02px;
+-  height: 0px;
+-  background: #222540;
+-  outline: 2px #222540 solid;
+-  outline-offset: -1px;
+-}
+-
+-.ourvision_span {
+-  color: rgba(34, 37, 64, 0.75);
+-  font-size: 32px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  line-height: 40px;
+-  letter-spacing: 0.96px;
+-  word-wrap: break-word;
+-}
+-
+-.our-vision {
+-  text-align: center;
+-}
+-
+-.wehelpourservicemembersandtheirfamiliestransitionfromtheuniformtonewprofessionalandpersonallivesbychangingtheveterantransitionlandscape_span {
+-  color: #222540;
+-  font-size: 20px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  line-height: 35px;
+-  letter-spacing: 0.60px;
+-  word-wrap: break-word;
+-}
+-
+-.we-help-our-service-members-and-their-families-transition-from-the-uniform-to-new-professional-and-personal-lives-by-changing-the-veteran-transition-landscape {
+-  width: 730px;
+-}
+-
+-.rectangle-3_03 {
+-  width: 174px;
+-  height: 45px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  background: #1C5A79;
+-  border-radius: 8px;
+-}
+-
+-.submit_03_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  letter-spacing: 0.80px;
+-  word-wrap: break-word;
+-}
+-
+-.submit_03 {
+-  width: 174px;
+-  height: 45px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  text-align: center;
+-  justify-content: center;
+-  display: flex;
+-  flex-direction: column;
+-}
+-
+-.recentnews_span {
+-  color: #222540;
+-  font-size: 32px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  line-height: 40px;
+-  letter-spacing: 0.96px;
+-  word-wrap: break-word;
+-}
+-
+-.recent-news {
+-  width: 244px;
+-  height: 42px;
+-}
+-
+-.rectangle-23885 {
+-  width: 396px;
+-  height: 484px;
+-  background: #EAEEF2;
+-  border-radius: 5px;
+-}
+-
+-.loremipsum_span {
+-  color: #074264;
+-  font-size: 24px;
+-  font-family: Raleway;
+-  font-weight: 700;
+-  word-wrap: break-word;
+-}
+-
+-.june13th2022_span {
+-  color: #65101C;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 400;
+-  line-height: 25px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.june-13th-2022 {
+-  width: 122px;
+-}
+-
+-.jamesberg_span {
+-  color: #65101C;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 400;
+-  line-height: 25px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.james-berg {
+-  width: 157px;
+-  text-align: right;
+-}
+-
+-.loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdoloremagnaaliquareadmore_span_01 {
+-  color: #1E1F29;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  line-height: 30px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdoloremagnaaliquareadmore_span_02 {
+-  color: #074264;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  text-decoration: underline;
+-  line-height: 30px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdoloremagnaaliquareadmore_span_03 {
+-  color: #1E1F29;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  line-height: 30px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua-read-more {
+-  width: 351px;
+-}
+-
+-.pexels-tima-miroshnichenko-5711177-1 {
+-  width: 361.03px;
+-  height: 195.90px;
+-}
+-
+-.rectangle-23885_01 {
+-  width: 396px;
+-  height: 484px;
+-  background: #EAEEF2;
+-  border-radius: 5px;
+-}
+-
+-.loremipsum_01_span {
+-  color: #074264;
+-  font-size: 24px;
+-  font-family: Raleway;
+-  font-weight: 700;
+-  word-wrap: break-word;
+-}
+-
+-.june13th2022_01_span {
+-  color: #65101C;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 400;
+-  line-height: 25px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.june-13th-2022_01 {
+-  width: 122px;
+-}
+-
+-.jamesberg_01_span {
+-  color: #65101C;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 400;
+-  line-height: 25px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.james-berg_01 {
+-  width: 157px;
+-  text-align: right;
+-}
+-
+-.loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquautlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdolorereadmore_span_01 {
+-  color: #1E1F29;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  line-height: 30px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquautlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdolorereadmore_span_02 {
+-  color: #074264;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  text-decoration: underline;
+-  line-height: 30px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquautlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdolorereadmore_span_03 {
+-  color: #1E1F29;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  line-height: 30px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua-ut-labore-et-dolore-magna-aliqua-eiusmod-tempor-incididunt-ut-labore-et-dolore-read-more {
+-  width: 351px;
+-}
+-
+-.pexels-rdne-stock-project-7468215-1 {
+-  width: 350.09px;
+-  height: 196px;
+-}
+-
+-.rectangle-23885_02 {
+-  width: 396px;
+-  height: 484px;
+-  background: #EAEEF2;
+-  border-radius: 5px;
+-}
+-
+-.loremipusm_span {
+-  color: #074264;
+-  font-size: 24px;
+-  font-family: Raleway;
+-  font-weight: 700;
+-  word-wrap: break-word;
+-}
+-
+-.june13th2022_02_span {
+-  color: #65101C;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 400;
+-  line-height: 25px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.june-13th-2022_02 {
+-  width: 122px;
+-}
+-
+-.jamesberg_02_span {
+-  color: #65101C;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 400;
+-  line-height: 25px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.james-berg_02 {
+-  width: 157px;
+-  text-align: right;
+-}
+-
+-.loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnautlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdolorereadmore_span_01 {
+-  color: #1E1F29;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  line-height: 30px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnautlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdolorereadmore_span_02 {
+-  color: #074264;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  text-decoration: underline;
+-  line-height: 30px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.loremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnautlaboreetdoloremagnaaliquaeiusmodtemporincididuntutlaboreetdolorereadmore_span_03 {
+-  color: #1E1F29;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  line-height: 30px;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-ut-labore-et-dolore-magna-aliqua-eiusmod-tempor-incididunt-ut-labore-et-dolore-read-more {
+-  width: 362px;
+-}
+-
+-.pexels-tima-miroshnichenko-5711177-1_01 {
+-  width: 361.03px;
+-  height: 195.90px;
+-}
+-
+-.rectangle-8 {
+-  width: 1440px;
+-  height: 372px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  background: #074264;
+-}
+-
+-.white-stacked-logo-high-res-1 {
+-  width: 176px;
+-  height: 48.98px;
+-  left: 65px;
+-  top: 135px;
+-  position: absolute;
+-}
+-
+-.programs_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  word-wrap: break-word;
+-}
+-
+-.bridge-reset_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.bridge-rebuild_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.build-refocus_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.build-reengage_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.bridge-replant_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.getinvolved_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  word-wrap: break-word;
+-}
+-
+-.boardofdirectors_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.becomeavolunteer_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.financialsupport_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.cameraandfieldequipmentdonation_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.f024operationmeraki_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.privacypolicy_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.termsofuse_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.contactus_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.aboutus_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.subscribenow_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  word-wrap: break-word;
+-}
+-
+-.subscribe-now {
+-  width: 139px;
+-}
+-
+-.stayinformedonwhatweredoingandopportunities_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 18px;
+-  font-family: Raleway;
+-  font-weight: 400;
+-  word-wrap: break-word;
+-}
+-
+-.rectangle-4 {
+-  width: 436px;
+-  height: 42px;
+-  background: rgba(254, 254, 254, 1);
+-  border-radius: 12px;
+-}
+-
+-.enteremail_span {
+-  color: #726E66;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 500;
+-  word-wrap: break-word;
+-}
+-
+-.enter-email {
+-  width: 94px;
+-  height: 17px;
+-}
+-
+-.ellipse-2 {
+-  width: 40px;
+-  height: 40px;
+-  border-radius: 9999px;
+-  border: 1px rgba(254, 254, 254, 1) solid;
+-}
+-
+-.ellipse-3 {
+-  width: 40px;
+-  height: 40px;
+-  border-radius: 9999px;
+-  border: 1px rgba(254, 254, 254, 1) solid;
+-}
+-
+-.ellipse-4 {
+-  width: 40px;
+-  height: 40px;
+-  border-radius: 9999px;
+-  border: 1px rgba(254, 254, 254, 1) solid;
+-}
+-
+-.ellipse-5 {
+-  width: 40px;
+-  height: 40px;
+-  border-radius: 9999px;
+-  border: 1px rgba(254, 254, 254, 1) solid;
+-}
+-
+-.vector {
+-  width: 23px;
+-  height: 24px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  background: black;
+-}
+-
+-.vector_01 {
+-  width: 23px;
+-  height: 23.99px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  background: rgba(254, 254, 254, 1);
+-}
+-
+-.vector_02 {
+-  width: 22.67px;
+-  height: 22.67px;
+-  left: 0.16px;
+-  top: 0.16px;
+-  position: absolute;
+-  background: rgba(254, 254, 254, 1);
+-}
+-
+-.vector_03 {
+-  width: 11.83px;
+-  height: 11.83px;
+-  left: 5.59px;
+-  top: 5.61px;
+-  position: absolute;
+-  background: rgba(254, 254, 254, 1);
+-}
+-
+-.vector_04 {
+-  width: 1.97px;
+-  height: 1.97px;
+-  left: 16.44px;
+-  top: 4.49px;
+-  position: absolute;
+-  background: rgba(254, 254, 254, 1);
+-}
+-
+-.vector_05 {
+-  width: 15.98px;
+-  height: 28.41px;
+-  left: 3.30px;
+-  top: 2.73px;
+-  position: absolute;
+-  outline: 1px rgba(254, 254, 254, 1) solid;
+-  outline-offset: -0.50px;
+-}
+-
+-.vector_06 {
+-  width: 4.67px;
+-  height: 5.42px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  background: rgba(254, 254, 254, 1);
+-}
+-
+-.vector_07 {
+-  width: 2.93px;
+-  height: 3.31px;
+-  left: 0.87px;
+-  top: 1.06px;
+-  position: absolute;
+-  background: #074264;
+-}
+-
+-.vector_08 {
+-  width: 3.91px;
+-  height: 17.50px;
+-  left: 0.42px;
+-  top: 6.32px;
+-  position: absolute;
+-  background: rgba(254, 254, 254, 1);
+-}
+-
+-.vector_09 {
+-  width: 2.17px;
+-  height: 15.38px;
+-  left: 1.29px;
+-  top: 7.38px;
+-  position: absolute;
+-  background: #074264;
+-}
+-
+-.vector_10 {
+-  width: 13.47px;
+-  height: 17.50px;
+-  left: 6.53px;
+-  top: 6.32px;
+-  position: absolute;
+-  background: rgba(254, 254, 254, 1);
+-}
+-
+-.vector_11 {
+-  width: 11.73px;
+-  height: 15.38px;
+-  left: 7.40px;
+-  top: 7.38px;
+-  position: absolute;
+-  background: #074264;
+-}
+-
+-.rectangle-10 {
+-  width: 87px;
+-  height: 42px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  background: #B22035;
+-  border-top-right-radius: 12px;
+-  border-bottom-right-radius: 12px;
+-}
+-
+-.submit_04_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 16px;
+-  font-family: Inter;
+-  font-weight: 500;
+-  letter-spacing: 0.48px;
+-  word-wrap: break-word;
+-}
+-
+-.submit_04 {
+-  width: 76px;
+-  height: 30.62px;
+-  left: 5px;
+-  top: 6.12px;
+-  position: absolute;
+-  text-align: center;
+-  justify-content: center;
+-  display: flex;
+-  flex-direction: column;
+-}
+-
+-.rectangle-11 {
+-  width: 77px;
+-  height: 31.50px;
+-  left: 5px;
+-  top: 5.25px;
+-  position: absolute;
+-  border-radius: 6px;
+-  border: 1px rgba(254, 254, 254, 1) solid;
+-}
+-
+-.full-color-stacked-logo-high-res-2 {
+-  width: 53px;
+-  height: 48.98px;
+-  left: 171px;
+-  top: 198px;
+-  position: absolute;
+-}
+-
+-.rectangle-23899 {
+-  width: 778px;
+-  height: 281px;
+-  left: 154px;
+-  top: 1027px;
+-  position: absolute;
+-  background: #D9D9D9;
+-}
+-
+-.rectangle-23900 {
+-  width: 778px;
+-  height: 281px;
+-  left: 512px;
+-  top: 1325px;
+-  position: absolute;
+-  background: #D9D9D9;
+-}
+-
+-.rectangle-23901 {
+-  width: 778px;
+-  height: 281px;
+-  left: 512px;
+-  top: 729px;
+-  position: absolute;
+-  background: #D9D9D9;
+-}
+-
+-.rectangle-1 {
+-  width: 1251px;
+-  height: 58.87px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  background: rgba(254, 254, 254, 1);
+-  border-bottom: 0.50px #D9D9D9 solid;
+-}
+-
+-.home_01_span {
+-  color: #074264;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  letter-spacing: 0.80px;
+-  word-wrap: break-word;
+-}
+-
+-.home_01 {
+-  width: 49px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-}
+-
+-.programs_01_span {
+-  color: #074264;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  letter-spacing: 0.80px;
+-  word-wrap: break-word;
+-}
+-
+-.programs_01 {
+-  width: 82px;
+-  height: 19px;
+-  position: relative;
+-}
+-
+-.home_03_span {
+-  color: #074264;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  letter-spacing: 0.80px;
+-  word-wrap: break-word;
+-}
+-
+-.home_03 {
+-  width: 110px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-}
+-
+-.home_05_span {
+-  color: #074264;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  letter-spacing: 0.80px;
+-  word-wrap: break-word;
+-}
+-
+-.home_05 {
+-  width: 57px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-}
+-
+-.home_07_span {
+-  color: #074264;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  letter-spacing: 0.80px;
+-  word-wrap: break-word;
+-}
+-
+-.home_07 {
+-  width: 47px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-}
+-
+-.home_09_span {
+-  color: #074264;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  letter-spacing: 0.80px;
+-  word-wrap: break-word;
+-}
+-
+-.home_09 {
+-  width: 68px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-}
+-
+-.home_11_span {
+-  color: #074264;
+-  font-size: 16px;
+-  font-family: Raleway;
+-  font-weight: 600;
+-  letter-spacing: 0.80px;
+-  word-wrap: break-word;
+-}
+-
+-.home_11 {
+-  width: 78px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-}
+-
+-.rectangle-3_04 {
+-  width: 144px;
+-  height: 45px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  background: #B8162F;
+-  border-radius: 5px;
+-}
+-
+-.donate_span {
+-  color: rgba(254, 254, 254, 1);
+-  font-size: 18px;
+-  font-family: Raleway;
+-  font-weight: 700;
+-  line-height: 40px;
+-  letter-spacing: 0.72px;
+-  word-wrap: break-word;
+-}
+-
+-.donate {
+-  width: 142px;
+-  height: 45px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-  text-align: center;
+-  justify-content: center;
+-  display: flex;
+-  flex-direction: column;
+-}
+-
+-.full-color-stacked-logo-high-res-1 {
+-  width: 290px;
+-  height: 157px;
+-  left: 0px;
+-  top: 5px;
+-  position: absolute;
+-}
+-
+-.pexels-rdne-7467943-2 {
+-  width: 1439px;
+-  height: 550px;
+-  left: 0px;
+-  top: 0px;
+-  position: absolute;
+-}
+-
+-.frame-1321314670 {
+-  justify-content: flex-start;
+-  align-items: center;
+-  gap: 56px;
+-  display: inline-flex;
+-}
+-
+-.frame-1321314602 {
+-  width: 351px;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 72px;
+-  display: inline-flex;
+-}
+-
+-.frame-1321314602_01 {
+-  width: 351px;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 72px;
+-  display: inline-flex;
+-}
+-
+-.frame-1321314602_02 {
+-  width: 351px;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 72px;
+-  display: inline-flex;
+-}
+-
+-.frame-43 {
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 12px;
+-  display: flex;
+-}
+-
+-.frame-43_01 {
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 12px;
+-  display: flex;
+-}
+-
+-.frame-46 {
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 124px;
+-  display: flex;
+-}
+-
+-.home {
+-  width: 49px;
+-  height: 19px;
+-  position: relative;
+-}
+-
+-.home_02 {
+-  width: 110px;
+-  height: 19px;
+-  position: relative;
+-}
+-
+-.home_04 {
+-  width: 57px;
+-  height: 19px;
+-  position: relative;
+-}
+-
+-.home_06 {
+-  width: 47px;
+-  height: 19px;
+-  position: relative;
+-}
+-
+-.home_08 {
+-  width: 68px;
+-  height: 19px;
+-  position: relative;
+-}
+-
+-.home_10 {
+-  width: 78px;
+-  height: 19px;
+-  position: relative;
+-}
+-
+-.blue-cta-button {
+-  width: 174px;
+-  height: 45px;
+-  position: relative;
+-  box-shadow: 2px 4px 4px rgba(2, 35, 53, 0.12);
+-}
+-
+-.frame-1321314587 {
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 42px;
+-  display: inline-flex;
+-}
+-
+-.blue-cta-button_01 {
+-  width: 174px;
+-  height: 45px;
+-  position: relative;
+-  box-shadow: 2px 4px 4px rgba(2, 35, 53, 0.12);
+-}
+-
+-.frame-35704 {
+-  width: 1440px;
+-  padding-left: 146px;
+-  padding-right: 146px;
+-  left: 0px;
+-  top: 1630px;
+-  position: absolute;
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: center;
+-  gap: 10px;
+-  display: inline-flex;
+-}
+-
+-.blue-cta-button_02 {
+-  width: 174px;
+-  height: 45px;
+-  position: relative;
+-  box-shadow: 2px 4px 4px rgba(2, 35, 53, 0.12);
+-}
+-
+-.blue-cta-button_03 {
+-  width: 174px;
+-  height: 45px;
+-  position: relative;
+-  box-shadow: 2px 4px 4px rgba(2, 35, 53, 0.12);
+-}
+-
+-.frame-1321314921 {
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 12px;
+-  display: flex;
+-}
+-
+-.frame-11244080_x_twitter_elon-musk_twitter-new-logo_icon-1 {
+-  width: 23px;
+-  height: 24px;
+-  left: 9px;
+-  top: 8px;
+-  position: absolute;
+-  overflow: hidden;
+-}
+-
+-.frame-7156617_instagram_social_media_icon-1 {
+-  width: 23px;
+-  height: 23px;
+-  left: 73px;
+-  top: 8px;
+-  position: absolute;
+-  overflow: hidden;
+-}
+-
+-.frame-7405573_plumpicons_facebook_simple_icon-1 {
+-  width: 24px;
+-  height: 33.88px;
+-  left: 136px;
+-  top: 3px;
+-  position: absolute;
+-  overflow: hidden;
+-}
+-
+-.frame-1829792_brand_linkedin_logo_network_social_icon-1 {
+-  width: 20px;
+-  height: 28.57px;
+-  left: 202px;
+-  top: 6px;
+-  position: absolute;
+-  overflow: hidden;
+-}
+-
+-.email-button {
+-  width: 87px;
+-  height: 42px;
+-  left: 1312px;
+-  top: 142px;
+-  position: absolute;
+-}
+-
+-.red-donate-button {
+-  width: 142px;
+-  height: 45px;
+-  position: relative;
+-  box-shadow: 2px 4px 4px 1px rgba(44.75, 12.49, 18.27, 0.03);
+-}
+-
+-.home-scroll {
+-  width: 1439px;
+-  height: 550px;
+-  left: -1px;
+-  top: 162px;
+-  position: absolute;
+-}
+-
+-.frame-1321314671 {
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 32px;
+-  display: flex;
+-}
+-
+-.frame-1321314565 {
+-  width: 362px;
+-  height: 257px;
+-  border-radius: 5px;
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 12px;
+-  display: inline-flex;
+-}
+-
+-.frame-1321314565_01 {
+-  width: 350px;
+-  height: 257px;
+-  border-radius: 5px;
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 12px;
+-  display: inline-flex;
+-}
+-
+-.frame-1321314565_02 {
+-  width: 362px;
+-  height: 257px;
+-  border-radius: 5px;
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 12px;
+-  display: inline-flex;
+-}
+-
+-.frame-45 {
+-  left: 358px;
+-  top: 58px;
+-  position: absolute;
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 36px;
+-  display: inline-flex;
+-}
+-
+-.frame-44 {
+-  left: 585px;
+-  top: 59px;
+-  position: absolute;
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 36px;
+-  display: inline-flex;
+-}
+-
+-.frame-47 {
+-  left: 65px;
+-  top: 335px;
+-  position: absolute;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 124px;
+-  display: inline-flex;
+-}
+-
+-.frame-1321314601 {
+-  justify-content: flex-start;
+-  align-items: center;
+-  gap: 64px;
+-  display: flex;
+-}
+-
+-.frame-1321314650 {
+-  width: 563px;
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: center;
+-  gap: 32px;
+-  display: flex;
+-}
+-
+-.frame-1321314650_01 {
+-  width: 419px;
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: center;
+-  gap: 32px;
+-  display: flex;
+-}
+-
+-.frame-1321314669_02 {
+-  width: 307px;
+-  height: 295px;
+-  left: 154px;
+-  top: 1335px;
+-  position: absolute;
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: center;
+-  gap: 32px;
+-  display: inline-flex;
+-}
+-
+-.frame-48 {
+-  position: relative;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 24px;
+-  display: inline-flex;
+-}
+-
+-.frame-1321314672 {
+-  left: 96px;
+-  top: 91px;
+-  position: absolute;
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 32px;
+-  display: inline-flex;
+-}
+-
+-.frame-1321314604 {
+-  padding-left: 64px;
+-  padding-right: 64px;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 32px;
+-  display: inline-flex;
+-}
+-
+-.frame-41 {
+-  width: 1096px;
+-  left: 120px;
+-  top: 5px;
+-  position: absolute;
+-  justify-content: flex-start;
+-  align-items: center;
+-  gap: 86px;
+-  display: inline-flex;
+-}
+-
+-.frame-1321314669 {
+-  width: 307px;
+-  height: 281px;
+-  left: 154px;
+-  top: 729px;
+-  position: absolute;
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: center;
+-  gap: 32px;
+-  display: inline-flex;
+-}
+-
+-.frame-1321314669_01 {
+-  width: 307px;
+-  height: 281px;
+-  left: 983px;
+-  top: 1027px;
+-  position: absolute;
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: center;
+-  gap: 32px;
+-  display: inline-flex;
+-}
+-
+-.frame-1321314922 {
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 24px;
+-  display: flex;
+-}
+-
+-.missionvision-section-homepage---concept-1 {
+-  width: 1140px;
+-  height: 442px;
+-  left: 150px;
+-  top: 2237px;
+-  position: absolute;
+-  background: #EAEEF2;
+-  border-radius: 5px;
+-}
+-
+-.frame-1321314649 {
+-  width: 1440px;
+-  padding-left: 30px;
+-  padding-right: 30px;
+-  left: 0px;
+-  top: 2679px;
+-  position: absolute;
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: center;
+-  gap: 32px;
+-  display: inline-flex;
+-}
+-
+-.navigation-bar {
+-  width: 1251px;
+-  height: 58px;
+-  left: 154px;
+-  top: 25px;
+-  position: absolute;
+-}
+-
+-.frame-1321314923 {
+-  left: 963px;
+-  top: 58px;
+-  position: absolute;
+-  flex-direction: column;
+-  justify-content: flex-start;
+-  align-items: flex-start;
+-  gap: 32px;
+-  display: inline-flex;
+-}
+-
+-.footer {
+-  width: 1440px;
+-  height: 372px;
+-  left: 0px;
+-  top: 3251px;
+-  position: absolute;
+-}
+-
+-.home-version-3 {
+-  width: 1440px;
+-  height: 3623px;
+-  position: relative;
+-  background: white;
+-  overflow: hidden;
+-}
+-</style>
+\ No newline at end of file
+diff --git a/Homepage v3/pexels-rdne-7467943 2.png b/Homepage v3/pexels-rdne-7467943 2.png
+deleted file mode 100644
+index 8a82d57..0000000
+Binary files a/Homepage v3/pexels-rdne-7467943 2.png and /dev/null differ
+diff --git a/Veteran Form/form.html b/Veteran Form/form.html
+new file mode 100644
+index 0000000..7f95617
+--- /dev/null
++++ b/Veteran Form/form.html	
+@@ -0,0 +1,123 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="UTF-8" />
++  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++  <title>Veteran Registration Form</title>
++  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
++  <style>
++    body {
++      font-family: 'Inter', sans-serif;
++      background-color: #f3f4f6;
++      margin: 0;
++      padding: 2rem;
++    }
++    .form-container {
++      max-width: 600px;
++      margin: auto;
++      background: white;
++      padding: 2rem;
++      border-radius: 10px;
++      box-shadow: 0 0 20px rgba(0,0,0,0.05);
++    }
++    h1 {
++      text-align: center;
++      margin-bottom: 1rem;
++      color: #1f2937;
++    }
++    label {
++      display: block;
++      margin-top: 1rem;
++      margin-bottom: 0.5rem;
++      font-weight: 600;
++    }
++    input, select, textarea {
++      width: 100%;
++      padding: 0.75rem;
++      border: 1px solid #d1d5db;
++      border-radius: 5px;
++      font-size: 1rem;
++    }
++    button {
++      margin-top: 2rem;
++      width: 100%;
++      background-color: #1d4ed8;
++      color: white;
++      border: none;
++      padding: 0.75rem;
++      font-size: 1rem;
++      border-radius: 5px;
++      cursor: pointer;
++    }
++    button:hover {
++      background-color: #2563eb;
++    }
++  </style>
++</head>
++<body>
++  <div class="form-container">
++    <h1>Veteran Registration</h1>
++    <form id="veteranForm">
++      <label for="firstName">First Name</label>
++      <input type="text" id="firstName" name="firstName" required>
++
++      <label for="lastName">Last Name</label>
++      <input type="text" id="lastName" name="lastName" required>
++
++      <label for="email">Email</label>
++      <input type="email" id="email" name="email" required>
++
++      <label for="phone">Phone Number</label>
++      <input type="number" id="phone" name="phone" required>
++
++      <label for="veteran">Are you a Veteran?</label>
++      <select id="veteran" name="veteran" required>
++        <option value="">Select</option>
++        <option value="true">Yes</option>
++        <option value="false">No</option>
++      </select>
++
++      <label for="programInterest">Program Interest</label>
++      <input type="text" id="programInterest" name="programInterest" required>
++
++      <label for="serviceBranch">Service Branch</label>
++      <input type="text" id="serviceBranch" name="serviceBranch">
++
++      <label for="state">State</label>
++      <input type="text" id="state" name="state" required>
++
++      <label for="comment">Comment</label>
++      <textarea id="comment" name="comment" rows="4" placeholder="Your message..."></textarea>
++
++      <button type="submit">Submit</button>
++    </form>
++  </div>
++
++  <script>
++    const form = document.getElementById('veteranForm');
++    form.addEventListener('submit', async (e) => {
++      e.preventDefault();
++
++      const formData = Object.fromEntries(new FormData(form).entries());
++      formData.veteran = formData.veteran === 'true'; // convert to boolean
++
++      try {
++        const res = await fetch('http://localhost:3000/submit', {
++          method: 'POST',
++          headers: {
++            'Content-Type': 'application/json'
++          },
++          body: JSON.stringify(formData)
++        });
++
++        const msg = await res.text();
++        alert(msg);
++        if (res.ok) form.reset();
++      } catch (err) {
++        alert('Error submitting form. Try again.');
++        console.error(err);
++      }
++    });
++  </script>
++</body>
++</html>
+diff --git a/Veteran Form/server.js b/Veteran Form/server.js
+new file mode 100644
+index 0000000..c4f4fe0
+--- /dev/null
++++ b/Veteran Form/server.js	
+@@ -0,0 +1,64 @@
++// server.js
++const express = require('express');
++const bodyParser = require('body-parser');
++const cors = require('cors');
++const { Pool } = require('pg');
++
++const app = express();
++const port = 3000;
++
++// Middleware
++app.use(cors());
++app.use(bodyParser.urlencoded({ extended: true }));
++app.use(bodyParser.json());
++
++// Neon PostgreSQL connection
++const pool = new Pool({
++  connectionString: 'postgresql://operationmeraki_owner:npg_BlfxeIi1vOE2@ep-crimson-glade-a5ydc3xk-pooler.us-east-2.aws.neon.tech/operationmeraki?sslmode=require',
++  ssl: {
++    rejectUnauthorized: false
++  }
++});
++
++// Handle form submission
++app.post('/submit', async (req, res) => {
++  const {
++    firstName,
++    lastName,
++    email,
++    phone,
++    veteran,
++    programInterest,
++    serviceBranch,
++    state,
++    comment
++  } = req.body;
++
++  try {
++    // Insert into the database, excluding ID (auto-generated)
++    const result = await pool.query(
++      `INSERT INTO veteran 
++      ("firstName", "lastName", "email", "phone", "veteran", "programInterest", "serviceBranch", "state", "comment")
++      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
++      RETURNING id`,
++      [firstName, lastName, email, phone, veteran, programInterest, serviceBranch, state, comment]
++    );
++
++    const insertedId = result.rows[0].id;
++    res.status(200).send(`Form submitted successfully!`);
++  } catch (error) {
++    console.error('Error inserting data:', error);
++
++    // If it's a duplicate key error
++    if (error.code === '23505') {
++      res.status(400).send('A record with this ID or unique field already exists.');
++    } else {
++      res.status(500).send('Error saving form data.');
++    }
++  }
++});
++
++// Start the server
++app.listen(port, () => {
++  console.log(` Server running at http://localhost:${port}`);
++});
