@@ -20,6 +20,16 @@
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0,0,0,0.05);
     }
+    .header-image {
+  display: block;
+  margin: 0 auto 20px auto; /* auto left/right for centering */
+  width: 60%; /* adjust this percentage to control size */
+  max-width: 400px; /* optional: cap the maximum size */
+  height: auto;
+  border-radius: 8px; /* optional: adds slightly rounded corners */
+}
+
+
     h1 {
       text-align: center;
       margin-bottom: 1rem;
@@ -56,6 +66,10 @@
 </head>
 <body>
   <div class="form-container">
+<!-- Banner Image -->
+<img src="thumbnail_image001.avif" alt="Operation Meraki Banner" class="header-image">
+
+
     <h1>Veteran Registration</h1>
     <form id="veteranForm">
       <label for="firstName">First Name</label>
