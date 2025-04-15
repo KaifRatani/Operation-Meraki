@@ -22,4 +22,49 @@ document.addEventListener('DOMContentLoaded', () => {
       if (selected) selected.classList.add('active');
     });
   });
+
+
+ const localVideo = document.getElementById("local-video");
+  const playButton = document.getElementById("play-button");
+
+  if (playButton && localVideo) {
+    playButton.addEventListener("click", function () {
+      // Show native controls
+      localVideo.setAttribute("controls", "controls");
+
+      // Start playback
+      localVideo.play();
+
+      // Hide custom overlay
+      playButton.style.display = "none";
+    });
+
+    // Optional: show controls even if user plays via keyboard or programmatically
+    localVideo.addEventListener("play", () => {
+      localVideo.setAttribute("controls", "controls");
+      playButton.style.display = "none";
+    });
+
+    // Optional: hide controls again if paused
+    localVideo.addEventListener("pause", () => {
+      localVideo.removeAttribute("controls");
+      playButton.style.display = "flex";
+    });
+  }
 });
+
+
+function revealOnScroll() {
+  const sections = document.querySelectorAll('.engagement-wrapper');
+  sections.forEach(section => {
+    const top = section.getBoundingClientRect().top;
+    const trigger = window.innerHeight * 0.85;
+
+    if (top < trigger) {
+      section.classList.add('reveal');
+    }
+  });
+}
+
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
