@@ -1,0 +1,20 @@
+{
+  "name": "operation-meraki",
+  "version": "1.0.0",
+  "description": "fisrt deployment",
+  "homepage": "https://github.com/KaifRatani/Operation-Meraki#readme",
+  "bugs": {
+    "url": "https://github.com/KaifRatani/Operation-Meraki/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaifRatani/Operation-Meraki.git"
+  },
+  "license": "ISC",
+  "author": "meraki",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  }
+}
