@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "start": "node ./api/server.js",
+    "build": "echo 'No build step needed'"
+  },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",

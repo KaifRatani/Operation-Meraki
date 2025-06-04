@@ -13,7 +13,7 @@
   "license": "ISC",
   "author": "meraki",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "./api/server.js",
   "scripts": {
     "test": "test"
   }
