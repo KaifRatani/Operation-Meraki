@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "start": "node ./api/server.js",
-    "build": "echo 'No build step needed'"
+    "start": "node api/server.js",
+    "build": "echo 'No build step needed'",
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
