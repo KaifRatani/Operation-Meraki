@@ -53,14 +53,12 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      
+
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'operationmeraki'
-          slot-name: 'meraki-main'
+          slot-name: 'production'  # Change this if you're using a custom slot like 'meraki-main'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5FD
-
-
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5FD9F3C4A1234567890 }}
