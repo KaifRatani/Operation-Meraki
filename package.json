@@ -2,22 +2,9 @@
   "name": "operation-meraki",
   "version": "1.0.0",
   "description": "first deployment",
-  "homepage": "https://github.com/KaifRatani/Operation-Meraki#readme",
-  "bugs": {
-    "url": "https://github.com/KaifRatani/Operation-Meraki/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KaifRatani/Operation-Meraki.git"
-  },
-  "license": "ISC",
-  "author": "meraki",
-  "type": "commonjs",
-  "main": "./Meraki-main/api/server.js",
+  "main": " ./Meraki-main/api/server.js",
   "scripts": {
-    "start": "node ./Meraki-main/api/server.js",
-    "build": "echo 'No build step needed'",
-    "test": "echo \"No tests specified\" && exit 0"
+    "start": "node api/server.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
