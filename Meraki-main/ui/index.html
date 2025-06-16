@@ -6,23 +6,11 @@
   <title>Operation Meraki</title>
   <link rel="icon" href="images/logo/logo.png" type="image/png" />
   <link rel="stylesheet" href="style.css" />
+  <script src="components/m-header.js" type="module"></script>
+  <script src="components/m-footer.js" type="module"></script>
 </head>
 <body>
-  <!-- Navbar -->
-  <header class="navbar">
-    <img src="images/logo/logo.png" alt="Logo" class="logo" />
-    <nav>
-      <ul>
-        <li><a href="#">HOME</a></li>
-        <li><a href="#">WHO ARE WE</a></li>
-        <li><a href="#">PROGRAMS</a></li>
-        <li><a href="#">GET INVOLVED</a></li>
-        <li><a href="#">RESOURCES</a></li>
-        <li><a href="#">CONTACT</a></li>
-      </ul>
-    </nav>
-    <button class="donate-button" onclick="window.open('https://www.zeffy.com/en-US/fundraising/c95056db-d06b-407f-b4ba-5de61442d2e4', '_blank', 'noopener')">MAKE A DONATION</button>
-  </header>
+  <m-header active="home"></m-header>
 
   <!-- Carousel -->
   <section class="carousel">
@@ -164,45 +152,7 @@
 </section>
 
   <!-- Footer -->
-  <footer>
-    <div class="column">
-      <img src="images/logo/logo_white.png" alt="Logo" style="width: 100px;" />
-    </div>
-    <div class="column">
-      <h3>Programs</h3>
-      <p>Bridge-Reset</p>
-      <p>Bridge-Rebuild</p>
-      <p>Build-Refocus</p>
-      <p>Build-ReEngage</p>
-      <p>Bridge-RePlant</p>
-    </div>
-    <div class="column">
-      <h3>Get Involved</h3>
-      <p>Board of Directors</p>
-      <p>Become a Volunteer</p>
-      <p>Financial Support</p>
-      <p>Camera and field equipment donation</p>
-    </div>
-
-    <div class="column">
-      <h3>Subscribe Now</h3>
-      <p>Stay informed on what we're doing and opportunities.</p>
-      <form id="subscribe-form">
-        <input type="email" id="email-input" placeholder="Enter Email" required />
-        <button type="submit">Submit</button>
-      </form>
-      <div class="social-icons" style="margin-top: 10px;">
-        <img src="images/socialmedia/facebook.png" alt="Facebook" class="icon" />
-        <img src="images/socialmedia/instagram.png" alt="Instagram" class="icon" />
-        <img src="images/socialmedia/twitter.png" alt="Twitter" class="icon" />
-        <img src="images/socialmedia/linkedin.png" alt="LinkedIn" class="icon" />
-      </div>
-    </div>
-    
-    
-
-  </footer>
-  <div class="footer-bottom">© 2025 All Rights Reserved.</div>
+  <m-footer></m-footer>
 
   <script src="script.js"></script>
 </body>

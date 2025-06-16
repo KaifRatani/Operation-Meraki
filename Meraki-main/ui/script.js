@@ -90,4 +90,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', revealOnScroll);
   window.addEventListener('load', revealOnScroll);
+
+  checkLoginState();
 });
+
+function checkLoginState() {
+  const authArea = document.getElementById('auth-area');
+  const token = localStorage.getItem('token');
+  const username = localStorage.getItem('username');
+
+  if (authArea && token && username) {
+    const initials = username.slice(0, 2).toUpperCase();
+
+    authArea.innerHTML = `
+      <button class="navbar-button" onclick="window.open('https://www.zeffy.com/en-US/fundraising/c95056db-d06b-407f-b4ba-5de61442d2e4', '_blank', 'noopener')">MAKE A DONATION</button>
+      <div class="user-menu">
+        <button class="avatar-button" onclick="toggleDropdown()">${initials}</button>
+        <div class="avatar-dropdown" id="avatarDropdown">
+          <a href="#">Profile</a>
+          <a href="#">Account settings</a>
+          <a href="#">Switch account</a>
+          <a href="#" onclick="logout()">Log out</a>
+        </div>
+      </div>
+    `;
+  } else if (authArea) {
+    authArea.innerHTML = `
+      <button class="navbar-button" onclick="window.open('https://www.zeffy.com/en-US/fundraising/c95056db-d06b-407f-b4ba-5de61442d2e4', '_blank', 'noopener')">
+    MAKE A DONATION
+  </button>
+  <div class="user-menu">
+    <button class="navbar-button" onclick="toggleDropdown()">Sign in</button>
+    <div class="avatar-dropdown" id="avatarDropdown">
+      <a href="loginForm.html">Login</a>
+      <a href="signinForm.html">Register</a>
+    </div>
+  </div>
+    `;
+  }
+}
+
+function toggleDropdown() {
+  const dropdown = document.getElementById('avatarDropdown');
+  if (dropdown) {
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  }
+}
+
+function logout() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('username');
+  location.reload();
+}

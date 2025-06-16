@@ -1,10 +1,22 @@
+/* Font */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: Raleway, Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f8f8f8;
-}
 
+  --color-primary-500: #074264;
+  --color-primary-400: #1C5A79;
+  --color-primary-100: #C3CFD9;
+  --color-primary-800: #222540;
+  --color-primary-900: #04273C;
+  --color-secondary-700: #782E38;
+  --color-secondary-500: #C40024;
+  --color-gray-100: #DDDDDD;
+  --color-white: #FEFEFE;
+}
 
 .navbar {
   background-color: #ffffff;
@@ -51,12 +63,19 @@ body {
   color: #fff;
 }
 
-.donate-button {
+.navbar-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.navbar-button {
   background-color: #42a5f5;
   color: white;
   border: none;
   padding: 12px 28px;
-  font-size: 18px;
+  font-size: 16px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
@@ -64,9 +83,71 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.donate-button:hover {
+.navbar-button:hover {
   background-color: #d9534f;
 }
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.username {
+  font-weight: bold;
+  color: #333;
+}
+
+.logout-button {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logout-button:hover {
+  background-color: #c9302c;
+}
+
+.user-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 50px;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  z-index: 100;
+}
+
+.avatar-dropdown a {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.avatar-dropdown a:hover {
+  background-color: #f1f1f1;
+}
+
 
 .carousel {
   position: relative;
@@ -119,7 +200,8 @@ body {
 .carousel-number {
   font-size: 90px;
   font-weight: bold;
-  color: #8e44ad;;
+  color: #8e44ad;
+  ;
   min-width: 150px;
   line-height: 1;
 }
@@ -136,13 +218,12 @@ body {
   padding: 40px 0;
 }
 
-
-
 .engagement-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 60px;   /* THIS controls the spacing */
+  gap: 60px;
+  /* THIS controls the spacing */
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 20px;
@@ -175,7 +256,8 @@ body {
 
 .engagement-profile {
   text-align: center;
-  flex-shrink: 0; /* prevents it from shrinking */
+  flex-shrink: 0;
+  /* prevents it from shrinking */
 }
 
 /* Hover group wraps image + button together */
@@ -200,7 +282,7 @@ body {
   border-radius: 10px;
   cursor: pointer;
   display: inline-block;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease, filter 0.3s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -216,7 +298,8 @@ body {
 
 .engagement-message {
   flex: 1;
-  background-color: rgba(245, 245, 245, 0.8); /* light transparent card */
+  background-color: rgba(245, 245, 245, 0.8);
+  /* light transparent card */
   padding: 20px 30px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -252,11 +335,13 @@ body {
 }
 
 @media (max-width: 768px) {
+
   .engagement-wrapper,
   .engagement-wrapper.reversed {
     flex-direction: column;
     text-align: center;
-    gap: 30px; /* Reduced spacing on mobile */
+    gap: 30px;
+    /* Reduced spacing on mobile */
     padding: 20px;
   }
 
@@ -286,7 +371,8 @@ body {
 .video-box {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 ratio */
+  padding-top: 56.25%;
+  /* 16:9 ratio */
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -302,7 +388,8 @@ body {
 .video-box {
   position: relative;
   width: 100%;
-  padding-top: 70%; /* 16:9 ratio */
+  padding-top: 70%;
+  /* 16:9 ratio */
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -325,7 +412,8 @@ body {
   transform: translate(-50%, -50%);
   width: 150px;
   height: 85px;
-  background-color: rgba(255, 255, 255, 0.2); /* transparent white */
+  background-color: rgba(255, 255, 255, 0.2);
+  /* transparent white */
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -339,12 +427,11 @@ body {
   content: "";
   display: inline-block;
   border-style: solid;
-  border-width: 30px 0 30px 45px; /*bigger triangle*/
+  border-width: 30px 0 30px 45px;
+  /*bigger triangle*/
   border-color: transparent transparent transparent #B00000;
   margin-left: 2px;
 }
-
-
 
 .mission {
   padding: 40px 20px;
@@ -394,7 +481,7 @@ body {
   padding: 10px 30px;
   border-radius: 6px;
   font-size: 16px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
@@ -414,6 +501,17 @@ footer {
 footer .column {
   flex: 1 1 200px;
   margin: 10px;
+}
+
+footer .column a {
+  text-decoration: none;
+  color: white;
+  display: block;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
 
 footer h3 {
@@ -451,7 +549,7 @@ footer button {
   border-radius: 6px;
   padding: 5px;
   background: white;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   object-fit: contain;
 }
 
@@ -469,7 +567,7 @@ footer button {
   padding: 20px;
   width: 320px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -478,7 +576,7 @@ footer button {
 
 .info-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .info-card img {
@@ -512,3 +610,6 @@ footer button {
   text-decoration: underline;
 }
 
+.hide {
+  display: none !important;
+}
