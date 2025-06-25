@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Events - Operation Meraki</title>
+    <link rel="icon" href="images/logo/logo.png" type="image/png" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="components/m-header.js" type="module"></script>
+    <script src="components/m-footer.js" type="module"></script>
+    <script src="components/m-button.js" type="module"></script>
+    <style>
+      h1 {
+        font-weight: 700;
+        font-size: 48px;
+        text-align: center;
+        color: #074264;
+        margin: 48px 0;
+      }
+      main {
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 0 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+      }
+      .event {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        background: #f8f8f8;
+        padding: 32px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      .event-title {
+        font-size: 32px;
+        font-weight: 600;
+        color: #04273C;
+      }
+      .event-date {
+        font-size: 18px;
+        color: #726E66;
+      }
+      .event-desc {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <m-header active="events"></m-header>
+    <h1>Upcoming Events</h1>
+    <main>
+      <div class="event">
+        <div class="event-title">Photography Workshop for Veterans</div>
+        <div class="event-date">July 20, 2025 - 2:00 PM EST</div>
+        <div class="event-desc">Join us for a hands-on workshop where veterans can explore photography and storytelling. Equipment provided for those without gear.</div>
+        <m-button variant="primary" onclick="location.href='https://www.operationmeraki.org/events/photography'">Register</m-button>
+      </div>
+      <div class="event">
+        <div class="event-title">Community Cleanup & Support Day</div>
+        <div class="event-date">August 10, 2025 - 10:00 AM EST</div>
+        <div class="event-desc">Support our local veterans by participating in a volunteer-led community cleanup and awareness event. Supplies and snacks will be provided.</div>
+        <m-button variant="primary" onclick="location.href='https://www.operationmeraki.org/events/cleanup'">Join Now</m-button>
+      </div>
+      <div class="event">
+        <div class="event-title">Veteran Career Transition Seminar</div>
+        <div class="event-date">September 5, 2025 - 11:00 AM EST</div>
+        <div class="event-desc">Learn from HR professionals and mentors about resume building, job search strategies, and leveraging military experience in civilian careers.</div>
+        <m-button variant="primary" onclick="location.href='https://www.operationmeraki.org/events/careers'">Sign Up</m-button>
+      </div>
+      <div class="event">
+        <div class="event-title">Veteran Wellness Retreat</div>
+        <div class="event-date">October 12, 2025 - 9:00 AM EST</div>
+        <div class="event-desc">A full-day retreat focused on mental health and mindfulness. Includes yoga, peer sessions, and holistic therapy demonstrations.</div>
+        <m-button variant="primary" onclick="location.href='https://www.operationmeraki.org/events/wellness'">Reserve Spot</m-button>
+      </div>
+      <div class="event">
+        <div class="event-title">Community Kitchen & Support Day</div>
+        <div class="event-date">November 15, 2025 - 6:30 PM EST</div>
+        <div class="event-desc">Celebrate the year's achievements with our community. Includes dinner, guest speakers, awards, and fundraising activities for future missions.</div>
+        <m-button variant="primary" onclick="location.href='https://www.operationmeraki.org/events/gala'">Attend</m-button>
+      </div>
+      <div class="event">
+        <div class="event-title">Holiday Support Drive</div>
+        <div class="event-date">December 10, 2025 - All Day</div>
+        <div class="event-desc">Join our holiday campaign to collect winter essentials and gifts for veterans and their families in need this season.</div>
+        <m-button variant="primary" onclick="location.href='https://www.operationmeraki.org/events/holiday'">Contribute</m-button>
+      </div>
+    </main>
+    <m-footer></m-footer>
+  </body>
+</html>
