@@ -4,8 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>News</title>
+  <script src="components/m-header.js" type="module"></script>
   <style>
-    body { font-family: Arial; background: #f8f8f8; padding: 40px; }
+    body {
+      margin: 0;
+    }
     .container { max-width: 1100px; margin: auto; display: flex; gap: 40px; }
     .main { flex: 3; }
     .sidebar { flex: 1; }
@@ -28,6 +31,8 @@
   </style>
 </head>
 <body>
+  <m-header active="news"></m-header>
+
   <h1 style="text-align: center;">News</h1>
   <div class="container">
     <div class="main">

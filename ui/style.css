@@ -609,3 +609,7 @@ footer button {
 .info-card .read-more:hover {
   text-decoration: underline;
 }
+
+.hide {
+  display: none !important;
+}
