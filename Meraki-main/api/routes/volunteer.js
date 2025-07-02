@@ -1,7 +1,8 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  connectionString: 'postgresql://operationmeraki_owner:npg_BlfxeIi1vOE2@ep-crimson-glade-a5ydc3xk-pooler.us-east-2.aws.neon.tech/operationmeraki?sslmode=require',
+  connectionString: 'new Client({host:"operationmeraki-server1.postgres.database.azure.com", user:"merakiAdmin", password:"root1Admin", database:"postgres", port:5432, ssl:{ca:fs.readFileSync("{ca-cert filename}")}});'
+,
   ssl: { rejectUnauthorized: false }
 });
 
