@@ -1,10 +1,9 @@
-// api/db/pool.js
 const { Pool } = require('pg');
-require('dotenv').config({ path: '../../.env' }); // loads .env from root
+require('dotenv').config({ path: './.env' });
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
 
 module.exports = pool;

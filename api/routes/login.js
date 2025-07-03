@@ -7,7 +7,8 @@ const router = express.Router();
 const SECRET_KEY = 'your_secret_key';
 
 const pool = new Pool({
-  connectionString: 'postgresql://operationmeraki_owner:npg_BlfxeIi1vOE2@ep-crimson-glade-a5ydc3xk-pooler.us-east-2.aws.neon.tech/operationmeraki?sslmode=require'
+  connectionString: 'postgresql://merakiAdmin:root1Admin@operationmeraki-server1.postgres.database.azure.com:5432/operationmeraki-database?sslmode=require',
+  ssl: { rejectUnauthorized: false }
 });
 
 router.post('/', async (req, res) => {

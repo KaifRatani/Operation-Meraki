@@ -400,6 +400,67 @@
       }
 
       wireUp()
+
+      function getTextInput(selector) {
+  const input = document.querySelector(selector);
+  return input ? input.value.trim() : '';
+}
+
+function getCheckedValueFromRadioGroup(containerSelector) {
+  const checkboxes = document.querySelectorAll(`${containerSelector} input[type="checkbox"]`);
+  const checked = [...checkboxes].find(el => el.checked);
+  return checked ? parseInt(checked.nextElementSibling.textContent.trim()) : null;
+}
+
+function getCheckedValuesFromCheckboxGroup(containerSelector) {
+  const checkboxes = document.querySelectorAll(`${containerSelector} input[type="checkbox"]`);
+  return [...checkboxes]
+    .filter(box => box.checked)
+    .map(box => box.nextElementSibling.textContent.trim());
+}
+
+function getPermissionConsent() {
+  const checkbox = document.querySelector('.checkbox-item.block input[type="checkbox"]');
+  return checkbox ? checkbox.checked : false;
+}
+
+function handleReengageSubmit() {
+  const data = {
+    firstName: getTextInput('.sign-up-step-1 input:nth-of-type(1)'),
+    lastName: getTextInput('.sign-up-step-1 input:nth-of-type(2)'),
+    state: getTextInput('.sign-up-step-1 input:nth-of-type(3)'),
+    email: getTextInput('.sign-up-step-1 input:nth-of-type(4)'),
+    phone: getTextInput('.sign-up-step-1 input:nth-of-type(5)'),
+    town: getTextInput('.sign-up-step-1 input:nth-of-type(6)'),
+    hearAboutUs: getTextInput('.sign-up-step-1 input:nth-of-type(7)'),
+    mentalHealthRating: getCheckedValueFromRadioGroup('.radio-group'),
+    selectedDays: getCheckedValuesFromCheckboxGroup('.sign-up-step-2 .checkbox-group'),
+    difficulties: getCheckedValuesFromCheckboxGroup('.sign-up-step-2 .checkbox-group'),
+    comments: getTextInput('.sign-up-step-2 textarea'),
+    permissionToContact: getPermissionConsent()
+  };
+
+  fetch('/api/re-engage', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(async res => {
+    const result = await res.json();
+    if (res.ok) {
+      transitionToSignedUp();
+    } else {
+      alert(result.message || '❌ Submission failed.');
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    alert('❌ Error submitting form. Try again later.');
+  });
+}
+
+
     </script>
   </body>
 </html>
+

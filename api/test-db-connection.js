@@ -1,14 +1,12 @@
-// api/test-db-connection.js
-require('dotenv').config({ path: '../.env' });
 const pool = require('./db/pool');
 
 (async () => {
   try {
     const res = await pool.query('SELECT NOW()');
-    console.log('✅ Connected! DB time is:', res.rows[0].now);
+    console.log('✅ Connected:', res.rows[0]);
+    process.exit(0);
   } catch (err) {
-    console.error('❌ Connection failed:', err.message);
-  } finally {
-    await pool.end();
+    console.error('❌ Connection failed:', err);
+    process.exit(1);
   }
 })();

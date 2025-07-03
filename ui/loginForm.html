@@ -101,5 +101,27 @@
             }
         });
     </script>
+
+<script>
+document.querySelector('form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const email = document.querySelector('input[name="email"]').value;
+  const password = document.querySelector('input[name="password"]').value;
+
+  const res = await fetch('/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  });
+
+  const result = await res.json();
+  if (res.ok) {
+    alert('Login successful! Token: ' + result.token);
+  } else {
+    alert(result.message);
+  }
+});
+</script>
+
 </body>
 </html>
