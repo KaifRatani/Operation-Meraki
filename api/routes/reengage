@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
 
   try {
     const result = await pool.query(
-      `INSERT INTO refocus_program (
+      `INSERT INTO reengage_program (
         "firstName",
         "lastName",
         "state",
@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
         "difficulties",
         "comments",
         "permissionToContact"
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
       RETURNING id`,
       [
         firstName,
@@ -57,7 +57,6 @@ module.exports = async (req, res) => {
 
     const insertedId = result.rows[0].id;
     res.status(200).json({ message: 'Form submitted successfully!', id: insertedId });
-
   } catch (error) {
     console.error('Error inserting data:', error);
     if (error.code === '23505') {

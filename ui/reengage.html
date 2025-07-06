@@ -164,79 +164,80 @@
             <div class="group">
               <div class="item">
                 <label class="label">First Name<span class="require-mark">*</span></label>
-                <input class="input" />
+                <input class="input" name="firstName" />
               </div>
               <div class="item">
                 <label class="label">Last Name<span class="require-mark">*</span></label>
-                <input class="input" />
+                <input class="input" name="lastName" />
               </div>
               <div class="item">
                 <label class="label">State<span class="require-mark">*</span></label>
-                <input class="input" />
+                <input class="input" name="state" />
               </div>
               <div class="item">
                 <label class="label">Email<span class="require-mark">*</span></label>
-                <input class="input" />
+                <input class="input" name="email" />
               </div>
               <div class="item">
                 <label class="label">Phone Number<span class="require-mark">*</span></label>
-                <input class="input" />
+                <input class="input" name="phone" />
               </div>
               <div class="item">
                 <label class="label">Town<span class="require-mark">*</span></label>
-                <input class="input" />
+                <input class="input" name="town" />
               </div>
             </div>
             <legend class="legend">How did you hear about us?</legend>
             <div class="group">
               <div class="item">
                 <label class="label">Choose from below</label>
-                <input class="input" />
+                <input class="input" name="hearAboutUs" />
               </div>
             </div>
             <legend class="legend">How would you rate your mental health today?</legend>
-            <div class="radio-group">
-              <div class="radio">
-                <input type="checkbox" checked />
-                <div class="label">1</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">2</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">3</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">4</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">5</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">6</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">7</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">8</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">9</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">10</div>
-              </div>
-            </div>
+<div class="radio-group">
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="1" />
+    <div class="label">1</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="2" />
+    <div class="label">2</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="3" />
+    <div class="label">3</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="4" />
+    <div class="label">4</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="5" />
+    <div class="label">5</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="6" />
+    <div class="label">6</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="7" />
+    <div class="label">7</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="8" />
+    <div class="label">8</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="9" />
+    <div class="label">9</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="10" />
+    <div class="label">10</div>
+  </div>
+</div>
+
             <div class="radio-group-scale">
               <p>Very bad</p>
               <p>Very Good</p>
@@ -248,52 +249,63 @@
               </m-button>
             </div>
           </div>
+
+
           <div class="sign-up-step-2 hide">
-            <legend class="legend">What areas would you like help in?</legend>
-            <div class="checkbox-group">
-              <div class="checkbox-item">
-                <input type="checkbox" />
-                <div class="label">Finding work</div>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" />
-                <div class="label">Career change support</div>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" />
-                <div class="label">Resume help</div>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" />
-                <div class="label">Finding a career</div>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" />
-                <div class="label">Interview prep</div>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" />
-                <div class="label">Other</div>
-              </div>
-            </div>
-            <legend class="legend">Any comments for Operation Meraki?</legend>
-            <textarea class="input" placeholder="(Type here)"></textarea>
-            <div class="checkbox-item block">
-              <input type="checkbox" />
-              <div class="label">By checking this box, you give us permission to contact you with the information provided.</div>
-            </div>
-            <div class="actions">
-              <m-button class="secondary-action to-1">
-                <div style="padding-inline: 48px; position: relative;">
-                  <img src="images/program/back.svg" />
-                  Back
-                </div>
-              </m-button>
-              <m-button variant="primary" class="primary-action to-signed-up">
-                <div style="padding-inline: 48px;">Submit</div>
-              </m-button>
-            </div>
-          </div>
+  <legend class="legend">What has been the most difficult part of returning?</legend>
+  <div class="checkbox-group">
+    <label class="checkbox-item">
+      <input type="checkbox" value="Feeling misunderstood" />
+      <div class="label">Feeling misunderstood</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Family life" />
+      <div class="label">Family life</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Lack of purpose" />
+      <div class="label">Lack of purpose</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Lack of support" />
+      <div class="label">Lack of support</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Other" />
+      <div class="label">Other</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Finding work" />
+      <div class="label">Finding work</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Trouble finding support" />
+      <div class="label">Trouble finding support</div>
+    </label>
+  </div>
+
+  <legend class="legend">Any comments for Operation Meraki?</legend>
+  <textarea class="input" placeholder="(Type here)"></textarea>
+
+  <label class="checkbox-item block">
+    <input type="checkbox" />
+    <div class="label">
+      By checking this box, you give us permission to contact you with the information provided.
+    </div>
+  </label>
+
+  <div class="actions">
+    <m-button class="secondary-action to-1">
+      <div style="padding-inline: 48px; position: relative;">
+        <img src="images/program/back.svg" />
+        Back
+      </div>
+    </m-button>
+    <m-button variant="primary" class="primary-action to-signed-up">
+      <div style="padding-inline: 48px;">Submit</div>
+    </m-button>
+  </div>
+</div>
         </form>
 
         <div class="signed-up hide">
@@ -392,7 +404,7 @@
         listen(elements.signUpCloseButton, 'click', transitionToMain)
         listen(elements.signUp1To2, 'click', transitionToSignUpStepTwo)        
         listen(elements.signUp2To1, 'click', transitionToSignUp)
-        listen(elements.signUp2ToSignedUp, 'click', transitionToSignedUp)
+        
         listen(elements.faq1, 'click', createAnswerToggler(elements.faq1, elements.faqA1))
         listen(elements.faq2, 'click', createAnswerToggler(elements.faq2, elements.faqA2))
         listen(elements.faq3, 'click', createAnswerToggler(elements.faq3, elements.faqA3))
@@ -400,67 +412,73 @@
       }
 
       wireUp()
-
-      function getTextInput(selector) {
-  const input = document.querySelector(selector);
-  return input ? input.value.trim() : '';
-}
-
-function getCheckedValueFromRadioGroup(containerSelector) {
-  const checkboxes = document.querySelectorAll(`${containerSelector} input[type="checkbox"]`);
-  const checked = [...checkboxes].find(el => el.checked);
-  return checked ? parseInt(checked.nextElementSibling.textContent.trim()) : null;
-}
-
-function getCheckedValuesFromCheckboxGroup(containerSelector) {
-  const checkboxes = document.querySelectorAll(`${containerSelector} input[type="checkbox"]`);
-  return [...checkboxes]
-    .filter(box => box.checked)
-    .map(box => box.nextElementSibling.textContent.trim());
-}
-
-function getPermissionConsent() {
-  const checkbox = document.querySelector('.checkbox-item.block input[type="checkbox"]');
-  return checkbox ? checkbox.checked : false;
-}
-
-function handleReengageSubmit() {
-  const data = {
-    firstName: getTextInput('.sign-up-step-1 input:nth-of-type(1)'),
-    lastName: getTextInput('.sign-up-step-1 input:nth-of-type(2)'),
-    state: getTextInput('.sign-up-step-1 input:nth-of-type(3)'),
-    email: getTextInput('.sign-up-step-1 input:nth-of-type(4)'),
-    phone: getTextInput('.sign-up-step-1 input:nth-of-type(5)'),
-    town: getTextInput('.sign-up-step-1 input:nth-of-type(6)'),
-    hearAboutUs: getTextInput('.sign-up-step-1 input:nth-of-type(7)'),
-    mentalHealthRating: getCheckedValueFromRadioGroup('.radio-group'),
-    selectedDays: getCheckedValuesFromCheckboxGroup('.sign-up-step-2 .checkbox-group'),
-    difficulties: getCheckedValuesFromCheckboxGroup('.sign-up-step-2 .checkbox-group'),
-    comments: getTextInput('.sign-up-step-2 textarea'),
-    permissionToContact: getPermissionConsent()
-  };
-
-  fetch('/api/re-engage', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  })
-  .then(async res => {
-    const result = await res.json();
-    if (res.ok) {
-      transitionToSignedUp();
-    } else {
-      alert(result.message || '❌ Submission failed.');
-    }
-  })
-  .catch(err => {
-    console.error(err);
-    alert('❌ Error submitting form. Try again later.');
-  });
-}
-
-
     </script>
+
+
+<script>
+  function getText(selector) {
+    const input = document.querySelector(selector);
+    return input ? input.value.trim() : '';
+  }
+
+  function getCheckedValueFromRadioGroup(containerSelector) {
+    const checkboxes = document.querySelectorAll(`${containerSelector} input[type="checkbox"]`);
+    const checked = [...checkboxes].find(el => el.checked);
+    return checked ? parseInt(checked.nextElementSibling.textContent.trim()) : null;
+  }
+
+  function getCheckedValues(containerSelector) {
+    const checkboxes = document.querySelectorAll(`${containerSelector} input[type="checkbox"]`);
+    return [...checkboxes].filter(cb => cb.checked).map(cb => cb.nextElementSibling.textContent.trim());
+  }
+
+  function getConsent() {
+    const checkbox = document.querySelector('.checkbox-item.block input[type="checkbox"]');
+    return checkbox ? checkbox.checked : false;
+  }
+
+  async function submitResetForm() {
+    const data = {
+  firstName: getText('input[name="firstName"]'),
+  lastName: getText('input[name="lastName"]'),
+  state: getText('input[name="state"]'),
+  email: getText('input[name="email"]'),
+  phone: getText('input[name="phone"]'),
+  town: getText('input[name="town"]'),
+  hearAboutUs: getText('input[name="hearAboutUs"]'),
+
+      mentalHealthRating: getCheckedValueFromRadioGroup('.radio-group'),
+      difficulties:       getCheckedValues('.sign-up-step-2 .checkbox-group'),
+      comments:           getText('.sign-up-step-2 textarea'),
+      permissionToContact: getConsent()
+    };
+
+    try {
+      // 🔽 endpoint must match your Express mount:  app.use('/reset', resetRoute)
+      const res = await fetch('/api/reengage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      if (res.ok) {
+        transitionToSignedUp();
+      } else {
+        alert(result.message || '❌ Submission failed.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('❌ Error submitting form. Try again later.');
+    }
+  }
+
+  // wire it to the submit button
+  document.querySelector('.to-signed-up').addEventListener('click', (e) => {
+    e.preventDefault();
+    submitResetForm();
+  });
+</script>
   </body>
 </html>
 

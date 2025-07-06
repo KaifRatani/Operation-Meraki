@@ -1,8 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const app = express();
 require('dotenv').config();
+
+const app = express();
 
 app.use(express.json());
 app.use(cors());
@@ -11,25 +12,39 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, '../ui')));
 app.use('/images', express.static(path.join(__dirname, '../images')));
 
-// Importing Routes
-try {
-    const veteranRoute = require('./routes/veteran');
-    const volunteerRoute = require('./routes/volunteer');
-    //const mailsubRoute = require('./routes/mailsub');
-    const loginRoute = require('./routes/login');
-    const signinRoute = require('./routes/signin');
+// Route: Serve reset.html at root
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../ui/reset.html'));
+});
 
-    // Setting up API Endpoints
-    app.use('/api/veteran', veteranRoute);
-    app.use('/api/volunteer', volunteerRoute);
-    //app.use('/api/mailsub', mailsubRoute);
-    app.use('/api/login', loginRoute);
-    app.use('/api/signin', signinRoute);
-
-} catch (error) {
-    console.error('Error importing routes:', error);
+// Function to safely import and mount a route
+function mountRoute(pathPrefix, routePath) {
+  try {
+    const route = require(routePath);
+    if (typeof route === 'function') {
+      app.use(pathPrefix, route);
+      console.log(`✅ Mounted route: ${pathPrefix}`);
+    } else {
+      console.warn(`⚠️ Route at ${routePath} does not export a router.`);
+    }
+  } catch (err) {
+    console.error(`❌ Failed to mount ${pathPrefix}:`, err.message);
+  }
 }
 
-// Start the server
+// Mount routes safely
+mountRoute('/api/veteran', './routes/veteran');
+mountRoute('/api/volunteer', './routes/volunteer');
+mountRoute('/api/login', './routes/login');
+mountRoute('/api/signin', './routes/signin');
+// mountRoute('/api/mailsub', './routes/mailsub'); // Only if valid
+mountRoute('/api/bodform', './routes/bODForm');
+mountRoute('/api/reset', './routes/reset');
+mountRoute('/api/refocus', './routes/refocus');
+mountRoute('/api/reengage', './routes/reengage'); // Only if valid
+
+// Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+});
