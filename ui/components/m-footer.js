@@ -82,7 +82,7 @@ class MFooter extends HTMLElement {
           <a href="/terms-of-use.html">Terms of Use</a>
         </div>
         <div>
-          <a href="/contact-us.html">Contact Us</a>
+          <a href="/contact.html">Contact Us</a>
         </div>
         <div>
           <a href="/about-us.html">About Us</a>
