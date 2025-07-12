@@ -1,797 +1,519 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Refocus Program - Operation Meraki</title>
-  <link rel="icon" href="images/logo/logo.png" type="image/png" />
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Specific styles for Refocus page */
-    .program-detail-container {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .program-image {
-      flex: 1;
-      min-width: 300px;
-      max-width: 450px;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    .program-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .program-content {
-      flex: 2;
-      min-width: 400px;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    .program-content h1 {
-      font-size: 36px;
-      margin-top: 0;
-      margin-bottom: 10px;
-      color: #002b5c;
-      text-align: left;
-    }
-    .program-content p {
-      font-size: 16px;
-      line-height: 1.6;
-      color: #555;
-    }
-    .program-actions {
-      margin-top: 20px;
-      display: flex;
-      gap: 15px;
-    }
-    .program-actions button {
-      padding: 12px 25px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .program-actions .share-btn {
-      background-color: #f0f0f0;
-      color: #555;
-    }
-    .program-actions .share-btn:hover {
-      background-color: #e0e0e0;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .program-actions .signup-btn {
-      background-color: #005a9c;
-      color: white;
-    }
-    .program-actions .signup-btn:hover {
-      background-color: #003b71;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Rebuild Program - Operation Meraki</title>
+    <link rel="icon" href="images/logo/logo.png" type="image/png" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="program-shared.css" />
+    <style>
 
-    .program-details-section {
-      flex: 1;
-      min-width: 300px;
-      max-width: 400px;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    .program-details-section h2 {
-      font-size: 24px;
-      margin-top: 0;
-      margin-bottom: 20px;
-      color: #002b5c;
-    }
-    .detail-item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-      font-size: 16px;
-      color: #555;
-    }
-    .detail-item img {
-      width: 24px;
-      height: 24px;
-      margin-right: 15px;
-    }
+    </style>
+    <script src="components/m-header.js" type="module"></script>
+    <script src="components/m-footer.js" type="module"></script>
+    <script src="components/m-button.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+  </head>
+  <body>
+    <m-header active="programs"></m-header>
 
-    .faq-section {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    .faq-section h2 {
-      font-size: 28px;
-      color: #002b5c;
-      padding: 30px 0 20px;
-      margin: 0;
-      border-bottom: 1px solid #eee;
-      text-align: center;
-    }
-    .faq-item {
-      padding: 20px 0;
-      border-bottom: 1px solid #eee;
-      cursor: pointer;
-    }
-    .faq-item:last-child {
-      border-bottom: none;
-    }
-    .faq-question {
-      font-weight: bold;
-      font-size: 18px;
-      color: #333;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .faq-answer {
-      font-size: 16px;
-      color: #666;
-      margin-top: 10px;
-      display: none;
-    }
-    .faq-item.active .faq-answer {
-      display: block;
-    }
-    .faq-item .arrow {
-      font-size: 20px;
-      transition: transform 0.3s ease;
-    }
-    .faq-item.active .arrow {
-      transform: rotate(90deg);
-    }
+    <div class="main-wrapper">
+      <!-- Program Details Sidebar -->
 
-    .veteran-artwork-section {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-    .veteran-artwork-section h2 {
-      font-size: 28px;
-      color: #002b5c;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .artwork-grid {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-    .artwork-card {
-      flex: 0 1 300px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      overflow: hidden;
-      text-align: left;
-    }
-    .artwork-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      display: block;
-    }
-    .artwork-content {
-      padding: 20px;
-    }
-    .artwork-content h3 {
-      font-size: 20px;
-      margin-top: 0;
-      margin-bottom: 5px;
-      color: #003b71;
-    }
-    .artwork-content .date-author {
-      font-size: 13px;
-      color: #999;
-      margin-bottom: 10px;
-    }
-    .artwork-content p {
-      font-size: 15px;
-      line-height: 1.5;
-      color: #555;
-      margin-bottom: 15px;
-    }
-    .artwork-content .read-more {
-      color: #005a9c;
-      font-weight: bold;
-      text-decoration: none;
-    }
+      <aside class="program-details-sidebar">
+        <section class="hero-image-section">
+          <img class="hero-image" src="images/program/refocus.png">
+        </section>
+        <div class="program-details-title">Details</div>
+        <div class="program-details-item">
+          <img class="icon" src="images/program/check.svg" />
+          <p class="title">Equipment included</p>
+        </div>
+        <div class="program-details-item">
+          <img class="icon" src="images/program/calendar.svg" />
+          <p class="title">Weekly Workshops</p>
+        </div>
+        <div class="program-details-item">
+          <img class="icon" src="images/program/clock.svg" />
+          <p class="title">1 hour program</p>
+        </div>
+        <div class="program-details-item">
+          <img class="icon" src="images/program/map-pin.svg" />
+          <p class="title">Ohio</p>
+        </div>
+        <div class="program-details-item">
+          <img class="icon" src="images/program/thumb-up.svg" />
+          <p class="title">No Experience Needed</p>
+        </div>
+      </aside>
 
-    /* Modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.5);
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background-color: #fefefe;
-      margin: auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 600px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      position: relative;
-    }
-    .close-button {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-    .close-button:hover,
-    .close-button:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .modal-nav {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .modal-nav span {
-        font-weight: bold;
-    }
-    .modal-page {
-        display: none;
-    }
-    .modal-page.active {
-        display: block;
-    }
-    .modal-buttons {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-    }
-    .modal-buttons button {
-        width: 48%;
-    }
-    .modal-success-image {
-        max-width: 80%;
-        height: auto;
-        display: block;
-        margin: 20px auto;
-    }
-    .modal-success-message {
-        text-align: center;
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
-    .modal-success-share-btn {
-        background-color: #42a5f5;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-    }
-    .modal-success-share-btn:hover {
-        background-color: #318fe0;
-    }
+      <main class="main-content">
+        <!-- Breadcrumb Navigation -->
 
-    @media (max-width: 768px) {
-      .program-detail-container {
-        flex-direction: column;
-        align-items: center;
-      }
-      .program-content, .program-details-section {
-        min-width: unset;
-        width: 100%;
-      }
-      .program-content h1 {
-        text-align: center;
-      }
-      .program-actions {
-        flex-direction: column;
-        align-items: center;
-      }
-      .program-actions button {
-        width: 80%;
-      }
-      .artwork-card {
-        width: 100%;
-      }
-    }
-  </style>
-</head>
-<body>
-  <!-- Navbar -->
-  <header class="navbar">
-    <img src="images/logo/logo.png" alt="Logo" class="logo" />
-    <nav>
-      <ul>
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="programs.html">PROGRAMS</a></li>
-        <li><a href="events.html">EVENTS</a></li>
-        <li><a href="get-involved.html">GET INVOLVED</a></li>
-        <li><a href="news.html">NEWS</a></li>
-        <li><a href="contact.html">CONTACT</a></li>
-        <li><a href="about us.html">ABOUT US</a></li>
-      </ul>
-    </nav>
-    <div class="navbar-buttons" id="auth-area">
-      <button class="navbar-button" onclick="window.open('https://www.zeffy.com/en-US/fundraising/c95056db-d06b-407f-b4ba-5de61442d2e4', '_blank', 'noopener')">
-        MAKE A DONATION
-      </button>
-      <div class="user-menu">
-        <button class="navbar-button" onclick="toggleDropdown()">Sign in</button>
-        <div class="avatar-dropdown" id="avatarDropdown">
-          <a href="loginForm.html">Login</a>
-          <a href="signinForm.html">Register</a>
+        <a href="programs.html" class="breadcrumb-navigation">
+          <div class="icon"></div>
+          Back to all programs
+        </a>
+
+        <!-- Hero -->
+
+        <section class="hero-section">
+          <div class="hero-title">Refocus</div>
+          <div class="hero-description">
+            ReFocus is a therapy program for Veterans, utilizing photography and videography to navigate trauma through storytelling. With classes held in Ohio, Michigan, and Pennsylvania, the program has impacted an estimated 300 Veterans. Operation Meraki ReFocus grounds Veterans, fostering emotional and cognitive shifts through hands-on workshops covering professional photo shoots, camera basics, lighting, and conception. 
+          </div>
+          <section class="hero-cta-section">
+            <m-button class="hero-cta share-1">
+              <div style="padding-inline: 48px; display: flex; align-items: center;">
+                <img class="icon" src="images/program/share.svg" />
+                <div class="padding-bottom: 14px;">
+                  <span class="share-text-1">
+                    Share
+                  </span>
+                </div>
+              </div>
+            </m-button>
+            <m-button variant="primary" class="hero-cta hero-cta-primary">
+              <div style="padding-inline: 48px;">
+                Sign Up
+              </div>
+            </m-button>
+          </section>
+        </section>
+
+        <div class="main-content-divider"></div>
+
+        <!-- FAQ -->
+
+        <section class="faq-section">
+          <p class="faq-title">Frequently Asked Questions</p>
+          <div class="faq-item faq-1">
+            <div class="faq-q">
+              <div class="text">Can I bring a friend or family member?</div>
+              <div class="arrow"></div>
+            </div>
+            <div class="faq-a faq-a-1 hide">Yes, family members are encouraged to join our programs as part of the healing process.</div>
+          </div>
+          <div class="faq-item faq-2">
+            <div class="faq-q">
+              <div class="text">Do I have to pay anything?</div>
+              <div class="arrow"></div>
+            </div>
+            <div class="faq-a faq-a-2 hide">No, all Operation Meraki programs are completely free for veterans and their families.</div>
+          </div>
+          <div class="faq-item faq-3">
+            <div class="faq-q">
+              <div class="text">Do I need to bring any supplies?</div>
+              <div class="arrow"></div>
+            </div>
+            <div class="faq-a faq-a-3 hide">No, all necessary equipment and supplies will be provided for the program.</div>
+          </div>
+          <div class="faq-item faq-4">
+            <div class="faq-q">
+              <div class="text">What if I have no experience?</div>
+              <div class="arrow"></div>
+            </div>
+            <div class="faq-a faq-a-4 hide">Our programs are designed for all experience levels, from beginners to advanced. No prior experience is necessary.</div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+     <!-- Other Programs -->
+
+    <section class="other-programs-section">
+      <p class="title">Other Programs</p>
+      <div class="programs">
+        <div class="card-wrapper">
+          <div class="program-card">
+            <img class="cover" src="images/program/rebuild.png">
+            <p class="title">Rebuild</p>
+            <p class="description">Peer support groups are a safe space where Veterans can discuss day-to-day problems with other veterans.</p>
+            <m-button variant="primary" class="cta" onclick="location.href='rebuild.html'">Learn More</m-button>
+          </div>
+        </div>
+        <div class="card-wrapper">
+          <div class="program-card">
+            <img class="cover" src="images/program/re-engage.png">
+            <p class="title">ReEngage</p>
+            <p class="description">ReEngage is a career development program for Veterans transitioning to new missions and careers. </p>
+            <m-button variant="primary" class="cta" onclick="location.href='re-engage.html'">Learn More</m-button>
+          </div>
+        </div>
+        <div class="card-wrapper">
+          <div class="program-card">
+            <img class="cover" src="images/program/replant.png">
+            <p class="title">Replant</p>
+            <p class="description">RePlant is a sustainable farming program with indoor gardens in community spaces. </p>
+            <m-button variant="primary" class="cta" onclick="location.href='replant.html'">Learn More</m-button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <m-footer></m-footer>
+
+    <div class="dialog-overlay hide">
+      <div class="sign-up-dialog">
+        <div class="sign-up-dialog-header">
+          <div class="title sign-up-title">Refocus Sign Up</div>
+          <div class="step-indicator">Page 1 of 2</div>
+          <img class="close" src="images/program/close.svg" />
+        </div>
+
+        <form class="sign-up-form">
+          <div class="sign-up-step-1">
+            <legend class="legend">General Infomation</legend>
+            <div class="group">
+              <div class="item">
+                <label class="label">First Name<span class="require-mark">*</span></label>
+                <input class="input" name="firstName" />
+              </div>
+              <div class="item">
+                <label class="label">Last Name<span class="require-mark">*</span></label>
+                <input class="input" name="lastName" />
+              </div>
+              <div class="item">
+                <label class="label">State<span class="require-mark">*</span></label>
+                <input class="input" name="state" />
+              </div>
+              <div class="item">
+                <label class="label">Email<span class="require-mark">*</span></label>
+                <input class="input" name="email" />
+              </div>
+              <div class="item">
+                <label class="label">Phone Number<span class="require-mark">*</span></label>
+                <input class="input" name="phone" />
+              </div>
+              <div class="item">
+                <label class="label">Town<span class="require-mark">*</span></label>
+                <input class="input" name="town" />
+              </div>
+            </div>
+            <legend class="legend">How did you hear about us?</legend>
+            <div class="group">
+              <div class="item">
+                <label class="label">Choose from below</label>
+                <input class="input" name="hearAboutUs" />
+              </div>
+            </div>
+            <legend class="legend">How would you rate your mental health today?</legend>
+<div class="radio-group">
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="1" />
+    <div class="label">1</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="2" />
+    <div class="label">2</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="3" />
+    <div class="label">3</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="4" />
+    <div class="label">4</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="5" />
+    <div class="label">5</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="6" />
+    <div class="label">6</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="7" />
+    <div class="label">7</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="8" />
+    <div class="label">8</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="9" />
+    <div class="label">9</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="10" />
+    <div class="label">10</div>
+  </div>
+</div>
+
+            <div class="radio-group-scale">
+              <p>Very bad</p>
+              <p>Very Good</p>
+            </div>
+
+            <div class="actions">
+              <m-button variant="primary" class="primary-action to-2">
+                <div style="padding-inline: 48px">Next Page</div>
+              </m-button>
+            </div>
+          </div>
+
+
+          <div class="sign-up-step-2 hide">
+  <legend class="legend">What has been the most difficult part of returning?</legend>
+  <div class="checkbox-group">
+    <label class="checkbox-item">
+      <input type="checkbox" value="Feeling misunderstood" />
+      <div class="label">Feeling misunderstood</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Family life" />
+      <div class="label">Family life</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Lack of purpose" />
+      <div class="label">Lack of purpose</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Lack of support" />
+      <div class="label">Lack of support</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Other" />
+      <div class="label">Other</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Finding work" />
+      <div class="label">Finding work</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Trouble finding support" />
+      <div class="label">Trouble finding support</div>
+    </label>
+  </div>
+
+  <legend class="legend">Any comments for Operation Meraki?</legend>
+  <textarea class="input" placeholder="(Type here)"></textarea>
+
+  <label class="checkbox-item block">
+    <input type="checkbox" />
+    <div class="label">
+      By checking this box, you give us permission to contact you with the information provided.
+    </div>
+  </label>
+
+  <div class="actions">
+    <m-button class="secondary-action to-1">
+      <div style="padding-inline: 48px; position: relative;">
+        <img src="images/program/back.svg" />
+        Back
+      </div>
+    </m-button>
+    <m-button variant="primary" class="primary-action to-signed-up">
+      <div style="padding-inline: 48px;">Submit</div>
+    </m-button>
+  </div>
+</div>
+        </form>
+
+        <div class="signed-up hide">
+          <img class="hero" src="images/program/high-five.svg" />
+          <p class="title">You’re all signed up.</p>
+          <div class="seperator"></div>
+          <p class="description">Operation Meraki will be in touch soon with the necessary details.</p>
+          <p class="share-call">Have a friend who would enjoy this program too?</p>
+          <m-button class="share-cta share-2">
+            <div style="padding-inline: 56px">
+              <span class="share-text-2">
+                Share
+              </span>
+            </div>
+          </m-button>
         </div>
       </div>
     </div>
-  </header>
 
-  <div class="program-detail-container">
-    <div class="program-image">
-      <a href="programs.html" style="display: block; text-decoration: none; color: #005a9c; margin-bottom: 20px;">&larr; Back to all programs</a>
-      <img src="images/mission/solution.png" alt="Refocus Program Image" />
-    </div>
-    <div class="program-content">
-      <h1>Refocus</h1>
-      <p>ReFocus is a therapy program for Veterans, utilizing photography and videography to navigate trauma through storytelling. With classes held in Ohio, Michigan, and Pennsylvania, the program has impacted an estimated 200 Veterans. Operation Meraki Refocus empowers Veterans, fostering emotional and cognitive shifts through hands-on workshops covering professional photo shoots, camera basics, lighting, and conception.</p>
-      <div class="program-actions">
-        <button class="share-btn">Share</button>
-        <button class="signup-btn" id="openSignupModal">Sign Up</button>
-      </div>
-    </div>
-    <div class="program-details-section">
-      <h2>Details</h2>
-      <div class="detail-item">
-        <img src="images/logo/logo.png" alt="Icon" /><span>Equipment Included</span>
-      </div>
-      <div class="detail-item">
-        <img src="images/logo/logo.png" alt="Icon" /><span>Wed & Fridays at 7:00 PM</span>
-      </div>
-      <div class="detail-item">
-        <img src="images/logo/logo.png" alt="Icon" /><span>1 hour program</span>
-      </div>
-      <div class="detail-item">
-        <img src="images/logo/logo.png" alt="Icon" /><span>Ohio, Michigan, Pennsylvania</span>
-      </div>
-      <div class="detail-item">
-        <img src="images/logo/logo.png" alt="Icon" /><span>No Experience Needed</span>
-      </div>
+    <script src="script.js"></script>
+    <script>
+      const elements = {
+        signUpButton: () => document.querySelector('.hero-cta-primary'),
+        dialogOverlay: () => document.querySelector('.dialog-overlay'),
+        signUpCloseButton: () => document.querySelector('.close'),
+        signUpStep1: () => document.querySelector('.sign-up-step-1'),
+        signUpStep2: () => document.querySelector('.sign-up-step-2'),
+        signedUp: () => document.querySelector('.signed-up'),
+        stepIndicator: () => document.querySelector('.step-indicator'),
+        signUp1To2: () => document.querySelector('.to-2'),
+        signUp2To1: () => document.querySelector('.to-1'),
+        signUp2ToSignedUp: () => document.querySelector('.to-signed-up'),
+        signUpDialogTitle: () => document.querySelector('.sign-up-title'),
+        faq1: () => document.querySelector('.faq-1'),
+        faq2: () => document.querySelector('.faq-2'),
+        faq3: () => document.querySelector('.faq-3'),
+        faq4: () => document.querySelector('.faq-4'),
+        faqA1: () => document.querySelector('.faq-a-1'),
+        faqA2: () => document.querySelector('.faq-a-2'),
+        faqA3: () => document.querySelector('.faq-a-3'),
+        faqA4: () => document.querySelector('.faq-a-4'),
+      }
+
+      function show(elementGetter) {
+        elementGetter().classList.remove('hide')
+      }
+
+      function hide(elementGetter) {
+        elementGetter().classList.add('hide')
+      }
+
+      function text(elementGetter, text) {
+        elementGetter().innerHTML = text
+      }
+
+      function listen(elementGetter, ev, fn) {
+        elementGetter().addEventListener(ev, (e) => {
+          e.preventDefault()
+          fn(e)
+        })
+      }
+
+      function transitionToSignUp() {
+        show(elements.dialogOverlay)
+        show(elements.signUpStep1)
+        hide(elements.signUpStep2)
+        hide(elements.signedUp)
+        show(elements.signUpDialogTitle)
+        text(elements.stepIndicator, 'Page 1 of 2')
+      }
+
+      function transitionToMain() {
+        hide(elements.dialogOverlay)
+      }
+
+      function transitionToSignUpStepTwo() {
+        hide(elements.signUpStep1)
+        show(elements.signUpStep2)
+        hide(elements.signedUp)
+        show(elements.signUpDialogTitle)
+        text(elements.stepIndicator, 'Page 2 of 2')
+      }
+
+      function transitionToSignedUp() {
+        hide(elements.signUpStep2)
+        show(elements.signedUp)
+        hide(elements.signUpDialogTitle)
+        text(elements.stepIndicator, '')
+      }
+
+      function createAnswerToggler(faqElementGetter, answerElementGetter) {
+        return function () {
+          faqElementGetter().classList.toggle('hide-answer')
+          answerElementGetter().classList.toggle('hide')
+        }
+      }
+
+      function wireUp() {
+        listen(elements.signUpButton, 'click', transitionToSignUp)
+        listen(elements.signUpCloseButton, 'click', transitionToMain)
+        listen(elements.signUp1To2, 'click', transitionToSignUpStepTwo)        
+        listen(elements.signUp2To1, 'click', transitionToSignUp)
+        
+        listen(elements.faq1, 'click', createAnswerToggler(elements.faq1, elements.faqA1))
+        listen(elements.faq2, 'click', createAnswerToggler(elements.faq2, elements.faqA2))
+        listen(elements.faq3, 'click', createAnswerToggler(elements.faq3, elements.faqA3))
+        listen(elements.faq4, 'click', createAnswerToggler(elements.faq4, elements.faqA4))
+
+        new ClipboardJS('.share-1', {
+            text: function(trigger) {
+              const txt = document.querySelector('.share-text-1')
+              txt.innerHTML = 'Link copied!'
+              setTimeout(() => {
+                txt.innerHTML = 'Share'
+              }, 500)
+              return location.origin + '/refocus.html'
+            }
+        });
+
+        new ClipboardJS('.share-2', {
+            text: function(trigger) {
+              const txt = document.querySelector('.share-text-2')
+              txt.innerHTML = 'Link copied!'
+              setTimeout(() => {
+                txt.innerHTML = 'Share'
+              }, 500)
+              return location.origin + '/refocus.html'
+            }
+        });
+      }
+
+      wireUp()
+    </script>
+
+
+<script>
+  function getText(selector) {
+    const input = document.querySelector(selector);
+    return input ? input.value.trim() : '';
+  }
+
+  function getCheckedValueFromRadioGroup(containerSelector) {
+    const checkboxes = document.querySelectorAll(`${containerSelector} input[type="checkbox"]`);
+    const checked = [...checkboxes].find(el => el.checked);
+    return checked ? parseInt(checked.nextElementSibling.textContent.trim()) : null;
+  }
+
+  function getCheckedValues(containerSelector) {
+    const checkboxes = document.querySelectorAll(`${containerSelector} input[type="checkbox"]`);
+    return [...checkboxes].filter(cb => cb.checked).map(cb => cb.nextElementSibling.textContent.trim());
+  }
+
+  function getConsent() {
+    const checkbox = document.querySelector('.checkbox-item.block input[type="checkbox"]');
+    return checkbox ? checkbox.checked : false;
+  }
+
+  async function submitResetForm() {
+    const data = {
+  firstName: getText('input[name="firstName"]'),
+  lastName: getText('input[name="lastName"]'),
+  state: getText('input[name="state"]'),
+  email: getText('input[name="email"]'),
+  phone: getText('input[name="phone"]'),
+  town: getText('input[name="town"]'),
+  hearAboutUs: getText('input[name="hearAboutUs"]'),
+
+      mentalHealthRating: getCheckedValueFromRadioGroup('.radio-group'),
+      difficulties:       getCheckedValues('.sign-up-step-2 .checkbox-group'),
+      comments:           getText('.sign-up-step-2 textarea'),
+      permissionToContact: getConsent()
+    };
+
+    try {
+      // 🔽 endpoint must match your Express mount:  app.use('/reset', resetRoute)
+
       
 
-    </div>
-  </div>
-
-  <div class="faq-section">
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-item">
-      <div class="faq-question">Can I bring a friend or family member? <span class="arrow">&gt;</span></div>
-      <div class="faq-answer">Yes, family members are encouraged to join our programs as part of the healing process.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question">Do I have to pay anything? <span class="arrow">&gt;</span></div>
-      <div class="faq-answer">No, all Operation Meraki programs are completely free for veterans and their families.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question">Do I need to bring any supplies? <span class="arrow">&gt;</span></div>
-      <div class="faq-answer">No, all necessary equipment and supplies will be provided for the program.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question">What if I have no experience? <span class="arrow">&gt;</span></div>
-      <div class="faq-answer">Our programs are designed for all experience levels, from beginners to advanced. No prior experience is necessary.</div>
-    </div>
-  </div>
-
-  <div class="veteran-artwork-section">
-    <h2>Veteran Artwork</h2>
-    <div class="artwork-grid">
-      <div class="artwork-card">
-        <img src="images/slider/pexels-rdne-7467939.jpg" alt="Artwork" />
-        <div class="artwork-content">
-          <h3>Lorem Ipsum</h3>
-          <p class="date-author">June 13th, 2022 · James Berg</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-      </div>
-      <div class="artwork-card">
-        <img src="images/slider/pexels-rdne-7467943.jpg" alt="Artwork" />
-        <div class="artwork-content">
-          <h3>Lorem Ipsum</h3>
-          <p class="date-author">June 13th, 2022 · James Berg</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-      </div>
-      <div class="artwork-card">
-        <img src="images/slider/pexels-rdne-7468184.jpg" alt="Artwork" />
-        <div class="artwork-content">
-          <h3>Lorem Ipsum</h3>
-          <p class="date-author">June 13th, 2022 · James Berg</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <a href="#" class="read-more">Read More</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Signup Modal -->
-  <div id="signupModal" class="modal">
-    <div class="modal-content">
-      <span class="close-button">&times;</span>
-      <div class="modal-nav">Refocus Sign Up <span id="modalPageCounter">Page 1 of 2</span></div>
-
-      <!-- Page 1 -->
-      <div id="modalPage1" class="modal-page active">
-        <h2>General Information</h2>
-        <label for="firstNameModal">First Name *</label>
-        <input type="text" id="firstNameModal" required>
-
-        <label for="lastNameModal">Last Name *</label>
-        <input type="text" id="lastNameModal" required>
-
-        <label for="stateModal">State *</label>
-        <select id="stateModal" required>
-          <option value="">Select</option>
-          <option value="AL">Alabama</option>
-          <option value="AK">Alaska</option>
-          <option value="AZ">Arizona</option>
-          <option value="AR">Arkansas</option>
-          <option value="CA">California</option>
-          <option value="CO">Colorado</option>
-          <option value="CT">Connecticut</option>
-          <option value="DE">Delaware</option>
-          <option value="FL">Florida</option>
-          <option value="GA">Georgia</option>
-          <option value="HI">Hawaii</option>
-          <option value="ID">Idaho</option>
-          <option value="IL">Illinois</option>
-          <option value="IN">Indiana</option>
-          <option value="IA">Iowa</option>
-          <option value="KS">Kansas</option>
-          <option value="KY">Kentucky</option>
-          <option value="LA">Louisiana</option>
-          <option value="ME">Maine</option>
-          <option value="MD">Maryland</option>
-          <option value="MA">Massachusetts</option>
-          <option value="MI">Michigan</option>
-          <option value="MN">Minnesota</option>
-          <option value="MS">Mississippi</option>
-          <option value="MO">Missouri</option>
-          <option value="MT">Montana</option>
-          <option value="NE">Nebraska</option>
-          <option value="NV">Nevada</option>
-          <option value="NH">New Hampshire</option>
-          <option value="NJ">New Jersey</option>
-          <option value="NM">New Mexico</option>
-          <option value="NY">New York</option>
-          <option value="NC">North Carolina</option>
-          <option value="ND">North Dakota</option>
-          <option value="OH">Ohio</option>
-          <option value="OK">Oklahoma</option>
-          <option value="OR">Oregon</option>
-          <option value="PA">Pennsylvania</option>
-          <option value="RI">Rhode Island</option>
-          <option value="SC">South Carolina</option>
-          <option value="SD">South Dakota</option>
-          <option value="TN">Tennessee</option>
-          <option value="TX">Texas</option>
-          <option value="UT">Utah</option>
-          <option value="VT">Vermont</option>
-          <option value="VA">Virginia</option>
-          <option value="WA">Washington</option>
-          <option value="WV">West Virginia</option>
-          <option value="WI">Wisconsin</option>
-          <option value="WY">Wyoming</option>
-        </select>
-
-        <label for="emailModal">Email *</label>
-        <input type="email" id="emailModal" required>
-
-        <label for="phoneModal">Phone Number *</label>
-        <input type="tel" id="phoneModal" required>
-
-        <label for="traumaModal">Trauma</label>
-        <select id="traumaModal">
-          <option value="">Select</option>
-          <option value="PTSD">PTSD</option>
-          <option value="Anxiety">Anxiety</option>
-          <option value="Depression">Depression</option>
-          <option value="Other">Other</option>
-        </select>
-
-        <p>How did you hear about us?</p>
-        <select id="hearAboutUs">
-          <option value="">Choose from below</option>
-          <option value="Social Media">Social Media</option>
-          <option value="Friend/Family">Friend/Family</option>
-          <option value="Online Search">Online Search</option>
-          <option value="Veteran Organization">Veteran Organization</option>
-          <option value="Other">Other</option>
-        </select>
-
-        <p>Select which day(s)</p>
-        <label><input type="checkbox"> Wednesdays at 7:00 PM</label>
-        <label><input type="checkbox"> Fridays at 7:00 PM</label>
-
-        <p>How would you rate your mental health today? *</p>
-        <div class="mental-health-rating">
-            1 <input type="radio" name="mentalHealth" value="1" required>
-            2 <input type="radio" name="mentalHealth" value="2">
-            3 <input type="radio" name="mentalHealth" value="3">
-            4 <input type="radio" name="mentalHealth" value="4">
-            5 <input type="radio" name="mentalHealth" value="5">
-            6 <input type="radio" name="mentalHealth" value="6">
-            7 <input type="radio" name="mentalHealth" value="7">
-            8 <input type="radio" name="mentalHealth" value="8">
-            9 <input type="radio" name="mentalHealth" value="9">
-            10 <input type="radio" name="mentalHealth" value="10"> Very Good
-        </div>
-        <div class="modal-buttons">
-          <button id="nextPage">Next Page</button>
-        </div>
-      </div>
-
-      <!-- Page 2 -->
-      <div id="modalPage2" class="modal-page">
-        <h2>What has been the most difficult part of returning?</h2>
-        <label><input type="checkbox"> Feeling misunderstood</label>
-        <label><input type="checkbox"> Family life</label>
-        <label><input type="checkbox"> Lack of purpose</label>
-        <label><input type="checkbox"> Handling emotions</label>
-        <label><input type="checkbox"> Lack of support</label>
-        <label><input type="checkbox"> Trouble finding Support</label>
-        <label><input type="checkbox"> Finding work</label>
-        <label><input type="checkbox"> Other</label>
-
-        <label for="commentsModal">Any comments for Operation Meraki?</label>
-        <textarea id="commentsModal" rows="4" placeholder="Type here!"></textarea>
-
-        <label class="checkbox-label"><input type="checkbox" id="consentModal" required> By checking this box, you give us permission to contact you, with the information provided.</label>
-
-        <div class="modal-buttons">
-          <button id="prevPage">Back</button>
-          <button id="submitModal">Submit</button>
-        </div>
-      </div>
-
-      <!-- Success Page -->
-      <div id="modalSuccess" class="modal-page">
-        <img src="images/team/veteran.png" alt="Success Image" class="modal-success-image">
-        <p class="modal-success-message">You're all signed up.</p>
-        <p class="modal-success-message">Operation Meraki will be in touch soon with the necessary details.</p>
-        <p class="modal-success-message">Have a friend who would enjoy this program too?</p>
-        <button class="modal-success-share-btn">Share</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <div class="column">
-      <img src="images/logo/logo_white.png" alt="Logo" style="width: 100px;" />
-    </div>
-    <div class="column">
-      <h3><a href="programs.html">PROGRAMS</a></h3>
-      <a href="reset.html">Bridge-Reset</a>
-      <a href="rebuild.html">Bridge-Rebuild</a>
-      <a href="refocus.html">Build-Refocus</a>
-      <a href="reEngage.html">Build-ReEngage</a>
-      <a href="replant.html">Bridge-RePlant</a>
-    </div>
-    <div class="column">
-      <h3><a href="get-involved.html">GET INVOLVED</a></h3>
-      <p>Board of Directors</p>
-      <p>Become a Volunteer</p>
-      <p>Financial Support</p>
-      <p>Camera and field equipment donation</p>
-    </div>
-
-    <div class="column">
-      <h3>Subscribe Now</h3>
-      <p>Stay informed on what we're doing and opportunities.</p>
-      <form id="subscribe-form">
-        <input type="email" id="email-input" placeholder="Enter Email" required />
-        <button type="submit">Submit</button>
-      </form>
-      <div class="social-icons" style="margin-top: 10px;">
-        <img src="images/socialmedia/facebook.png" alt="Facebook" class="icon" />
-        <img src="images/socialmedia/instagram.png" alt="Instagram" class="icon" />
-        <img src="images/socialmedia/twitter.png" alt="Twitter" class="icon" />
-        <img src="images/socialmedia/linkedin.png" alt="LinkedIn" class="icon" />
-      </div>
-    </div>
-  </footer>
-  <div class="footer-bottom">© 2025 All Rights Reserved.</div>
-
-  <script src="script.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const signupModal = document.getElementById('signupModal');
-      const openSignupModalBtn = document.getElementById('openSignupModal');
-      const closeButton = document.querySelector('.close-button');
-      const modalPage1 = document.getElementById('modalPage1');
-      const modalPage2 = document.getElementById('modalPage2');
-      const modalSuccess = document.getElementById('modalSuccess');
-      const nextPageBtn = document.getElementById('nextPage');
-      const prevPageBtn = document.getElementById('prevPage');
-      const submitModalBtn = document.getElementById('submitModal');
-      const modalPageCounter = document.getElementById('modalPageCounter');
-      let currentPage = 1;
-
-      // Open Modal
-      if (openSignupModalBtn) {
-        openSignupModalBtn.onclick = () => {
-          signupModal.style.display = 'flex';
-          currentPage = 1;
-          showPage(currentPage);
-        };
-      }
-
-      // Close Modal
-      if (closeButton) {
-        closeButton.onclick = () => {
-          signupModal.style.display = 'none';
-        };
-      }
-
-      window.onclick = (event) => {
-        if (event.target === signupModal) {
-          signupModal.style.display = 'none';
-        }
-      };
-
-      function showPage(pageNumber) {
-        modalPage1.style.display = 'none';
-        modalPage2.style.display = 'none';
-        modalSuccess.style.display = 'none';
-
-        if (pageNumber === 1) {
-          modalPage1.style.display = 'block';
-          modalPageCounter.textContent = 'Page 1 of 2';
-        } else if (pageNumber === 2) {
-          modalPage2.style.display = 'block';
-          modalPageCounter.textContent = 'Page 2 of 2';
-        } else if (pageNumber === 3) {
-          modalSuccess.style.display = 'block';
-          modalPageCounter.textContent = ''; // Clear page counter for success
-        }
-      }
-
-      if (nextPageBtn) {
-        nextPageBtn.onclick = () => {
-          // Basic validation for page 1 before proceeding
-          const firstName = document.getElementById('firstNameModal').value.trim();
-          const lastName = document.getElementById('lastNameModal').value.trim();
-          const state = document.getElementById('stateModal').value;
-          const email = document.getElementById('emailModal').value.trim();
-          const phone = document.getElementById('phoneModal').value.trim();
-          const mentalHealthRadios = document.querySelectorAll('input[name="mentalHealth"]:checked');
-
-          if (!firstName || !lastName || !state || !email || !phone || mentalHealthRadios.length === 0) {
-              alert('Please fill in all required fields on this page.');
-              return;
-          }
-          if (!isValidEmail(email)) { // Re-using isValidEmail from veteranRegistration.html
-              alert('Please enter a valid email address.');
-              return;
-          }
-          if (!isValidPhone(phone)) { // Re-using isValidPhone from veteranRegistration.html
-              alert('Please enter a valid phone number (10-15 digits).');
-              return;
-          }
-
-
-          currentPage = 2;
-          showPage(currentPage);
-        };
-      }
-
-      if (prevPageBtn) {
-        prevPageBtn.onclick = () => {
-          currentPage = 1;
-          showPage(currentPage);
-        };
-      }
-
-      if (submitModalBtn) {
-        submitModalBtn.onclick = async () => {
-          const consent = document.getElementById('consentModal').checked;
-          if (!consent) {
-              alert('You must consent before submitting.');
-              return;
-          }
-
-          // Gather all form data from both pages
-          const formData = {
-              firstName: document.getElementById('firstNameModal').value.trim(),
-              lastName: document.getElementById('lastNameModal').value.trim(),
-              state: document.getElementById('stateModal').value,
-              email: document.getElementById('emailModal').value.trim(),
-              phone: document.getElementById('phoneModal').value.trim(),
-              trauma: document.getElementById('traumaModal').value,
-              hearAboutUs: document.getElementById('hearAboutUs').value,
-              availability: [], // For checkboxes
-              mentalHealth: document.querySelector('input[name="mentalHealth"]:checked')?.value || '',
-              difficultParts: [], // For checkboxes
-              comments: document.getElementById('commentsModal').value.trim(),
-              consent: consent
-          };
-
-          // Collect availability checkboxes
-          document.querySelectorAll('#modalPage1 input[type="checkbox"]').forEach(checkbox => {
-            if (checkbox.checked) {
-              formData.availability.push(checkbox.nextSibling.textContent.trim());
-            }
-          });
-
-          // Collect difficult parts checkboxes
-          document.querySelectorAll('#modalPage2 input[type="checkbox"]').forEach(checkbox => {
-            if (checkbox.checked && checkbox.id !== 'consentModal') {
-              formData.difficultParts.push(checkbox.nextSibling.textContent.trim());
-            }
-          });
-
-          // Send data to backend (example: assuming a new API endpoint /api/refocus-signup)
-          try {
-            const response = await fetch('http://localhost:5000/api/refocus-signup', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(formData)
-            });
-
-            if (response.ok) {
-              currentPage = 3;
-              showPage(currentPage);
-            } else {
-              const errorResult = await response.json();
-              alert('Registration failed: ' + (errorResult.message || 'Server error'));
-            }
-          } catch (error) {
-            console.error('Error:', error);
-            alert('Error during registration.');
-          }
-        };
-      }
-
-      // FAQ Toggle Functionality
-      document.querySelectorAll('.faq-item').forEach(item => {
-        item.addEventListener('click', () => {
-          item.classList.toggle('active');
-        });
+      const res = await fetch('/api/refocus', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
       });
 
-      // Helper functions (re-using from other forms)
-      function isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      const result = await res.json();
+      if (res.ok) {
+        transitionToSignedUp();
+      } else {
+        alert(result.message || '❌ Submission failed.');
       }
+    } catch (err) {
+      console.error(err);
+      alert('❌ Error submitting form. Try again later.');
+    }
+  }
 
-      function isValidPhone(phone) {
-        return /^\d{10,15}$/.test(phone); // Allows 10–15 digits
-      }
-    });
-  </script>
-</body>
-</html> 
+  // wire it to the submit button
+  document.querySelector('.to-signed-up').addEventListener('click', (e) => {
+    e.preventDefault();
+    submitResetForm();
+  });
+</script>
+
+
+  </body>
+</html>

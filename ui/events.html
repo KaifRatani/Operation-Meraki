@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Events | Operation Meraki</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="images/logo/logo.png" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="components/m-header.js" type="module"></script>
+  <script src="components/m-footer.js" type="module"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+    }
+    h1 {
+      text-align: center;
+      margin: 40px 0 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 0 5% 60px;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      padding: 20px;
+    }
+    .card h3 {
+      margin: 0 0 10px;
+    }
+    .card p {
+      margin: 5px 0;
+      font-size: 0.95rem;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+    .buttons button {
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+    }
+    .rsvp-btn { background: #0074D9; }
+    .vol-btn { background: #2ECC40; }
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .modal-content {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 600px;
+      width: 100%;
+      position: relative;
+    }
+    .modal-content h2 {
+      margin-top: 0;
+    }
+    .modal-content input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .modal-content button.submit-btn {
+      background: #0074D9;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .close {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <m-header active="events"></m-header>
+
+  <h1>Upcoming Events</h1>
+  <div class="grid" id="eventsContainer"></div>
+
+  <!-- RSVP Modal -->
+  <div class="modal" id="rsvpModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('rsvpModal')">×</span>
+      <h2>RSVP Form</h2>
+      <form id="rsvpForm">
+        <input type="hidden" name="event_id" id="rsvpEventId" />
+        <input placeholder="First Name" id="rsvpFirst" required />
+        <input placeholder="Last Name" id="rsvpLast" required />
+        <input type="email" placeholder="Email" id="rsvpEmail" required />
+        <input placeholder="Phone Number" id="rsvpPhone" required />
+        <input placeholder="State" id="rsvpState" required />
+        <input placeholder="Town" id="rsvpTown" required />
+        <input placeholder="Number of People Attending" id="rsvpCount" type="number" required />
+        <label>Are you a Veteran?</label>
+        <select id="rsvpVet" required>
+          <option value="">Select</option>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Volunteer Modal -->
+  <div class="modal" id="volunteerModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('volunteerModal')">×</span>
+      <h2>Volunteer Registration</h2>
+      <form id="volForm">
+        <input type="hidden" name="event_id" id="volEventId" />
+        <input placeholder="First Name" id="volFirst" required />
+        <input placeholder="Last Name" id="volLast" required />
+        <input type="email" placeholder="Email" id="volEmail" required />
+        <input placeholder="Phone Number" id="volPhone" required />
+        <input placeholder="State" id="volState" required />
+        <input placeholder="Town" id="volTown" required />
+        <input placeholder="How did you hear about us?" id="volSource" />
+        <input placeholder="Age Group (e.g. 18–25)" id="volAge" />
+        <label>Are you a Veteran?</label>
+        <select id="volVet" required>
+          <option value="">Select</option>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <m-footer></m-footer>
+
+  <script>
+    async function loadEvents() {
+      const res = await fetch('/api/events');
+      const events = await res.json();
+      const container = document.getElementById('eventsContainer');
+      container.innerHTML = '';
+
+      events.forEach(e => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h3>${e.title}</h3>
+          <p><strong>Date:</strong> ${e.date} at ${e.start_time}</p>
+          <p><strong>Duration:</strong> ${e.duration}</p>
+          <p><strong>Location:</strong> ${e.location}</p>
+          <p>${e.description}</p>
+          <div class="buttons">
+            <button class="vol-btn" onclick="openModal('volunteerModal', ${e.id})">Volunteer</button>
+            <button class="rsvp-btn" onclick="openModal('rsvpModal', ${e.id})">RSVP</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openModal(id, eventId) {
+      document.getElementById(id).style.display = 'flex';
+      if (id === 'rsvpModal') document.getElementById('rsvpEventId').value = eventId;
+      if (id === 'volunteerModal') document.getElementById('volEventId').value = eventId;
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const body = {
+        event_id: document.getElementById('rsvpEventId').value,
+        first_name: document.getElementById('rsvpFirst').value,
+        last_name: document.getElementById('rsvpLast').value,
+        email: document.getElementById('rsvpEmail').value,
+        phone: document.getElementById('rsvpPhone').value,
+        state: document.getElementById('rsvpState').value,
+        town: document.getElementById('rsvpTown').value,
+        people_count: parseInt(document.getElementById('rsvpCount').value),
+        is_veteran: document.getElementById('rsvpVet').value === 'true',
+        role: 'veteran'
+      };
+      const res = await fetch('/api/events/respond', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      alert(await res.text());
+      closeModal('rsvpModal');
+    });
+
+    document.getElementById('volForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const body = {
+        event_id: document.getElementById('volEventId').value,
+        first_name: document.getElementById('volFirst').value,
+        last_name: document.getElementById('volLast').value,
+        email: document.getElementById('volEmail').value,
+        phone: document.getElementById('volPhone').value,
+        state: document.getElementById('volState').value,
+        town: document.getElementById('volTown').value,
+        heard_from: document.getElementById('volSource').value,
+        age_group: document.getElementById('volAge').value,
+        is_veteran: document.getElementById('volVet').value === 'true',
+        role: 'volunteer'
+      };
+      const res = await fetch('/api/events/respond', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      alert(await res.text());
+      closeModal('volunteerModal');
+    });
+
+    loadEvents();
+  </script>
+</body>
+</html>

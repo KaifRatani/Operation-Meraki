@@ -6,36 +6,131 @@
   <title>Operation Meraki</title>
   <link rel="icon" href="images/logo/logo.png" type="image/png" />
   <link rel="stylesheet" href="style.css" />
+  <script src="components/m-header.js" type="module"></script>
+  <script src="components/m-footer.js" type="module"></script>
+
+  <style>
+    
+
+    section.mission {
+      width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      gap: 42px;
+      margin-top: 120px;
+    }
+    .missions {
+      display: flex;
+      flex-direction: column;
+    }
+    .missions .seperator {
+      height: 3px;
+      width: 100%;
+      background-color: #D9D9D9;
+      margin: 32px 0 48px;
+    }
+    div.mission {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 596px;
+      color: #04273C;
+    }
+    .mission h2 {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 40px;
+      margin: 0;
+    }
+    .mission p {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 40px;
+    }
+    .mission-image {
+      width: 510px;
+    }
+
+    .info-section {
+      width: 1285px;
+      margin: 120px auto 80px;
+    }
+
+    .info-cards {
+      display: flex;
+      gap: 50px;
+      margin-top: 40px;
+      justify-content: space-between;
+    }
+
+    .info-section .title {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 40px;
+      color: #222540;
+      text-align: center;
+    }
+
+    .info-card {
+      width: 360px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-section .seperator {
+      width: 3px;
+      background-color: #D9D9D9;
+      flex: 0 0 auto;
+    }
+
+    .info-card img {
+      width: 100%;
+      height: 196px;
+      object-fit: cover;
+    }
+
+    .info-card h3 {
+      font-weight: 700;
+      font-size: 24px;
+      color: #074264;
+      margin-top: 12px;;
+    }
+
+    .info-card .subtitle {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 25px;
+      color: #6A131F;
+      display: flex;
+      justify-content: space-between;
+      height: 25px;
+    }
+
+    .subtitle p {
+      margin: 0;
+    }
+
+    .info-card>p {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 40px;
+      color: #04273C;
+    }
+
+    .info-card .read-more {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 40px;
+      text-decoration: underline;
+      text-decoration-style: solid;
+      margin-top: 12px;
+      cursor: pointer;
+      color: #074264;
+    }
+  </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <header class="navbar">
-    <img src="images/logo/logo.png" alt="Logo" class="logo" />
-    <nav>
-      <ul>
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="programs.html">PROGRAMS</a></li>
-        <li><a href="events.html">EVENTS</a></li>
-        <li><a href="get-involved.html">GET INVOLVED</a></li>
-        <li><a href="news.html">NEWS</a></li>
-        <li><a href="contact.html">CONTACT</a></li>
-        <li><a href="about us.html">ABOUT US</a></li>
-      </ul>
-    </nav>
-    <div class="navbar-buttons" id="auth-area">
-  <button class="navbar-button" onclick="window.open('https://www.zeffy.com/en-US/fundraising/c95056db-d06b-407f-b4ba-5de61442d2e4', '_blank', 'noopener')">
-    MAKE A DONATION
-  </button>
-  <div class="user-menu">
-    <button class="navbar-button" onclick="toggleDropdown()">Sign in</button>
-    <div class="avatar-dropdown" id="avatarDropdown">
-      <a href="loginForm.html">Login</a>
-      <a href="signinForm.html">Register</a>
-    </div>
-  </div>
-</div>
-
-  </header>
+  <m-header active="home"></m-header>
 
   <!-- Carousel -->
   <section class="carousel">
@@ -100,9 +195,6 @@
   </div>
 </section>
 
-
-
-
 <!-- Donors -->
 <section class="engagement-section">
   <div class="engagement-wrapper donors">
@@ -133,89 +225,66 @@
   </div>
 </section>
 
-
-
-
-
-
-  <!-- Mission -->
   <section class="mission">
-    <div class="tabs">
-      <div class="tab active" data-tab="mission">Our Mission</div>
-      <div class="tab" data-tab="vision">Our Vision</div>
+    <div class="missions">
+      <div class="mission">
+        <h2>Our Mission</h2>
+        <p>We challenge and change the veteran transition landscape by helping our service members and their families bridge from the uniform to building new professional and personal lives.</p>
+      </div>
+      <div class="seperator"></div>
+      <div class="mission">
+        <h2>Our Vision</h2>
+        <p>Our vision is to address the post-military challenges faced by Veterans. Operation Meraki is dedicated to reducing underemployment among veterans and redirecting their emotional and cognitive capabilities towards a successful transition.</p>
+      </div>
     </div>
-    <div id="mission" class="tab-content active">
-      <p>We help our service members and their families transition from the uniform to new professional and personal lives by changing the veteran transition landscape.</p>
-    </div>
-    <div id="vision" class="tab-content">
-      <p>We envision a future where every veteran is supported in achieving a fulfilling civilian life through community, opportunity, and purpose.</p>
-    </div>
-    <button class="learn-more">Learn More</button>
+    <img class="mission-image" src="images/index/mission.png" alt="Mission" />
   </section>
 
  <section class="info-section">
-  <div class="info-card">
-    <img src="images/mission/problem.png" alt="The Problem" />
-    <h3>The Problem</h3>
-    <p>Many veterans face overwhelming challenges when transitioning to their next mission after military service. From mental health struggles to reintegration to next life mission.</p>
-    <span class="read-more">READ MORE</span>
-  </div>
+  <p class="title">Recent News</p>
 
-  <div class="info-card">
-    <img src="images//mission/solution.png" alt="The Solution" />
-    <h3>The Solution</h3>
-    <p>At Operation Meraki, we provide tailored solutions designed to support veterans on their journey toward healing, rebuilding, and reintegrating into their communities with renewed purpose and confidence.</p>
-    <span class="read-more">READ MORE</span>
-  </div>
+  <div class="info-cards">
+    <div class="info-card">
+      <img src="images/mission/problem.png" alt="The Problem" />
+      <h3>Navigating the Transition: Redefining Life After Military Service</h3>
+      <div class="subtitle">
+        <p>September 10, 2024</p>
+        <p>Michael Thomas</p>
+      </div>
+      <p>For many veterans, transitioning from military service to a civilian career—or what some call the “next mission” </p>
+      <a class="read-more">Read More</a>
+    </div>
 
-  <div class="info-card">
-    <img src="images//mission/accomplishment.png" alt="Accomplishments" />
-    <h3>Accomplishments</h3>
-    <p>With over 738 veterans empowered, Operation Meraki has become a beacon of hope for those looking to heal, grow, and re-established themselves in their next life mission.</p>
-    <span class="read-more">READ MORE</span>
+    <div class="seperator"></div>
+  
+    <div class="info-card">
+      <img src="images//mission/solution.png" alt="The Solution" />
+      <h3>A Simple Guide to Performance-Based Interviewing</h3>
+      <div class="subtitle">
+        <p>November 3, 2024</p>
+        <p>Michael Thomas</p>
+      </div>
+      <p>Performance-based interviewing (PBI) is about finding candidates with proven, real-world skills and experience. </p>
+      <a class="read-more">Read More</a>
+    </div>
+
+    <div class="seperator"></div>
+  
+    <div class="info-card">
+      <img src="images//mission/accomplishment.png" alt="Accomplishments" />
+      <h3>Navigating Veteran Transition: Strategies for a Successful Next Mission</h3>
+      <div class="subtitle">
+        <p>October 24, 2024</p>
+        <p>Michael Thomas</p>
+      </div>
+      <p>Veteran transition can be one of the most challenging phases of military service. </p>
+      <a class="read-more">Read More</a>
+    </div>
   </div>
 </section>
 
   <!-- Footer -->
-  <footer>
-    <div class="column">
-      <img src="images/logo/logo_white.png" alt="Logo" style="width: 100px;" />
-    </div>
-    <div class="column">
-      <h3><a href="programs.html">PROGRAMS</a></h3>
-      <a href="reset.html">Bridge-Reset</a>
-      <a href="rebuild.html">Bridge-Rebuild</a>
-      <a href="refocus.html">Build-Refocus</a>
-      <a href="reEngage.html">Build-ReEngage</a>
-      <a href="replant.html">Bridge-RePlant</a>
-    </div>
-    <div class="column">
-      <h3><a href="get-involved.html">GET INVOLVED</a></h3>
-      <p>Board of Directors</p>
-      <p>Become a Volunteer</p>
-      <p>Financial Support</p>
-      <p>Camera and field equipment donation</p>
-    </div>
-
-    <div class="column">
-      <h3>Subscribe Now</h3>
-      <p>Stay informed on what we're doing and opportunities.</p>
-      <form id="subscribe-form">
-        <input type="email" id="email-input" placeholder="Enter Email" required />
-        <button type="submit">Submit</button>
-      </form>
-      <div class="social-icons" style="margin-top: 10px;">
-        <img src="images/socialmedia/facebook.png" alt="Facebook" class="icon" />
-        <img src="images/socialmedia/instagram.png" alt="Instagram" class="icon" />
-        <img src="images/socialmedia/twitter.png" alt="Twitter" class="icon" />
-        <img src="images/socialmedia/linkedin.png" alt="LinkedIn" class="icon" />
-      </div>
-    </div>
-    
-    
-
-  </footer>
-  <div class="footer-bottom">© 2025 All Rights Reserved.</div>
+  <m-footer></m-footer>
 
   <script src="script.js"></script>
 </body>

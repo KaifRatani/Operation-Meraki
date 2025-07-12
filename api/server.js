@@ -1,35 +1,69 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const app = express();
+const session = require('express-session');
 require('dotenv').config();
 
+const app = express();
+
+// Middleware
 app.use(express.json());
 app.use(cors());
+
+// Session setup (only needs to be done once)
+app.use(session({
+  secret: 'operationMerakiSecret', // use a secure secret in production
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // set true if using HTTPS
+}));
 
 // Serve static files
 app.use(express.static(path.join(__dirname, '../ui')));
 app.use('/images', express.static(path.join(__dirname, '../images')));
 
-// Importing Routes
-try {
-    const veteranRoute = require('./routes/veteran');
-    const volunteerRoute = require('./routes/volunteer');
-    //const mailsubRoute = require('./routes/mailsub');
-    const loginRoute = require('./routes/login');
-    const signinRoute = require('./routes/signin');
+// Route: Serve homepage
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../ui/index.html'));
+});
 
-    // Setting up API Endpoints
-    app.use('/api/veteran', veteranRoute);
-    app.use('/api/volunteer', volunteerRoute);
-    //app.use('/api/mailsub', mailsubRoute);
-    app.use('/api/login', loginRoute);
-    app.use('/api/signin', signinRoute);
+// Optional: Protect admin.html (uncomment if needed)
+/*app.get('/admin.html', (req, res) => {
+  if (req.session.user && req.session.user.role === 'admin') {
+    return res.sendFile(path.join(__dirname, '../ui/admin.html'));
+  } else {
+    return res.redirect('/admin-login.html');
+  }
+});*/
 
-} catch (error) {
-    console.error('Error importing routes:', error);
+// Helper to safely mount routes
+function mountRoute(pathPrefix, routePath) {
+  try {
+    const route = require(routePath);
+    if (typeof route === 'function') {
+      app.use(pathPrefix, route);
+      console.log(`✅ Mounted route: ${pathPrefix}`);
+    } else {
+      console.warn(`⚠️ Route at ${routePath} does not export a router.`);
+    }
+  } catch (err) {
+    console.error(`❌ Failed to mount ${pathPrefix}:`, err.message);
+  }
 }
 
+// Mount API routes
+mountRoute('/api/veteran', './routes/veteran');
+mountRoute('/api/volunteer', './routes/volunteer');
+mountRoute('/api/login', './routes/login');     // shared login (admin + user)
+mountRoute('/api/signin', './routes/signin');
+mountRoute('/api/events', './routes/events');
+mountRoute('/api/admin', './routes/admin');
+mountRoute('/api/reset', './routes/reset');
+mountRoute('/api/refocus', './routes/refocus');
+mountRoute('/api/reengage', './routes/reengage');
+
 // Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+});

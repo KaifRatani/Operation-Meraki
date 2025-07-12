@@ -10,34 +10,13 @@
     <style>
 
     </style>
+    <script src="components/m-header.js" type="module"></script>
+    <script src="components/m-footer.js" type="module"></script>
+    <script src="components/m-button.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
   </head>
   <body>
-    <header class="navbar">
-      <img src="images/logo/logo.png" alt="Logo" class="logo" />
-      <nav>
-        <ul>
-          <li><a href="index.html">HOME</a></li>
-          <li><a href="programs.html">PROGRAMS</a></li>
-          <li><a href="events.html">EVENTS</a></li>
-          <li><a href="get-involved.html">GET INVOLVED</a></li>
-          <li><a href="news.html">NEWS</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
-          <li><a href="about us.html">ABOUT US</a></li>
-        </ul>
-      </nav>
-      <div class="navbar-buttons" id="auth-area">
-        <button class="navbar-button" onclick="window.open('https://www.zeffy.com/en-US/fundraising/c95056db-d06b-407f-b4ba-5de61442d2e4', '_blank', 'noopener')">
-          MAKE A DONATION
-        </button>
-        <div class="user-menu">
-          <button class="navbar-button" onclick="toggleDropdown()">Sign in</button>
-          <div class="avatar-dropdown" id="avatarDropdown">
-            <a href="loginForm.html">Login</a>
-            <a href="signinForm.html">Register</a>
-          </div>
-        </div>
-      </div>
-    </header>
+    <m-header active="programs"></m-header>
 
     <div class="main-wrapper">
       <!-- Program Details Sidebar -->
@@ -61,7 +40,7 @@
         </div>
         <div class="program-details-item">
           <img class="icon" src="images/program/map-pin.svg" />
-          <p class="title">Ohio, Michigan, Pennsylvania</p>
+          <p class="title">Ohio</p>
         </div>
         <div class="program-details-item">
           <img class="icon" src="images/program/thumb-up.svg" />
@@ -85,13 +64,19 @@
             Welcome to ReSet, your personal haven for well-being and healing. Experience Trauma-Informed Yoga as a comforting embrace, tailored to your needs, fostering mindfulness and reclaiming control. Mindfulness and Meditation are not just practices; they're trusty sidekicks offering tools to navigate stress and enhance self-awareness. ReSet is a community where peer support groups provide connection, understanding, and camaraderie. Join us on this journey towards resilience, connection, and renewed well-being. 
           </div>
           <section class="hero-cta-section">
-            <button class="hero-cta hero-cta-secondary">
-              <img class="icon" src="images/program/share.svg" />
-              Share
-            </button>
-            <button class="hero-cta hero-cta-primary">
-              Sign Up
-            </button>
+            <m-button class="hero-cta share-1">
+              <div style="padding-inline: 48px; display: flex; align-items: center;">
+                <img class="icon" src="images/program/share.svg" />
+                <div class="padding-bottom: 14px;">
+                  <span class="share-text-1">Share</span>
+                </div>
+              </div>
+            </m-button>
+            <m-button variant="primary" class="hero-cta hero-cta-primary">
+              <div style="padding-inline: 48px;">
+                Sign Up
+              </div>
+            </m-button>
           </section>
         </section>
 
@@ -143,7 +128,7 @@
             <img class="cover" src="images/program/refocus.png">
             <p class="title">Refocus</p>
             <p class="description">Refocus uses photography and videography to address trauma through storytelling.</p>
-            <button class="cta" onclick="location.href='refocus.html'">Learn More</button>
+            <m-button variant="primary" class="cta" onclick="location.href='rebuild.html'">Learn More</m-button>
           </div>
         </div>
         <div class="card-wrapper">
@@ -151,7 +136,7 @@
             <img class="cover" src="images/program/rebuild.png">
             <p class="title">Rebuild</p>
             <p class="description">Peer support groups are a safe space where Veterans can discuss day-to-day problems with other veterans.</p>
-            <button class="cta" onclick="location.href='rebuild.html'">Learn More</button>
+            <m-button variant="primary" class="cta" onclick="location.href='rebuild.html'">Learn More</m-button>
           </div>
         </div>
         <div class="card-wrapper">
@@ -159,49 +144,14 @@
             <img class="cover" src="images/program/replant.png">
             <p class="title">Replant</p>
             <p class="description">RePlant is a sustainable farming program with indoor gardens in community spaces. </p>
-            <button class="cta" onclick="location.href='replant.html'">Learn More</button>
+            <m-button variant="primary" class="cta" onclick="location.href='replant.html'">Learn More</m-button>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-      <div class="column">
-        <img src="images/logo/logo_white.png" alt="Logo" style="width: 100px;" />
-      </div>
-      <div class="column">
-        <h3><a href="programs.html">PROGRAMS</a></h3>
-        <a href="reset.html">Bridge-Reset</a>
-        <a href="rebuild.html">Bridge-Rebuild</a>
-        <a href="refocus.html">Build-Refocus</a>
-        <a href="reEngage.html">Build-ReEngage</a>
-        <a href="replant.html">Bridge-RePlant</a>
-      </div>
-      <div class="column">
-        <h3><a href="get-involved.html">GET INVOLVED</a></h3>
-        <p>Board of Directors</p>
-        <p>Become a Volunteer</p>
-        <p>Financial Support</p>
-        <p>Camera and field equipment donation</p>
-      </div>
-
-      <div class="column">
-        <h3>Subscribe Now</h3>
-        <p>Stay informed on what we're doing and opportunities.</p>
-        <form id="subscribe-form">
-          <input type="email" id="email-input" placeholder="Enter Email" required />
-          <button type="submit">Submit</button>
-        </form>
-        <div class="social-icons" style="margin-top: 10px;">
-          <img src="images/socialmedia/facebook.png" alt="Facebook" class="icon" />
-          <img src="images/socialmedia/instagram.png" alt="Instagram" class="icon" />
-          <img src="images/socialmedia/twitter.png" alt="Twitter" class="icon" />
-          <img src="images/socialmedia/linkedin.png" alt="LinkedIn" class="icon" />
-        </div>
-      </div>
-    </footer>
-    <div class="footer-bottom">© 2025 All Rights Reserved.</div>
+    <m-footer></m-footer>
 
     <div class="dialog-overlay hide">
       <div class="sign-up-dialog">
@@ -217,134 +167,148 @@
             <div class="group">
               <div class="item">
                 <label class="label">First Name<span class="require-mark">*</span></label>
-                <input class="input" />
+                <input class="input" name="firstName" />
               </div>
               <div class="item">
                 <label class="label">Last Name<span class="require-mark">*</span></label>
-                <input class="input" />
+                <input class="input" name="lastName" />
               </div>
               <div class="item">
                 <label class="label">State<span class="require-mark">*</span></label>
-                <input class="input" />
+                <input class="input" name="state" />
               </div>
               <div class="item">
                 <label class="label">Email<span class="require-mark">*</span></label>
-                <input class="input" />
+                <input class="input" name="email" />
               </div>
               <div class="item">
                 <label class="label">Phone Number<span class="require-mark">*</span></label>
-                <input class="input" />
+                <input class="input" name="phone" />
               </div>
               <div class="item">
                 <label class="label">Town<span class="require-mark">*</span></label>
-                <input class="input" />
+                <input class="input" name="town" />
               </div>
             </div>
             <legend class="legend">How did you hear about us?</legend>
             <div class="group">
               <div class="item">
                 <label class="label">Choose from below</label>
-                <input class="input" />
+                <input class="input" name="hearAboutUs" />
               </div>
             </div>
             <legend class="legend">How would you rate your mental health today?</legend>
-            <div class="radio-group">
-              <div class="radio">
-                <input type="checkbox" checked />
-                <div class="label">1</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">2</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">3</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">4</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">5</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">6</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">7</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">8</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">9</div>
-              </div>
-              <div class="radio">
-                <input type="checkbox" />
-                <div class="label">10</div>
-              </div>
-            </div>
+<div class="radio-group">
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="1" />
+    <div class="label">1</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="2" />
+    <div class="label">2</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="3" />
+    <div class="label">3</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="4" />
+    <div class="label">4</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="5" />
+    <div class="label">5</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="6" />
+    <div class="label">6</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="7" />
+    <div class="label">7</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="8" />
+    <div class="label">8</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="9" />
+    <div class="label">9</div>
+  </div>
+  <div class="radio">
+    <input type="radio" name="mentalHealthRating" value="10" />
+    <div class="label">10</div>
+  </div>
+</div>
+
             <div class="radio-group-scale">
               <p>Very bad</p>
               <p>Very Good</p>
             </div>
 
             <div class="actions">
-              <button class="primary-action to-2">Next Page</button>
+              <m-button variant="primary" class="primary-action to-2">
+                <div style="padding-inline: 48px">Next Page</div>
+              </m-button>
             </div>
           </div>
+
+
           <div class="sign-up-step-2 hide">
-            <legend class="legend">What has been the most difficult part of returning?</legend>
-            <div class="checkbox-group">
-              <div class="checkbox-item">
-                <input type="checkbox" />
-                <div class="label">Feeling misunderstood</div>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" />
-                <div class="label">Family life</div>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" />
-                <div class="label">Lack of purpose</div>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" />
-                <div class="label">Lack of support</div>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" />
-                <div class="label">Other</div>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" />
-                <div class="label">Finding work</div>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" />
-                <div class="label">Trouble finding support</div>
-              </div>
-            </div>
-            <legend class="legend">Any comments for Operation Meraki?</legend>
-            <textarea class="input" placeholder="(Type here)"></textarea>
-            <div class="checkbox-item block">
-              <input type="checkbox" />
-              <div class="label">By checking this box, you give us permission to contact you with the information provided.</div>
-            </div>
-            <div class="actions">
-              <button class="secondary-action to-1">
-                <img src="images/program/back.svg" />
-                Back
-              </button>
-              <button class="primary-action to-signed-up">Submit</button>
-            </div>
-          </div>
+  <legend class="legend">What has been the most difficult part of returning?</legend>
+  <div class="checkbox-group">
+    <label class="checkbox-item">
+      <input type="checkbox" value="Feeling misunderstood" />
+      <div class="label">Feeling misunderstood</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Family life" />
+      <div class="label">Family life</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Lack of purpose" />
+      <div class="label">Lack of purpose</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Lack of support" />
+      <div class="label">Lack of support</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Other" />
+      <div class="label">Other</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Finding work" />
+      <div class="label">Finding work</div>
+    </label>
+    <label class="checkbox-item">
+      <input type="checkbox" value="Trouble finding support" />
+      <div class="label">Trouble finding support</div>
+    </label>
+  </div>
+
+  <legend class="legend">Any comments for Operation Meraki?</legend>
+  <textarea class="input" placeholder="(Type here)"></textarea>
+
+  <label class="checkbox-item block">
+    <input type="checkbox" />
+    <div class="label">
+      By checking this box, you give us permission to contact you with the information provided.
+    </div>
+  </label>
+
+  <div class="actions">
+    <m-button class="secondary-action to-1">
+      <div style="padding-inline: 48px; position: relative;">
+        <img src="images/program/back.svg" />
+        Back
+      </div>
+    </m-button>
+    <m-button variant="primary" class="primary-action to-signed-up">
+      <div style="padding-inline: 48px;">Submit</div>
+    </m-button>
+  </div>
+</div>
         </form>
 
         <div class="signed-up hide">
@@ -353,7 +317,13 @@
           <div class="seperator"></div>
           <p class="description">Operation Meraki will be in touch soon with the necessary details.</p>
           <p class="share-call">Have a friend who would enjoy this program too?</p>
-          <button class="share-cta">Share</button>
+          <m-button class="share-cta share-2">
+            <div style="padding-inline: 56px">
+              <span class="share-text-2">
+                Share
+              </span>
+            </div>
+          </m-button>
         </div>
       </div>
     </div>
@@ -441,14 +411,105 @@
         listen(elements.signUpCloseButton, 'click', transitionToMain)
         listen(elements.signUp1To2, 'click', transitionToSignUpStepTwo)        
         listen(elements.signUp2To1, 'click', transitionToSignUp)
-        listen(elements.signUp2ToSignedUp, 'click', transitionToSignedUp)
+        
         listen(elements.faq1, 'click', createAnswerToggler(elements.faq1, elements.faqA1))
         listen(elements.faq2, 'click', createAnswerToggler(elements.faq2, elements.faqA2))
         listen(elements.faq3, 'click', createAnswerToggler(elements.faq3, elements.faqA3))
         listen(elements.faq4, 'click', createAnswerToggler(elements.faq4, elements.faqA4))
+
+        new ClipboardJS('.share-1', {
+            text: function(trigger) {
+              const txt = document.querySelector('.share-text-1')
+              txt.innerHTML = 'Link copied!'
+              setTimeout(() => {
+                txt.innerHTML = 'Share'
+              }, 500)
+              return location.origin + '/reset.html'
+            }
+        });
+        new ClipboardJS('.share-2', {
+            text: function(trigger) {
+              const txt = document.querySelector('.share-text-2')
+              txt.innerHTML = 'Link copied!'
+              setTimeout(() => {
+                txt.innerHTML = 'Share'
+              }, 500)
+              return location.origin + '/reset.html'
+            }
+        });
       }
 
       wireUp()
     </script>
+
+
+<script>
+  function getText(selector) {
+    const input = document.querySelector(selector);
+    return input ? input.value.trim() : '';
+  }
+
+  function getCheckedValueFromRadioGroup(containerSelector) {
+    const checkboxes = document.querySelectorAll(`${containerSelector} input[type="checkbox"]`);
+    const checked = [...checkboxes].find(el => el.checked);
+    return checked ? parseInt(checked.nextElementSibling.textContent.trim()) : null;
+  }
+
+  function getCheckedValues(containerSelector) {
+    const checkboxes = document.querySelectorAll(`${containerSelector} input[type="checkbox"]`);
+    return [...checkboxes].filter(cb => cb.checked).map(cb => cb.nextElementSibling.textContent.trim());
+  }
+
+  function getConsent() {
+    const checkbox = document.querySelector('.checkbox-item.block input[type="checkbox"]');
+    return checkbox ? checkbox.checked : false;
+  }
+
+  async function submitResetForm() {
+    const data = {
+  firstName: getText('input[name="firstName"]'),
+  lastName: getText('input[name="lastName"]'),
+  state: getText('input[name="state"]'),
+  email: getText('input[name="email"]'),
+  phone: getText('input[name="phone"]'),
+  town: getText('input[name="town"]'),
+  hearAboutUs: getText('input[name="hearAboutUs"]'),
+
+      mentalHealthRating: getCheckedValueFromRadioGroup('.radio-group'),
+      difficulties:       getCheckedValues('.sign-up-step-2 .checkbox-group'),
+      comments:           getText('.sign-up-step-2 textarea'),
+      permissionToContact: getConsent()
+    };
+
+    try {
+      // 🔽 endpoint must match your Express mount:  app.use('/reset', resetRoute)
+      const res = await fetch('/api/reset', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      if (res.ok) {
+        transitionToSignedUp();
+      } else {
+        alert(result.message || '❌ Submission failed.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('❌ Error submitting form. Try again later.');
+    }
+  }
+
+  // wire it to the submit button
+  document.querySelector('.to-signed-up').addEventListener('click', (e) => {
+    e.preventDefault();
+    submitResetForm();
+  });
+</script>
+
+
+
+
   </body>
 </html>

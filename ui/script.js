@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+  addAccessibilityTool();
+
   // === Carousel click to cycle images ===
   const images = document.querySelectorAll('.carousel img');
   const captions = document.querySelectorAll('.carousel-caption');
@@ -141,4 +143,12 @@ function logout() {
   localStorage.removeItem('token');
   localStorage.removeItem('username');
   location.reload();
+}
+
+function addAccessibilityTool() {
+  const src = 'https://website-widgets.pages.dev/dist/sienna.min.js'
+  const script = document.createElement('script');
+  script.src = src;
+  script.async = true;
+  document.head.appendChild(script);
 }
