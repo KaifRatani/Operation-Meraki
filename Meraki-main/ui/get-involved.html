@@ -292,7 +292,6 @@
               <div class="col">
                 <legend>How did you hear about us?</legend>
                 <div class="item">
-                  <label class="label">Choose from drop down</label>
                   <input class="input" />
                 </div>
               </div>
@@ -410,14 +409,12 @@
               <div class="col">
                 <legend>How did you hear about us?</legend>
                 <div class="item">
-                  <label class="label">Choose from drop down</label>
                   <input class="input" />
                 </div>
               </div>
               <div class="col">
                 <legend>How old are you?</legend>
                 <div class="item">
-                  <label class="label">Choose from drop down</label>
                   <input class="input" />
                 </div>
               </div>
@@ -703,5 +700,102 @@
       }
       wireUp()
     </script>
+
+    <script>
+const validatorPatterns = {
+  name: /^[a-zA-Z\s'-]{2,}$/,
+  email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  phone: /^\d{10}$/,
+  town: /^[a-zA-Z\s'-]{2,}$/,
+  state: /^[a-zA-Z\s'-]{2,}$/
+};
+
+function validateInputsInStep(stepElement) {
+  const inputs = stepElement.querySelectorAll('input.input');
+  let valid = true;
+  let messages = [];
+
+  inputs.forEach(input => {
+    const labelText = input.closest('.item')?.querySelector('label')?.textContent || '';
+    const value = input.value.trim();
+    let pattern;
+
+    if (labelText.includes('Email')) pattern = validatorPatterns.email;
+    else if (labelText.includes('Phone')) pattern = validatorPatterns.phone;
+    else if (labelText.includes('Town')) pattern = validatorPatterns.town;
+    else if (labelText.includes('State')) pattern = validatorPatterns.state;
+    else pattern = validatorPatterns.name;
+
+    if (!pattern.test(value)) {
+      valid = false;
+      messages.push(`${labelText} is invalid.`);
+    }
+  });
+
+  return { valid, messages };
+}
+
+function validateCheckboxGroup(stepElement, groupSelector, requireOne = true, label = '') {
+  const boxes = stepElement.querySelectorAll(groupSelector);
+  const checked = Array.from(boxes).filter(cb => cb.checked);
+  if (requireOne && checked.length < 1) {
+    return { valid: false, messages: [`Please select ${label || 'a required option'}.`] };
+  }
+  if (!requireOne && checked.length !== 1) {
+    return { valid: false, messages: [`Please select only one ${label || 'option'}.`] };
+  }
+  return { valid: true, messages: [] };
+}
+
+function displayValidationMessages(button, messages) {
+  const existing = button.parentElement.querySelector('.validation-error');
+  if (existing) existing.remove();
+  if (messages.length > 0) {
+    const div = document.createElement('div');
+    div.className = 'validation-error';
+    div.style.color = 'red';
+    div.style.marginTop = '12px';
+    div.innerHTML = messages.map(m => `<div>${m}</div>`).join('');
+    button.parentElement.appendChild(div);
+  }
+}
+
+function setupFormValidation(dialogId, step1Selector, step2Selector, nextHandler, submitHandler, step2SelectorIsOptional = false) {
+  const dialog = document.getElementById(dialogId);
+  if (!dialog) return;
+
+  const step1 = dialog.querySelector(step1Selector);
+  const step2 = dialog.querySelector(step2Selector);
+  const nextBtn = step1?.querySelector('m-button[onclick^="show"]');
+  const submitBtn = step2?.querySelector('m-button[onclick^="show"]');
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const inputValidation = validateInputsInStep(step1);
+      const checkboxValidation = validateCheckboxGroup(step1, '.row .col:last-child input[type="checkbox"]', false, 'Yes or No');
+      const allValid = inputValidation.valid && checkboxValidation.valid;
+      const allMessages = [...inputValidation.messages, ...checkboxValidation.messages];
+      displayValidationMessages(nextBtn, allMessages);
+      if (allValid && typeof window[nextHandler] === 'function') window[nextHandler]();
+    });
+  }
+
+  if (submitBtn && !step2SelectorIsOptional) {
+    submitBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const checkboxValidation = validateCheckboxGroup(step2, '.checkbox-item input[type="checkbox"]', true, 'at least one checkbox');
+      displayValidationMessages(submitBtn, checkboxValidation.messages);
+      if (checkboxValidation.valid && typeof window[submitHandler] === 'function') window[submitHandler]();
+    });
+  }
+}
+
+setupFormValidation('bodDialog', '.step1', '.step2', 'showBodPage2', 'showBodResult');
+setupFormValidation('volunteerDialog', '.step1', '.step2', 'showVolunteerPage2', 'showVolunteerResult');
+setupFormValidation('equipDialog', '.step1', '.step2', 'showEquipPage2', 'showEquipResult', true);
+</script>
+
+
   </body>
 </html>
