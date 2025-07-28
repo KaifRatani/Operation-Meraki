@@ -8,7 +8,18 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="program-shared.css" />
     <style>
-
+      .badge {
+        background-color: #003b71;
+        color: #fff;
+        border-radius: 999px;
+        padding: 0.5em 1em;
+        white-space: nowrap;
+        width: min-content;
+        position: relative;
+        font-size: 12px;
+        left: 216px;
+        top: -54px;
+      }
     </style>
     <script src="components/m-header.js" type="module"></script>
     <script src="components/m-footer.js" type="module"></script>
@@ -133,7 +144,8 @@
             <img class="cover" src="images/program/rebuild.png">
             <p class="title">Rebuild</p>
             <p class="description">Peer support groups are a safe space where Veterans can discuss day-to-day problems with other veterans.</p>
-            <m-button variant="primary" class="cta" onclick="location.href='rebuild.html'">Learn More</m-button>
+            <m-button disabled variant="primary" class="cta"">Learn More</m-button>
+            <div class="badge">Coming Soon</div>
           </div>
         </div>
         <div class="card-wrapper">
@@ -141,7 +153,8 @@
             <img class="cover" src="images/program/replant.png">
             <p class="title">Replant</p>
             <p class="description">RePlant is a sustainable farming program with indoor gardens in community spaces. </p>
-            <m-button variant="primary" class="cta" onclick="location.href='replant.html'">Learn More</m-button>
+            <m-button disabled variant="primary" class="cta"">Learn More</m-button>
+            <div class="badge">Coming Soon</div>
           </div>
         </div>
       </div>
