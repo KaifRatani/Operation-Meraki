@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up | Operation Meraki</title>
+  <link rel="icon" href="images/logo/logo.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="components/m-header.js" type="module"></script>
+  <script src="components/m-footer.js" type="module"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f3f4f6;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: 40px auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+
+    .header-image {
+      display: block;
+      margin: 0 auto 20px auto;
+      width: 40%;
+      max-width: 200px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      background-color: #1d4ed8;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2563eb;
+    }
+
+    #message {
+      margin-top: 1rem;
+      text-align: center;
+      color: green;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .login-link a {
+      color: #1d4ed8;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <m-header active="signin"></m-header>
+
+  <div class="form-container">
+    <img src="/images/thumbnail_image001.avif" alt="Operation Meraki Logo" class="header-image">
+    <h2>Sign Up</h2>
+    <form id="signinForm">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+
+      <label for="role">Role:</label>
+      <select id="role" name="role" required>
+        <option value="veteran">Veteran</option>
+        <option value="volunteer">Volunteer</option>
+      </select>
+
+      <button type="submit">Register</button>
+      <p id="message"></p>
+    </form>
+    <div class="login-link">
+      Already a member? <a href="/loginform.html">Login</a>
+    </div>
+  </div>
+
+  <m-footer></m-footer>
+
+  <script>
+    document.getElementById('signinForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const role = document.getElementById('role').value;
+
+      try {
+        const response = await fetch('/api/signin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, role })
+        });
+
+        const result = await response.json();
+        document.getElementById('message').textContent = result.message;
+
+        if (response.ok) {
+          alert('Registration successful!');
+          window.location.href = '/loginform.html';
+        }
+      } catch (err) {
+        console.error('Registration error:', err);
+        document.getElementById('message').textContent = 'Error during registration.';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | Operation Meraki</title>
+  <link rel="icon" href="images/logo/logo.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="components/m-header.js" type="module"></script>
+  <script src="components/m-footer.js" type="module"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f3f4f6;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      width: 100%;
+      background-color: #1d4ed8;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2563eb;
+    }
+
+    .extra-links {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .extra-links a {
+      color: #1d4ed8;
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .extra-links a:hover {
+      text-decoration: underline;
+    }
+
+    #message, #resetMessage {
+      margin-top: 1rem;
+      text-align: center;
+      color: red;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <m-header active="login"></m-header>
+
+  <div class="form-container">
+    <!-- Login Form -->
+    <form id="loginForm">
+      <h2>Login</h2>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+
+      <button type="submit">Login</button>
+
+      <div class="extra-links">
+        <a onclick="toggleForms()">Forgot Password?</a> |
+        <a href="signinform.html">New here? Sign Up</a>
+      </div>
+
+      <p id="message"></p>
+    </form>
+
+    <!-- Reset Password Form -->
+    <form id="resetForm" class="hidden">
+      <h2>Reset Password</h2>
+      <label for="resetEmail">Enter your email:</label>
+      <input type="email" id="resetEmail" required />
+
+      <button type="submit">Send Reset Link</button>
+
+      <div class="extra-links">
+        <a onclick="toggleForms()">Back to Login</a>
+      </div>
+
+      <p id="resetMessage"></p>
+    </form>
+  </div>
+
+  <m-footer></m-footer>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const resetForm = document.getElementById('resetForm');
+
+    function toggleForms() {
+      loginForm.classList.toggle('hidden');
+      resetForm.classList.toggle('hidden');
+    }
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          const payload = JSON.parse(atob(result.token.split('.')[1]));
+          const role = payload.role;
+
+          if (role === 'admin') {
+            window.location.href = '/admin.html';
+          } else {
+            window.location.href = '/events.html';
+          }
+        } else {
+          document.getElementById('message').textContent = result.message;
+        }
+      } catch (err) {
+        console.error('Login Error:', err);
+        document.getElementById('message').textContent = 'Login failed. Please try again.';
+      }
+    });
+
+    resetForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('resetEmail').value;
+
+      try {
+        const res = await fetch('/api/reset', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+
+        const result = await res.json();
+        document.getElementById('resetMessage').textContent = result.message;
+        if (res.ok) {
+          alert('Reset instructions sent to your email!');
+          toggleForms();
+        }
+      } catch (err) {
+        console.error('Reset Error:', err);
+        document.getElementById('resetMessage').textContent = 'Reset failed. Please try again.';
+      }
+    });
+  </script>
+</body>
+</html>
