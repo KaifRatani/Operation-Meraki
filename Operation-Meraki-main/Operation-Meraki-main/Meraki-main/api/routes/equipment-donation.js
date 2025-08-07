@@ -17,28 +17,24 @@ module.exports = async (req, res) => {
     email,
     phone,
     town,
-    hearAboutUs,
-    veteranStatus,
-    linkedinUrl,
-    skills,
+    donationReceiptRequired,
+    equipmentDetails,
     permissionToContact
   } = req.body;
 
   try {
     const result = await pool.query(
-      `INSERT INTO board_applications (
+      `INSERT INTO equipment_donations (
         "firstName",
         "lastName",
         "state",
         "email",
         "phone",
         "town",
-        "hearAboutUs",
-        "veteranStatus",
-        "linkedinUrl",
-        "skills",
+        "donationReceiptRequired",
+        "equipmentDetails",
         "permissionToContact"
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
       RETURNING id`,
       [
         firstName,
@@ -47,22 +43,20 @@ module.exports = async (req, res) => {
         email,
         phone,
         town,
-        hearAboutUs || null,
-        veteranStatus,
-        linkedinUrl,
-        skills || null,
+        donationReceiptRequired,
+        equipmentDetails,
         permissionToContact
       ]
     );
 
     const insertedId = result.rows[0].id;
-    res.status(200).json({ message: 'Board application submitted successfully!', id: insertedId });
+    res.status(200).json({ message: 'Donation submitted successfully!', id: insertedId });
   } catch (error) {
-    console.error('Error inserting data:', error);
+    console.error('Error inserting donation:', error);
     if (error.code === '23505') {
-      res.status(400).json({ message: 'A record with this email or LinkedIn already exists.' });
+      res.status(400).json({ message: 'A record with this email or unique field already exists.' });
     } else {
-      res.status(500).json({ message: 'Error saving form data.' });
+      res.status(500).json({ message: 'Error saving donation.' });
     }
   }
 };
