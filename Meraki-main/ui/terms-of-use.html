@@ -7,7 +7,7 @@
     <link rel="icon" href="images/logo/logo.png" type="image/png" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="program-shared.css" />
-    <style>
+   <style>
       main {
         width: 1030px;
         margin: 48px auto 64px;
@@ -35,11 +35,57 @@
       br+br {
         height: 32px;
       }
+      @media (max-width: 1030px) {
+  main {
+    width: 90%;
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 36px;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 16px;
+    line-height: 32px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  h2 {
+    font-size: 15px;
+    line-height: 28px;
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 28px;
+  }
+
+  main {
+    width: 100%;
+    padding: 0 12px;
+  }
+}
+
     </style>
     <script src="components/m-header.js" type="module"></script>
     <script src="components/m-footer.js" type="module"></script>
   </head>
-  <body>
+  <body class ="program-shared">
     <m-header active="programs"></m-header>
 
     <main>
