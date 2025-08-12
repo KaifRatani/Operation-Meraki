@@ -223,6 +223,114 @@
       .space {
         height: 78px;
       }
+      @media (max-width: 1024px) {
+  h1 {
+    font-size: 32px;
+    margin-top: 32px;
+    margin-bottom: 24px;
+  }
+
+  .subtitle {
+    width: auto;
+    padding: 0 16px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .data-prove .items {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 16px;
+    gap: 24px;
+  }
+
+  .data-prove .item {
+    height: auto;
+    padding-inline: 0;
+  }
+
+  .data-prove .item .data {
+    font-size: 28px;
+  }
+
+  .data-prove .item .name {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .founder,
+  .goal,
+  .community,
+  .join .items {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 32px;
+    padding: 0 16px;
+  }
+
+  .founder img,
+  .community img {
+    width: 100%;
+    height: auto;
+  }
+
+  .founder .intro,
+  .community .intro {
+    align-items: center;
+    text-align: center;
+    margin: 0;
+  }
+
+  .founder .intro .cta-hint {
+    width: auto;
+    height: auto;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .goal .seperator,
+  .join .items .seperator {
+    display: none;
+  }
+
+  .goal .item .title,
+  .goal .item .desc,
+  .community .intro .title,
+  .community .intro .content,
+  .approach .title,
+  .approach p,
+  .join .title,
+  .join .item .name,
+  .join .item .desc {
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .approach p {
+    width: auto;
+    padding: 0 16px;
+  }
+
+  .join {
+    width: 100%;
+    padding: 0 16px;
+  }
+
+  .join .item {
+    width: 100%;
+  }
+
+  .join .item .desc {
+    width: auto;
+  }
+
+  .space {
+    height: 48px;
+  }
+}
+
     </style>
     <script src="components/m-header.js" type="module"></script>
     <script src="components/m-footer.js" type="module"></script>
@@ -230,7 +338,7 @@
   </head>
   <body>
     <m-header active="about-us"></m-header>
-
+<main class="main-content">
     <h1>About Us</h1>
 
     <main>
@@ -320,12 +428,12 @@
           <div class="item">
             <div class="name">Contact Us</div>
             <div class="desc">We’re happy to answer any of your questions, hear your feedback and hear your ideas for making Operation Meraki reach more Veterans. </div>
-            <m-button variant="primary" onclick="location.href = 'contact-us.html'">Contact Us</m-button>
+            <m-button variant="primary" onclick="location.href = 'contact.html'">Contact Us</m-button>
           </div>
         </div>
       </div>
     </main>
-
+</main>
     <m-footer></m-footer>
 
     <script src="script.js"></script>
