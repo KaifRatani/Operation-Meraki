@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Volunteer Registration – Operation Meraki</title>
-  <style>
+<style>
     body {
       font-family: Arial, sans-serif;
       background: #f9f9f9;
@@ -66,6 +66,65 @@
     button:hover {
       background-color: #0063a0;
     }
+
+    @media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .header-image {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  form {
+    padding: 16px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  input, select, textarea {
+    font-size: 0.95rem;
+    padding: 6px;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  .header-image {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  form {
+    padding: 12px;
+  }
+
+  input, select, textarea {
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 8px;
+    font-size: 0.95rem;
+  }
+}
+.require-mark {
+  font-weight: 700;
+  font-size: 20px;
+  color: #B22035;
+}
   </style>
 </head>
 <body>
