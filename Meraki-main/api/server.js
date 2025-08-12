@@ -79,6 +79,8 @@ function mountRoute(pathPrefix, routePath) {
   }
 }
 
+
+
 // Mount API routes
 mountRoute('/api/veteran', './routes/veteran');
 mountRoute('/api/volunteer', './routes/volunteer');
@@ -91,6 +93,9 @@ mountRoute('/api/reset', './routes/reset');
 mountRoute('/api/refocus', './routes/refocus');
 mountRoute('/api/reengage', './routes/reengage');
 mountRoute('/api/events', './routes/events');
+mountRoute('/api/contact', './routes/contact');
+mountRoute('/api/equipment-donation', './routes/equipmentDonation');
+mountRoute('/api/bodForm', './routes/bODForm');
 
 // Start the server
 const PORT = process.env.PORT || 5000;
