@@ -107,7 +107,7 @@
   <m-header></m-header>
   <main>
     <div class="page-form">
-      <form>
+      <form id="bodForm">
         <div class="step1">
           <div class="dialog-header">
             <div class="title">Board of Directors Form</div>
@@ -378,7 +378,7 @@
 
     document.getElementById('consent').addEventListener('change', validateConsent);
 
-    document.querySelector('button[type="submit"]').addEventListener('click', validateForm);
+    //document.querySelector('button[type="submit"]').addEventListener('click', validateForm);
 
     // 🔁 Optional: Auto-complete LinkedIn with https:// if missing
     document.getElementById('linkedin').addEventListener('blur', function () {
@@ -394,9 +394,8 @@
 
 <script>
 document.getElementById('bodForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
 
-
-  // Assuming all fields are already validated by your live validation script
   const formData = {
     firstName: document.getElementById('firstName').value.trim(),
     lastName: document.getElementById('lastName').value.trim(),
@@ -412,20 +411,23 @@ document.getElementById('bodForm').addEventListener('submit', async function(e) 
   };
 
   try {
-    const res = await fetch('/api/routes/bODForm', {
+    const res = await fetch('/api/bodForm', {   // ✅ correct path
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
     });
 
-    const data = await res.json();
+    const text = await res.text();
+    let data; try { data = JSON.parse(text); } catch { data = { message: text }; }
+
     if (res.ok) {
       alert('Form submitted successfully!');
+      this.reset();
     } else {
-      alert('Submission failed: ' + data.message);
+      alert('Submission failed: ' + (data.message || `HTTP ${res.status}`));
     }
-  } catch (error) {
-    alert('Network error: ' + error.message);
+  } catch (err) {
+    alert('Network error: ' + err.message);
   }
 });
 </script>
