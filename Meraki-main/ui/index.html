@@ -10,8 +10,6 @@
   <script src="components/m-footer.js" type="module"></script>
 
   <style>
-    
-
     section.mission {
       width: 1140px;
       margin: 0 auto;
@@ -127,11 +125,85 @@
       cursor: pointer;
       color: #074264;
     }
+    @media (max-width: 1024px) {
+  section.mission {
+    flex-direction: column;
+    width: 90%;
+    margin-top: 80px;
+    gap: 32px;
+  }
+
+  div.mission {
+    width: 100%;
+  }
+
+  .mission-image {
+    width: 100%;
+  }
+
+  .info-section {
+    width: 90%;
+    margin: 80px auto 60px;
+  }
+
+  .info-cards {
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .info-card {
+    width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .mission h2 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .mission p {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .info-section .title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .info-card h3 {
+    font-size: 20px;
+  }
+
+  .info-card>p,
+  .info-card .read-more {
+    font-size: 16px;
+    line-height: 32px;
+  }
+
+  .info-card .subtitle {
+    font-size: 14px;
+    line-height: 22px;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .info-card {
+    width: 100%;
+  }
+
+  .info-card img {
+    height: 180px;
+  }
+}
+
   </style>
 </head>
 <body>
   <m-header active="home"></m-header>
-
+<main class="main-content">
   <!-- Carousel -->
   <section class="carousel">
     <img src="images/slider/pexels-rdne-7467939.jpg" class="active" />
@@ -282,9 +354,10 @@
     </div>
   </div>
 </section>
-
+</main>
   <!-- Footer -->
   <m-footer></m-footer>
+  
 
   <script src="script.js"></script>
 </body>
