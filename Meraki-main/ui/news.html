@@ -196,6 +196,60 @@
     .pagination .active {
       font-weight: 700;
     }
+    @media (max-width: 1024px) {
+  .container {
+    padding: 32px 24px;
+  }
+
+  .news-container {
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .news-item {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .news-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .sidebar {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  h1.news-title-main {
+    font-size: 32px;
+    margin-top: 16px;
+  }
+
+  .news-title {
+    font-size: 20px;
+  }
+
+  .news-desc {
+    font-size: 16px;
+    line-height: 32px;
+  }
+
+  .news-meta {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .sidebar h2 {
+    font-size: 20px;
+  }
+
+  .pagination a, .pagination p {
+    font-size: 16px;
+  }
+}
+
   </style>
   <script src="components/m-header.js" type="module"></script>
   <script src="components/m-footer.js" type="module"></script>
