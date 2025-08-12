@@ -8,7 +8,18 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="program-shared.css" />
     <style>
-
+      .badge {
+        background-color: #003b71;
+        color: #fff;
+        border-radius: 999px;
+        padding: 0.5em 1em;
+        white-space: nowrap;
+        width: min-content;
+        position: relative;
+        font-size: 12px;
+        left: 216px;
+        top: -54px;
+      }
     </style>
     <script src="components/m-header.js" type="module"></script>
     <script src="components/m-footer.js" type="module"></script>
@@ -133,7 +144,8 @@
             <img class="cover" src="images/program/rebuild.png">
             <p class="title">Rebuild</p>
             <p class="description">Peer support groups are a safe space where Veterans can discuss day-to-day problems with other veterans.</p>
-            <m-button variant="primary" class="cta" onclick="location.href='rebuild.html'">Learn More</m-button>
+            <m-button disabled variant="primary" class="cta"">Learn More</m-button>
+            <div class="badge">Coming Soon</div>
           </div>
         </div>
         <div class="card-wrapper">
@@ -141,7 +153,8 @@
             <img class="cover" src="images/program/replant.png">
             <p class="title">Replant</p>
             <p class="description">RePlant is a sustainable farming program with indoor gardens in community spaces. </p>
-            <m-button variant="primary" class="cta" onclick="location.href='replant.html'">Learn More</m-button>
+            <m-button disabled variant="primary" class="cta"">Learn More</m-button>
+            <div class="badge">Coming Soon</div>
           </div>
         </div>
       </div>
@@ -190,7 +203,6 @@
             <legend class="legend">How did you hear about us?</legend>
             <div class="group">
               <div class="item">
-                <label class="label">Choose from below</label>
                 <input class="input" name="hearAboutUs" />
               </div>
             </div>
@@ -244,10 +256,11 @@
             </div>
 
             <div class="actions">
-              <m-button variant="primary" class="primary-action to-2">
-                <div style="padding-inline: 48px">Next Page</div>
-              </m-button>
-            </div>
+  <div id="page1-error" style="color: red; font-size: 0.95em; margin-bottom: 8px;"></div>
+  <m-button variant="primary" class="primary-action to-2">
+    <div style="padding-inline: 48px">Next Page</div>
+  </m-button>
+</div>
           </div>
 
 
@@ -402,8 +415,15 @@
       function wireUp() {
         listen(elements.signUpButton, 'click', transitionToSignUp)
         listen(elements.signUpCloseButton, 'click', transitionToMain)
-        listen(elements.signUp1To2, 'click', transitionToSignUpStepTwo)        
-        listen(elements.signUp2To1, 'click', transitionToSignUp)
+        listen(elements.signUp1To2, 'click', () => {
+  const errorBox = document.getElementById('page1-error');
+  if (validateAllFields()) {
+    errorBox.textContent = '';
+    transitionToSignUpStepTwo();
+  } else {
+    errorBox.textContent = 'Please correct all highlighted fields before continuing.';
+  }
+});        listen(elements.signUp2To1, 'click', transitionToSignUp)
         
         listen(elements.faq1, 'click', createAnswerToggler(elements.faq1, elements.faqA1))
         listen(elements.faq2, 'click', createAnswerToggler(elements.faq2, elements.faqA2))
@@ -479,6 +499,85 @@
     submitResetForm();
   });
 </script>
+
+<script>
+  const validators = {
+    firstName: {
+      pattern: /^[A-Za-z]{2,}$/,
+      message: 'First name must contain only letters (min 2 characters)'
+    },
+    lastName: {
+      pattern: /^[A-Za-z]{2,}$/,
+      message: 'Last name must contain only letters (min 2 characters)'
+    },
+    state: {
+      pattern: /^[A-Za-z\s]{2,}$/,
+      message: 'Enter a valid state'
+    },
+    email: {
+      pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      message: 'Enter a valid email address'
+    },
+    phone: {
+      pattern: /^\d{10}$/,
+      message: 'Phone must be 10 digits'
+    },
+    town: {
+      pattern: /^[A-Za-z\s]{2,}$/,
+      message: 'Enter a valid town name'
+    }
+  };
+
+  function validateField(input) {
+    const { name, value } = input;
+    const validator = validators[name];
+    if (!validator) return true;
+
+    const errorId = `${name}-error`;
+    let error = document.getElementById(errorId);
+    if (!error) {
+      error = document.createElement('div');
+      error.id = errorId;
+      error.style.color = 'red';
+      error.style.fontSize = '0.9em';
+      input.parentNode.appendChild(error);
+    }
+
+    if (!validator.pattern.test(value.trim())) {
+      error.textContent = validator.message;
+      input.style.borderColor = 'red';
+      return false;
+    } else {
+      error.textContent = '';
+      input.style.borderColor = 'green';
+      return true;
+    }
+  }
+
+  function validateAllFields() {
+    let allValid = true;
+    Object.keys(validators).forEach((fieldName) => {
+      const input = document.querySelector(`input[name="${fieldName}"]`);
+      if (input && !validateField(input)) {
+        allValid = false;
+      }
+    });
+    return allValid;
+  }
+
+  // Attach live validation listeners
+  Object.keys(validators).forEach((fieldName) => {
+    const input = document.querySelector(`input[name="${fieldName}"]`);
+    if (input) {
+      input.addEventListener('input', () => {
+        validateField(input);
+      });
+    }
+  });
+
+
+</script>
+
   </body>
 </html>
 

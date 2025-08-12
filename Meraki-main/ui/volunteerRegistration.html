@@ -171,83 +171,76 @@
 
   <!-- FORM SUBMIT SCRIPT -->
   <script>
-    const form = document.getElementById("volunteerForm");
-  
-    function isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-  
-    function isValidPhone(phone) {
-      return /^\d{10,15}$/.test(phone);
-    }
-  
-    function isValidZip(zip) {
-      return /^\d{5}(-\d{4})?$/.test(zip);
-    }
-  
-    function showError(input, message) {
-      input.style.borderColor = 'red';
-      alert(message);
-      input.focus();
-    }
-  
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-  
-      const fullName = form.fullName.value.trim();
-      const email = form.email.value.trim();
-      const phone = form.phone.value.trim();
-      const street = form.street.value.trim();
-      const city = form.city.value.trim();
-      const state = form.state.value;
-      const zip = form.zip.value.trim();
-      const availability = form.availability.value.trim();
-      const interests = form.interests.value.trim();
-      const consent = form.consent.checked;
-  
-      // Field validations
-      if (!fullName) return showError(form.fullName, "Full name is required.");
-      if (!isValidEmail(email)) return showError(form.email, "Please enter a valid email address.");
-      if (!isValidPhone(phone)) return showError(form.phone, "Please enter a valid phone number (10–15 digits).");
-      if (!street) return showError(form.street, "Street address is required.");
-      if (!city) return showError(form.city, "City is required.");
-      if (!state) return showError(form.state, "Please select a state.");
-      if (!isValidZip(zip)) return showError(form.zip, "Please enter a valid ZIP code.");
-      if (!availability) return showError(form.availability, "Please tell us your availability.");
-      if (!interests) return showError(form.interests, "Please describe your areas of interest.");
-      if (!consent) return showError(form.consent, "You must consent before submitting.");
-  
-      const formData = {
-        fullName,
-        email,
-        phone,
-        street,
-        city,
-        state,
-        zip,
-        availability,
-        interests
-      };
-  
-      try {
-        const res = await fetch('http://localhost:5000/api/volunteer', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
-  
-        if (res.ok) {
-          alert("Registration successful!");
-          form.reset();
-        } else {
-          alert("Failed to register. Please try again.");
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Error submitting form. Check your server.");
+  const vForm = document.getElementById('volunteerForm');
+
+  const vMsg = document.createElement('p');
+  vMsg.id = 'volunteerMsg';
+  vMsg.style.textAlign = 'center';
+  vMsg.style.marginTop = '12px';
+  vForm.appendChild(vMsg);
+
+  const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const phoneOk = (v) => /^\d{10,15}$/.test(v);
+  const zipOk   = (v) => /^\d{5}(-\d{4})?$/.test(v);
+
+  function show(input, text, color='#d97706') {
+    if (input) input.style.borderColor = '#ef4444';
+    vMsg.style.color = color;
+    vMsg.textContent = text;
+    input?.focus();
+  }
+
+  vForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    vMsg.textContent = 'Submitting...'; vMsg.style.color = '#6b7280';
+
+    const payload = {
+      fullName: vForm.fullName.value.trim(),
+      email:    vForm.email.value.trim(),
+      phone:    vForm.phone.value.trim(),
+      street:   vForm.street.value.trim(),
+      city:     vForm.city.value.trim(),
+      state:    vForm.state.value,
+      zip:      vForm.zip.value.trim(),
+      availability: vForm.availability.value.trim(),
+      interests:    vForm.interests.value.trim(),
+      consent:  vForm.consent.checked
+    };
+
+    // Validate
+    if (!payload.fullName) return show(vForm.fullName, 'Full name is required.');
+    if (!emailOk(payload.email)) return show(vForm.email, 'Please enter a valid email.');
+    if (!phoneOk(payload.phone)) return show(vForm.phone, 'Please enter a valid phone (10–15 digits).');
+    if (!payload.street) return show(vForm.street, 'Street address is required.');
+    if (!payload.city)   return show(vForm.city, 'City is required.');
+    if (!payload.state)  return show(vForm.state, 'Please select a state.');
+    if (!zipOk(payload.zip)) return show(vForm.zip, 'Please enter a valid ZIP code.');
+    if (!payload.availability) return show(vForm.availability, 'Please tell us your availability.');
+    if (!payload.interests)    return show(vForm.interests, 'Please describe your areas of interest.');
+    if (!payload.consent)      return show(vForm.consent, 'You must consent before submitting.');
+
+    try {
+      const res = await fetch('/api/volunteer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const out = await res.json().catch(() => ({}));
+      if (res.ok) {
+        vMsg.style.color = '#16a34a';
+        vMsg.textContent = out.message || 'Registration successful!';
+        vForm.reset();
+      } else {
+        vMsg.style.color = '#dc2626';
+        vMsg.textContent = out.message || 'Failed to register.';
       }
-    });
-  </script>
-  
+    } catch (err) {
+      console.error(err);
+      vMsg.style.color = '#dc2626';
+      vMsg.textContent = 'Network error. Check your server.';
+    }
+  });
+</script>
+
 </body>
 </html>

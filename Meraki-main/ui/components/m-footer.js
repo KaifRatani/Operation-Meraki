@@ -2,6 +2,7 @@ import './m-button.js';
 
 class MFooter extends HTMLElement {
   constructor() {
+    
     super();
 
     const shadow = this.attachShadow({ mode: 'open' });
@@ -51,12 +52,14 @@ class MFooter extends HTMLElement {
         </div>
         <div>
           <h3>Subscribe Now</h3>
-          <form>
-            <p>Stay informed on what we’re doing and opportunities. </p>
-            <input type="email" placeholder="(Enter Email)" /><div class="input-extra">
-              <m-button variant="ghost">Submit</m-button>
+         <form id="subscribeForm" novalidate>
+          <p>Stay informed on what we’re doing and opportunities. </p>
+            <input id="subscribeEmail" type="email" placeholder="(Enter Email)" required />
+              <div class="input-extra">
+            <m-button id="subscribeBtn" variant="ghost">Submit</m-button>
             </div>
-          </form>
+              <div id="subscribeMsg" class="subscribe-msg" aria-live="polite"></div>
+        </form>
           <section class="social-media">
             <i>
               <img src="images/socialmedia/x.svg" alt="X" />
@@ -89,6 +92,7 @@ class MFooter extends HTMLElement {
         </div>
       </nav>
     `;
+    
 
     const style = document.createElement('style');
     style.textContent = `
@@ -214,6 +218,7 @@ class MFooter extends HTMLElement {
       .second-footer div:nth-child(3) {
         width: 222px;
       }
+      .subscribe-msg { min-height: 1.25rem; color: #FEFEFEFE; margin-top: 8px; }
 
       .second-footer div:nth-child(4) {
         width: 207px;
@@ -222,6 +227,60 @@ class MFooter extends HTMLElement {
 
     shadow.appendChild(style);
     shadow.appendChild(footer)
+        shadow.appendChild(style);
+    shadow.appendChild(footer);
+
+// === wire up email subscribe ===
+    const form = shadow.getElementById('subscribeForm');
+    const emailInput = shadow.getElementById('subscribeEmail');
+    const msg = shadow.getElementById('subscribeMsg');
+    const btn = shadow.getElementById('subscribeBtn');
+
+    // make the <m-button> submit the form
+    btn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (form?.requestSubmit) form.requestSubmit();
+      else form?.dispatchEvent(new Event('submit', { cancelable: true }));
+    });
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = (emailInput?.value || '').trim();
+
+      msg.style.color = '#FEFEFE';
+      msg.textContent = 'Submitting...';
+
+      // simple email check
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!ok) {
+        msg.style.color = '#FFD580';
+        msg.textContent = 'Please enter a valid email.';
+        return;
+      }
+
+      try {
+        const res = await fetch('/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await res.json().catch(() => ({}));
+        if (res.ok) {
+          msg.style.color = '#90EE90';
+          msg.textContent = data.message || 'Subscribed!';
+          form.reset();
+        } else {
+          msg.style.color = '#FFD580';
+          msg.textContent = data.message || 'Could not subscribe.';
+        }
+      } catch (err) {
+        console.error('Subscribe submit error:', err);
+        msg.style.color = '#FFD580';
+        msg.textContent = 'Network error. Please try again.';
+      }
+    });
+
   }
 }
 

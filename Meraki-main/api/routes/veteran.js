@@ -1,45 +1,64 @@
+const express = require('express');
 const { Pool } = require('pg');
 
+const router = express.Router();
+
 const pool = new Pool({
-  connectionString: 'postgresql://merakiAdmin:root1Admin@operationmeraki-server1.postgres.database.azure.com:5432/operationmeraki-database?sslmode=require',
-  ssl: { rejectUnauthorized: false }
+  connectionString: 'postgresql://neondb_owner:npg_le2bdPxuCv1a@ep-super-hill-ae09e9e0-pooler.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
+  ssl: { rejectUnauthorized: false },
+  keepAlive: true,
+  connectionTimeoutMillis: 10000,
+  idleTimeoutMillis: 30000,
+  max: 10,
 });
 
-module.exports = async (req, res) => {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method Not Allowed' });
-  }
-
-  const {
-    firstName,
-    lastName,
-    email,
-    phone,
-    veteran,
-    programInterest,
-    serviceBranch,
-    state,
-    comment
-  } = req.body;
-
+// POST /api/veteran
+router.post('/', async (req, res) => {
   try {
+    const {
+      firstName = '',
+      lastName = '',
+      email = '',
+      phone = '',
+      veteran = false,
+      programInterest = null,
+      serviceBranch = null,
+      state = '',
+      comment = null,
+    } = req.body || {};
+
+    const emailNorm = String(email).trim().toLowerCase();
+    const state2 = String(state).trim().toUpperCase().slice(0, 2);
+    const isVet = typeof veteran === 'boolean'
+      ? veteran
+      : String(veteran).toLowerCase() === 'true';
+
     const result = await pool.query(
-      `INSERT INTO veteran 
-      ("firstName", "lastName", "email", "phone", "veteran", "programInterest", "serviceBranch", "state", "comment")
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-      RETURNING id`,
-      [firstName, lastName, email, phone, veteran, programInterest, serviceBranch, state, comment]
+      `INSERT INTO veteran
+       ("firstName","lastName","email","phone","veteran","programInterest","serviceBranch","state","comment")
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+       RETURNING id`,
+      [
+        String(firstName).trim(),
+        String(lastName).trim(),
+        emailNorm,
+        String(phone).trim(),
+        isVet,
+        programInterest ?? null,
+        serviceBranch ?? null,
+        state2,
+        comment ?? null,
+      ]
     );
 
-    const insertedId = result.rows[0].id;
-    res.status(200).json({ message: 'Form submitted successfully!', id: insertedId });
+    return res.status(200).json({ message: 'Form submitted successfully!', id: result.rows[0].id });
   } catch (error) {
-    console.error('Error inserting data:', error);
-
+    console.error('Veteran insert error:', error);
     if (error.code === '23505') {
-      res.status(400).json({ message: 'A record with this email or unique field already exists.' });
-    } else {
-      res.status(500).json({ message: 'Error saving form data.' });
+      return res.status(400).json({ message: 'A record with this email already exists.' });
     }
+    return res.status(500).json({ message: 'Error saving form data.' });
   }
-};
+});
+
+module.exports = router;

@@ -1,81 +1,50 @@
+// api/subscribe-server.js (or merge into your existing server)
 const express = require('express');
 const cors = require('cors');
-const nodemailer = require('nodemailer');
 const { Pool } = require('pg');
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 
+// Neon DB string (as requested)
 const pool = new Pool({
-  connectionString: 'postgresql://merakiAdmin:root1Admin@operationmeraki-server1.postgres.database.azure.com:5432/operationmeraki-database?sslmode=require',
-  ssl: { rejectUnauthorized: false }
+  connectionString: 'postgresql://neondb_owner:npg_le2bdPxuCv1a@ep-super-hill-ae09e9e0-pooler.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
+  ssl: { rejectUnauthorized: false },
+  keepAlive: true,
+  connectionTimeoutMillis: 10000,
+  idleTimeoutMillis: 30000,
+  max: 10,
 });
 
-let etherealTransporter;
-
-(async () => {
-  // Create Ethereal test account and transporter ONCE
-  const testAccount = await nodemailer.createTestAccount();
-
-  etherealTransporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    auth: {
-      user: testAccount.user,
-      pass: testAccount.pass
-    }
-  });
-
-  console.log('📧 Ethereal test account created:');
-  console.log('  Username:', testAccount.user);
-  console.log('  Password:', testAccount.pass);
-})();
-
-// Subscribe endpoint
+// POST /subscribe — just insert email
 app.post('/subscribe', async (req, res) => {
-  const { email } = req.body;
-
-  if (!email || !email.includes('@')) {
-    return res.status(400).json({ message: 'Invalid email address.' });
-  }
-
   try {
+    const raw = String(req.body?.email || '');
+    const email = raw.trim().toLowerCase();
+
+    // simple email check
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ message: 'Invalid email address.' });
+    }
+
     const result = await pool.query(
       `INSERT INTO "emailSub" (email) VALUES ($1) RETURNING id`,
       [email]
     );
 
-    // Prepare email
-    const mailOptions = {
-      from: '"Operation Meraki" <noreply@operationmeraki.org>',
-      to: email,
-      subject: 'Welcome to Operation Meraki (Test Email)',
-      html: `
-        <h2>Welcome to Operation Meraki! 🎉</h2>
-        <p>This is a test email using Ethereal.</p>
-        <p>You’re successfully subscribed. This is how the real email will look!</p>
-      `
-    };
-
-    const info = await etherealTransporter.sendMail(mailOptions);
-    const previewUrl = nodemailer.getTestMessageUrl(info); // Get preview link
-    
-    res.status(200).json({
-      message: '✅ Subscribed and test email sent!',
-      preview: previewUrl,
+    return res.status(200).json({
+      message: '✅ Subscribed!',
       id: result.rows[0].id
     });
   } catch (error) {
-    console.error('Error:', error);
-
     if (error.code === '23505') {
-      res.status(409).json({ message: '⚠️ Email already subscribed.' });
-    } else {
-      res.status(500).json({ message: '❌ Server error. Could not save or email.' });
+      return res.status(409).json({ message: '⚠️ Email already subscribed.' });
     }
+    console.error('Subscribe error:', error);
+    return res.status(500).json({ message: '❌ Server error. Could not save.' });
   }
 });
 
