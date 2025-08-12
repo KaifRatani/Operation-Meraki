@@ -196,6 +196,10 @@
       .result m-button {
         margin-bottom: 32px;
       }
+      
+      .error { color:#c62828; font-size:14px; margin-top:-2px; margin-bottom:15px; }
+  .input-error { border:1px solid #c62828 !important; }
+
 
       @media (max-width: 1024px) {
   main {
@@ -340,6 +344,10 @@
     margin: 32px 0;
     justify-content: center;
   }
+
+  .error { color:#c62828; font-size:14px; margin-top:6px; }
+  .input-error { border:1px solid #c62828 !important; }
+
 }
 
     </style>
@@ -379,7 +387,7 @@
          
         </div>
 
-        <form class="contact-form" onsubmit="return validateForm(event)">
+        <form id="contactForm" class="contact-form">  <!-- add id, remove onsubmit -->
   <div class="form">
     <div class="row" style="margin-bottom: 24px;">
       <div class="col">
@@ -413,7 +421,7 @@
     </div>
 
     <div class="actions">
-      <m-button variant="primary" class="primary-action">Send Message</m-button>
+      <button type="submit" class="primary-action">Send Message</button>
     </div>
     <p id="formError" style="color: red; font-weight: 500; display: none; margin-top: 12px;">
   Please complete all required fields and check both boxes.
@@ -520,7 +528,7 @@
         listen(elements.faq2, 'click', createAnswerToggler(elements.faq2, elements.faqA2))
         listen(elements.faq3, 'click', createAnswerToggler(elements.faq3, elements.faqA3))
         listen(elements.faq4, 'click', createAnswerToggler(elements.faq4, elements.faqA4))
-        listen(elements.submitButton, 'click', transitionToResult)
+        //listen(elements.submitButton, 'click', transitionToResult)
       }
 
       wireUp()
@@ -611,10 +619,22 @@ function validateContactForm() {
 
 <script>
 document.getElementById('contactForm').addEventListener('submit', async function (e) {
-  e.preventDefault(); // stop native submit
+  e.preventDefault();
 
-  // Assuming your live validations already ran
-  const formData = {
+  const formEl = this;
+  const errorEl = document.getElementById('formError');
+
+  // custom + native validation
+  const customOk = validateContactForm();
+  const nativeOk = formEl.checkValidity();
+  if (!customOk || !nativeOk) {
+    errorEl.style.display = 'block';
+    formEl.reportValidity();
+    return;
+  }
+  errorEl.style.display = 'none';
+
+  const payload = {
     firstName: document.getElementById('firstName').value.trim(),
     lastName:  document.getElementById('lastName').value.trim(),
     email:     document.getElementById('email').value.trim(),
@@ -624,31 +644,30 @@ document.getElementById('contactForm').addEventListener('submit', async function
   };
 
   try {
-    const res = await fetch('/api/routes/contact', {
+    const res = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(payload)
     });
 
-    // parse safely in case server returns HTML on error
     const text = await res.text();
-    let data;
-    try { data = JSON.parse(text); } catch { data = { message: text }; }
+    let data; try { data = JSON.parse(text); } catch { data = { message: text }; }
 
-    if (res.ok) {
-      alert('Message sent successfully!');
-      // optional UI:
-      // document.querySelector('.form').classList.add('hide');
-      // document.querySelector('.result').classList.remove('hide');
-      // this.reset();
-    } else {
-      alert('Submission failed: ' + (data?.message || `HTTP ${res.status}`));
+    if (!res.ok) {
+      alert(data.message || `HTTP ${res.status}`);
+      return;
     }
-  } catch (error) {
-    alert('Network error: ' + error.message);
+
+    // Success UI
+    document.querySelector('.form').classList.add('hide');
+    document.querySelector('.result').classList.remove('hide');
+    formEl.reset();
+  } catch (err) {
+    alert('Network error: ' + err.message);
   }
 });
 </script>
+
 
 
 
