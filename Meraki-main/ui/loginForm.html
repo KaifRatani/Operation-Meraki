@@ -8,19 +8,137 @@
   <link rel="stylesheet" href="style.css" />
   <script src="components/m-header.js" type="module"></script>
   <script src="components/m-footer.js" type="module"></script>
-  <style>
-    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f3f4f6; }
-    .form-container { max-width: 600px; margin: 40px auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
-    h2 { text-align: center; margin-bottom: 1rem; }
-    label { display: block; margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 600; }
-    input { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 5px; font-size: 1rem; }
-    button { margin-top: 1.5rem; width: 100%; background-color: #1d4ed8; color: white; border: none; padding: 0.75rem; font-size: 1rem; border-radius: 5px; cursor: pointer; }
-    button:hover { background-color: #2563eb; }
-    .extra-links { text-align: center; margin-top: 1.5rem; }
-    .extra-links a { color: #1d4ed8; margin: 0 10px; text-decoration: none; font-size: 0.95rem; cursor: pointer; }
-    .extra-links a:hover { text-decoration: underline; }
-    #message, #resetMessage { margin-top: 1rem; text-align: center; color: crimson; }
-    .hidden { display: none; }
+ <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f3f4f6;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      width: 100%;
+      background-color: #1d4ed8;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2563eb;
+    }
+
+    .extra-links {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .extra-links a {
+      color: #1d4ed8;
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .extra-links a:hover {
+      text-decoration: underline;
+    }
+
+    #message, #resetMessage {
+      margin-top: 1rem;
+      text-align: center;
+      color: red;
+    }
+
+    .hidden {
+      display: none;
+    }
+    @media (max-width: 768px) {
+  .form-container {
+    margin: 20px;
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  label {
+    font-size: 0.95rem;
+  }
+
+  input, button {
+    font-size: 0.95rem;
+    padding: 0.65rem;
+  }
+
+  .extra-links a {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-container {
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  input, button {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .extra-links {
+    flex-direction: column;
+  }
+
+  .extra-links a {
+    display: block;
+    margin: 6px 0;
+  }
+}
+
   </style>
 </head>
 <body>
