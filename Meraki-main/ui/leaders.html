@@ -6,7 +6,7 @@
     <title>Our Leaders - Operation Meraki</title>
     <link rel="icon" href="images/logo/logo.png" type="image/png" />
     <link rel="stylesheet" href="style.css" />
-    <style>
+       <style>
       body {
         background-color: white;
       }
@@ -77,6 +77,53 @@
         width: 100%;
         object-fit: cover;
       }
+
+      @media (max-width: 1024px) {
+  main, .leaders-section {
+    width: 90%;
+    margin: 32px auto;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+    line-height: 32px;
+  }
+
+  .leader-item {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+    line-height: 28px;
+  }
+
+  .leader-name {
+    font-size: 18px;
+  }
+
+  .leader-title,
+  .leader-description {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .leader-info {
+    padding: 12px;
+  }
+}
+
     </style>
     <script src="components/m-header.js" type="module"></script>
     <script src="components/m-footer.js" type="module"></script>
