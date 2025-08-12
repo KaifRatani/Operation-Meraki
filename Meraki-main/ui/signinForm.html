@@ -121,42 +121,55 @@
     </div>
   </div>
 
-  <m-footer></m-footer>
+  <m-footer></m-footer><script>
+  const form = document.getElementById('signinForm');
+  const msg = document.getElementById('message');
 
-  <script>
-    const form = document.getElementById('signinForm');
-    const msg = document.getElementById('message');
+  function setMsg(text, ok = false) {
+    msg.style.color = ok ? 'green' : 'crimson';
+    msg.textContent = text;
+  }
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      msg.textContent = '';
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    setMsg('Submitting…', false);
 
-      const email = document.getElementById('email').value.trim();
-      const username = document.getElementById('username').value.trim();
-      const password = document.getElementById('password').value;
-      const usertype = document.getElementById('usertype').value;
+    const email = document.getElementById('email').value.trim();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+    const usertype = document.getElementById('usertype').value;
 
-      try {
-        const response = await fetch('/api/signin', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password, username, usertype })
-        });
+    try {
+      const res = await fetch('/api/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, username, usertype })
+      });
 
-        const result = await response.json();
-        msg.style.color = response.ok ? 'green' : 'crimson';
-        msg.textContent = result.message || (response.ok ? 'Registered.' : 'Registration failed.');
+      const data = await res.json().catch(() => ({}));
 
-        if (response.ok) {
-          alert('Registration successful!');
-          window.location.href = '/loginform.html';
-        }
-      } catch (err) {
-        console.error('Registration error:', err);
-        msg.style.color = 'crimson';
-        msg.textContent = 'Error during registration.';
+      if (res.status === 409) {
+        // Duplicate email
+        setMsg(data.message || 'Email already registered.', false);
+        return;
       }
-    });
-  </script>
+
+      if (!res.ok) {
+        setMsg(data.message || 'Registration failed.', false);
+        return;
+      }
+
+      setMsg(data.message || 'Registered.', true);
+      // Redirect after a brief pause
+      setTimeout(() => {
+        window.location.href = '/loginform.html';
+      }, 800);
+    } catch (err) {
+      console.error('Registration error:', err);
+      setMsg('Error during registration.', false);
+    }
+  });
+</script>
+
 </body>
 </html>
