@@ -4,6 +4,12 @@ This project was developed as part of the Operation Meraki initiative.
 It provides a platform for veterans and volunteers to register, manage events, and connect with the community.
 
 ---
+👥 Contributors
+Kaif - Project Lead ; Abhinav, Ziyu, Michael – Developer
+
+Supported by Operation Meraki team
+
+---
 
 ## 📌 Overview
 The platform is designed with the following key features:
@@ -48,6 +54,7 @@ Meraki-main/
 ├── package.json
 └── package-lock.json
 
+---
 ## ⚙️ Setup & Installation
 
 ### 1. Clone Repository
@@ -86,6 +93,8 @@ The server should now run on http://localhost:5000.
 5. Access Frontend
 Open /ui folder HTML files in the browser or serve via a static server.
 
+---
+
 🌐 Azure vs Local Setup
 Azure Setup:
 Originally configured for Azure App Service (backend) + Azure PostgreSQL (database).
@@ -106,6 +115,7 @@ Endpoint	Method	Description
 /equipment-donation	POST	Submit donation form
 /mailsub	POST	Newsletter subscription
 
+---
 🧪 Testing
 API Testing – via Postman or curl (verify login, signup, events, forms).
 
@@ -115,6 +125,7 @@ UI Testing – verify forms, navigation, and responsiveness in browser.
 
 Payment Testing – sandbox test via Zeefy keys.
 
+---
 🚀 Deployment Guide
 Ensure .env variables are configured properly.
 
@@ -126,11 +137,8 @@ Serve frontend from static hosting (Netlify, Vercel, Azure Static Web Apps, etc.
 
 Confirm DB connection and API route functionality.
 
-👥 Contributors
-Kaif - Project Lead ; Abhinav, Ziyu, Michael – Developer
-
-Supported by Operation Meraki team
-
+---
 🙏 Acknowledgments
 Special thanks to Michael Thomas and Operation Meraki for guidance and collaboration.
+---
 
