@@ -133,7 +133,7 @@ Serve frontend from static hosting (Netlify, Vercel, Azure Static Web Apps, etc.
 Confirm DB connection and API route functionality.
 
 👥 Contributors
-Kaif Ratani – Developer, Project Lead
+Kaif - Project Lead ; Abhinav, Ziyu, Michael – Developer
 
 Supported by Operation Meraki team
 
