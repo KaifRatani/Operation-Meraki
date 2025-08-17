@@ -48,16 +48,10 @@ Meraki-main/
 ├── package.json
 └── package-lock.json
 
-yaml
-Copy
-Edit
-
----
-
 ## ⚙️ Setup & Installation
 
 ### 1. Clone Repository
-```bash
+
 git clone <repo-link>
 cd Meraki-main
 2. Install Dependencies
